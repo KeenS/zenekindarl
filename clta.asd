@@ -16,14 +16,30 @@
   :version "0.1"
   :author "κeen"
   :license ""
-  :depends-on (:alexandria :babel :optima :cl-ppcre)
+  :depends-on (
+               :alexandria
+               :anaphora
+               :babel
+               :optima
+               :cl-ppcre
+               :esrap
+               )
   :components ((:module "src"
                 :components
-                ((:file "clta")
+                ((:file "clta" :depends-on ("parse" "pass" "backend" "be"))
                  (:file "att" :depends-on ("util"))
                  (:file "backend" :depends-on ("util" "att"))
+                 (:module "be"
+                          :pathname "backend"
+                          :depends-on ("backend")
+                          :components ((:file "stream")))
                  (:file "pass" :depends-on ("util"))
-                 (:file "parse")
+                 (:file "parse" :depends-on ("att" "st"))
+                 (:file "syntax-table")
+                 (:module "st"
+                          :pathname "syntax-table"
+                          :depends-on ("syntax-table")
+                          :components ((:file "default")))
                  (:file "util"))))
   :description ""
   :long-description

@@ -43,8 +43,6 @@
     (apply #'att-progn (append (nodes x) (nodes y))))
   (:method ((x att-string) (y att-string))
     (att-string (concatenate 'string (value x) (value y))))
-  (:method ((x att-octets) (y att-octets))
-    (att-octets (concatenate 'octets (value x) (value y))))
   (:method ((x att-nil) (y att-nil))
     (declare (ignore x y))
     (values))
@@ -93,8 +91,6 @@
       (ecase (vartype obj)
         (:string
          (att-string value))
-        (:octets
-         (att-octets value))
         (:anything
          (att-string (format nil "~A" value))))))
   (:method ((obj att-node) vars)

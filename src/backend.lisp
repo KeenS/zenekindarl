@@ -6,54 +6,59 @@
 (in-package :cl-user)
 (defpackage clta.backend
   (:use :cl :clta.util :clta.att)
-  (:import-from :alexandria
-                :if-let)
-  (:export :generate-write-code))
+  (:export :backend
+           :emit-code
+           :symbols))
+
 (in-package :clta.backend)
 
-(defgeneric generate-write-code (obj stream-sym)
-  (:method (obj stream-sym)
-    `(princ ,obj ,stream-sym)))
+(defclass backend ()
+  ((symbols
+    :accessor symbols
+    :initform ())))
 
+(defgeneric emit-code (backend obj)
+  (:method (backend obj)
+      (error "The backend ~A of ~A is not implemented" backend obj)))
 
-(defmethod generate-write-code ((obj att-string) stream-sym)
-  `(write-sequence ,(value obj) ,stream-sym))
+;;; You are to implement the backend specific `emit-code' for `att-output'
+;; (defmethod emit-code (backend (obj att-output)))
 
-(defmethod generate-write-code ((obj att-octets) stream-sym)
-  `(write-sequence ,(value obj) ,stream-sym))
+(defmethod emit-code (backend (obj att-string))
+  (declare (ignore backend))
+  (value obj))
 
-(defmethod generate-write-code ((obj att-variable) stream-sym)
-  (ecase (vartype obj)
-    ((:string :octets)
-     `(write-sequence ,(varsym obj) ,stream-sym))
-    (:anything
-     `(princ ,(varsym obj) ,stream-sym))))
+(defmethod emit-code (backend (obj att-variable))
+  (pushnew (varsym obj) (symbols backend))
+  (varsym obj))
 
-(defmethod generate-write-code ((obj att-eval) stream-sym)
-  (declare (ignore stream-sym))
+(defmethod emit-code (backend (obj att-constant))
+  (declare (ignore backend))
+  `',(value obj))
+
+(defmethod emit-code (backend (obj att-eval))
+  (declare (ignore backend))
   (sexp obj))
 
-(defmethod generate-write-code ((obj att-eval-to-output) stream-sym)
-  `(princ ,(sexp obj) ,stream-sym))
-
-(defmethod generate-write-code ((obj att-nil) stream-sym)
+(defmethod emit-code (backend (obj att-nil))
+  (declare (ignore backend obj))
   nil)
 
-(defmethod generate-write-code ((obj att-progn) stream-sym)
+(defmethod emit-code (backend (obj att-progn))
   (cons 'progn (mapcar (lambda (node)
-                            (generate-write-code node stream-sym))
+                            (emit-code backend node))
                        (nodes obj))))
 
-(defmethod generate-write-code ((obj att-if) stream-sym)
+(defmethod emit-code (backend (obj att-if))
   (with-slots (cond-clause then-clause else-clause) obj
     (list 'if
-          (generate-write-code cond-clause stream-sym)
-          (generate-write-code then-clause stream-sym)
-          (generate-write-code else-clause stream-sym))))
+          (emit-code backend cond-clause)
+          (emit-code backend then-clause)
+          (emit-code backend else-clause))))
 
-(defmethod generate-write-code ((obj att-loop) stream-sym)
+(defmethod emit-code (backend (obj att-loop))
   (with-slots (loop-seq body loop-var) obj
     `(loop
-        for ,(or (varsym loop-var) (gensym "loop-var"))
-        in ,(sexp loop-seq)
-        do ,(generate-write-code body stream-sym))))
+        for ,(emit-code backend loop-var)
+        in ,(emit-code backend loop-seq)
+        do ,(emit-code backend body))))

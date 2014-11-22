@@ -12,7 +12,6 @@
            :att-control
            
            :att-string
-           :att-octets
            :value
            
            :att-variable
@@ -20,8 +19,12 @@
            :vartype
            
            :att-eval
-           :att-eval-to-output
            :sexp
+           
+           :att-output
+           :expression
+
+           :att-constant
            
            :att-nil
            
@@ -53,7 +56,7 @@
   ())
 
 (defgeneric att-equal (x y)
-  (:method ((x att-node) (y att-node))
+  (:method (x y)
     (declare (ignore x y))
     nil))
 
@@ -75,23 +78,6 @@
   (string= (value x) (value y)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; att-octets
-(defclass att-octets (att-leaf)
-  ((value
-    :type 'octets
-    :accessor value
-    :initarg :value)))
-
-(defmethod print-object ((obj att-octets) stream)
-  (format stream "#<ATT-OCTETS ~S>" (value obj)))
-
-(defun att-octets (seq)
-  (make-instance 'att-octets :value seq))
-
-(defmethod att-equal ((x att-octets) (y att-octets))
-  (equalp (value x) (value y)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; att-variable
 (defclass att-variable (att-leaf)
   ((varsym
@@ -99,7 +85,7 @@
     :accessor varsym
     :initarg :varsym)
    (vartype
-    :type '(or :string :octets :anything)
+    :type '(or :string :anything)
     :accessor vartype
     :initarg :vartype
     :initform :anything)))
@@ -117,6 +103,24 @@
        (eql (vartype x) (vartype y))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; att-constant
+(defclass att-constant (att-leaf)
+  ((value
+    :accessor value
+    :initarg :value)))
+
+(defmethod print-object ((obj att-constant) stream)
+  (format stream "#<ATT-CONSTANT ~S>" (value obj)))
+
+(defun att-constant (val)
+  (make-instance 'att-constant
+                 :value val))
+
+(defmethod att-equal ((x att-constant) (y att-constant))
+  (equal (value x) (value y)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; att-eval
 (defclass att-eval (att-leaf)
   ((sexp
@@ -132,24 +136,6 @@
 (defmethod att-equal ((x att-eval) (y att-eval))
   (equalp (sexp x) (sexp y)))
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; att-eval-to-output
-(defclass att-eval-to-output (att-leaf)
-  ((sexp
-    :accessor sexp
-    :initarg :sexp)))
-
-(defmethod print-object ((obj att-eval-to-output) stream)
-  (format stream "#<ATT-EVAL ~S>" (sexp obj)))
-
-(defun att-eval-to-output (sexp)
-  (make-instance 'att-eval-to-output :sexp sexp))
-
-(defmethod att-equal ((x att-eval-to-output) (y att-eval-to-output))
-  (equalp (sexp x) (sexp y)))
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; att-nil
 (defclass att-nil (att-leaf)
@@ -160,6 +146,24 @@
 
 (defmethod att-equal ((x att-nil) (y att-nil))
   t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; att-eval-to-output
+(defclass att-output (att-control)
+  ((exp
+    :accessor arg
+    :initarg :arg)))
+
+(defmethod print-object ((obj att-output) stream)
+  (format stream "#<ATT-OUTPUT ~S>" (arg obj)))
+
+(defun att-output (arg)
+  (make-instance 'att-output :arg arg))
+
+(defmethod att-equal ((x att-output) (y att-output))
+  (att-equal (arg x) (arg y)))
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; att-progn

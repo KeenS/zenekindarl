@@ -9,6 +9,7 @@
         :clta.util
         :clta.att
         :clta.backend
+        :clta.backend.stream
         :cl-test-more))
 (in-package :clta.backend-test)
 
@@ -17,75 +18,60 @@
 
 (plan nil)
 
-(ast-is
- (generate-write-code (att-string "aaa") 's)
- 
- '(write-sequence "aaa" s))
+(defvar *stream-output-backend* (make-instance 'stream-backend
+                                               :stream *standard-output*))
 
 (ast-is
- (generate-write-code
-  (att-octets (octets 1 2 3)) 's)
+ (emit-code *stream-output-backend* (att-output (att-string "aaa")))
  
- `(write-sequence ,(octets 1 2 3) s))
+ `(write-sequence "aaa" ,*standard-output*))
 
 (ast-is
- (generate-write-code
-  (att-eval '(+ 1 2)) 's)
+ (emit-code *stream-output-backend* (att-eval '(+ 1 2)))
 
  '(+ 1 2))
 
 (ast-is
- (generate-write-code
-  (att-eval-to-output '(+ 1 2)) 's)
-
- '(princ (+ 1 2) s))
+ (emit-code *stream-output-backend* (att-output (att-eval '(+ 1 2))))
+ `(princ (+ 1 2) ,*standard-output*))
 
 (ast-is
- (generate-write-code
-  (att-variable 'foo) 's)
+ (emit-code *stream-output-backend* (att-output (att-variable 'foo)))
 
- '(princ foo s))
-
-(ast-is
- (generate-write-code
-  (att-variable 'foo :string) 's)
-
- '(write-sequence foo s))
+ `(princ foo ,*standard-output*))
 
 (ast-is
- (generate-write-code
-  (att-variable 'foo :octets) 's)
-
- '(write-sequence foo s))
+ (emit-code *stream-output-backend* (att-output (att-variable 'foo :string)))
+ `(write-sequence foo ,*standard-output*))
 
 (ast-is
- (generate-write-code
+ (emit-code *stream-output-backend*
   (att-if
    (att-eval t)
-   (att-string "foo")) 's)
+   (att-string "foo")))
 
  '(if t
-   (write-sequence "foo" s)
+   "foo"
    nil))
 
 (ast-is
- (generate-write-code
+ (emit-code *stream-output-backend*
   (att-if
    (att-eval t)
    (att-string "foo")
-   (att-string "bar")) 's)
+   (att-string "bar")))
 
  '(if t
-   (write-sequence "foo" s)
-   (write-sequence "bar" s)))
+   "foo"
+   "bar"))
 
 (ast-is
- (generate-write-code
+ (emit-code *stream-output-backend*
   (att-loop
    (att-eval ''((:foo 1) (:foo 2) (:foo 3)))
-   (att-variable 'foo))
-  's)
+   (att-variable 'foo)))
 
  '(loop for (gensym) in '((:foo 1) (:foo 2) (:foo 3))
-      (princ foo s)))
+     foo))
+
 (finalize)
