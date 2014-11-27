@@ -150,7 +150,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; att-eval-to-output
 (defclass att-output (att-control)
-  ((exp
+  ((arg
     :accessor arg
     :initarg :arg)))
 
