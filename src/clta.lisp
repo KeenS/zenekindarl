@@ -18,20 +18,19 @@
            :render))
 (in-package :clta)
 
-(defun complie-template-string (backend str)
-  (let* ((code (emit-code backend (remove-progn-pass (append-sequence-pass (flatten-pass (parse-template-string str))))))
+(defun complie-template-string (backend str env)
+  (let* ((code (emit-code backend (apply-passes (parse-template-string str) env)))
          (syms (symbols backend)))
     (eval
      `(lambda ,(if syms `(&key ,@syms) ())
         ,code
         t))))
 
-(defun render (template &rest args )
-  (let  ((backend (or (getf args :backend) (make-instance 'stream-backend :stream '*standard-output*))))
-   (apply (complie-template-string backend template) args)))
+(defun render (template &rest args)
+  (let  ((backend (or (getf args :backend) (make-backend :stream :stream '*standard-output*))))
+   (apply (complie-template-string backend template '(:known-args (:name "κeen"))) args)))
 
 
 #+(or)
-(render (make-instance 'stream-backend :stream '*standard-output*)
-        "Hello {{var name}}!!"
+(render "Hello {{var name}}!!"
         :name "κeen")

@@ -22,7 +22,7 @@
            :sexp
            
            :att-output
-           :expression
+           :arg
 
            :att-constant
            

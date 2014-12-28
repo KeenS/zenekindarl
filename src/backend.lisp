@@ -7,6 +7,7 @@
 (defpackage clta.backend
   (:use :cl :clta.util :clta.att)
   (:export :backend
+           :make-backend
            :emit-code
            :symbols))
 
@@ -16,6 +17,8 @@
   ((symbols
     :accessor symbols
     :initform ())))
+
+(defgeneric make-backend (backend &key &allow-other-keys))
 
 (defgeneric emit-code (backend obj)
   (:method (backend obj)
