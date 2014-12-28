@@ -10,8 +10,10 @@
                 :if-let)
   (:import-from :optima
                 :match)
-  (:export :flatten-pass
-           :fold-variable-pass
+  (:export :*default-passes*
+           :apply-passes
+           :flatten-pass
+           :fold-variables-pass
            :append-sequence-pass
            :remove-progn-pass))
 (in-package :clta.pass)
@@ -29,6 +31,8 @@
               (traverse-node func (cond-clause obj))
               (traverse-node func (then-clause obj))
               (traverse-node func (else-clause obj)))))
+  (:method (func (obj att-output))
+    (funcall func (att-output (traverse-node func (arg obj)))))
   (:method (func (obj att-loop))
     (funcall func
              (att-loop
@@ -43,6 +47,8 @@
     (apply #'att-progn (append (nodes x) (nodes y))))
   (:method ((x att-string) (y att-string))
     (att-string (concatenate 'string (value x) (value y))))
+  (:method ((x att-output) (y att-output))
+    (apply #'values (mapcar #'att-output (multiple-value-list (append-att-node-aux (arg x) (arg y))))))
   (:method ((x att-nil) (y att-nil))
     (declare (ignore x y))
     (values))
@@ -70,7 +76,8 @@
   (:method ((obj att-node))
     (att-progn obj)))
 
-(defun flatten-pass (obj)
+(defun flatten-pass (obj env)
+  (declare (ignore env))
   (traverse-node #'flatten-impl obj))
 
 (defgeneric remove-progn-impl (obj)
@@ -82,7 +89,8 @@
   (:method ((obj att-node))
     obj))
 
-(defun remove-progn-pass (obj)
+(defun remove-progn-pass (obj env)
+  (declare (ignore env))
   (traverse-node #'remove-progn-impl obj))
 
 (defgeneric fold-variables-impl (obj vars)
@@ -92,13 +100,14 @@
         (:string
          (att-string value))
         (:anything
-         (att-string (format nil "~A" value))))))
+         (att-string (format nil "~A" value))))
+      obj))
   (:method ((obj att-node) vars)
     (declare (ignore vars))
     obj))
 
-(defun fold-variables-pass (obj vars)
-  (traverse-node (lambda (o) (fold-variables-impl o vars)) obj))
+(defun fold-variables-pass (obj env)
+  (traverse-node (lambda (o) (fold-variables-impl o (getf env :known-args))) obj))
 
 (defgeneric append-sequence-impl (obj)
   (:method ((obj att-progn))
@@ -106,5 +115,14 @@
   (:method ((obj att-node))
     obj))
 
-(defun append-sequence-pass (obj)
+(defun append-sequence-pass (obj env)
+  (declare (ignore env))
   (traverse-node #'append-sequence-impl obj))
+
+(defparameter *default-passes* (list #'fold-variables-pass #'flatten-pass #'remove-progn-pass #'append-sequence-pass ))
+
+(defun apply-passes (att env)
+  (reduce (lambda (att pass)
+            (funcall pass att env))
+          *default-passes*
+          :initial-value att))

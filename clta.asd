@@ -33,7 +33,7 @@
                           :pathname "backend"
                           :depends-on ("backend")
                           :components ((:file "stream")))
-                 (:file "pass" :depends-on ("util"))
+                 (:file "pass" :depends-on ("util" "att"))
                  (:file "parse" :depends-on ("att" "st"))
                  (:file "syntax-table")
                  (:module "st"
