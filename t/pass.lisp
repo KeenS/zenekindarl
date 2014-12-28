@@ -12,35 +12,51 @@ Copyright (c) 2014 κeen
         :cl-test-more))
 (in-package :clta.pass-test)
 
-(defmacro att-is (got expect)
-  `(is ,got ,expect :test #'att-equal))
-
 (plan nil)
-(att-is
- (att-progn
-  (att-string "start")
-  (att-variable 'foo)
-  (att-string "end"))
+(diag "test pass")
 
+(is
  (flatten-pass
   (att-progn
    (att-string "start")
    (att-progn (att-variable 'foo))
-   (att-string "end"))))
+   (att-string "end"))
+  ())
 
-(att-is
  (att-progn
   (att-string "start")
   (att-variable 'foo)
   (att-string "end"))
+ "flatten-pass for progn"
+ :test #'att-equal)
 
+(is
  (flatten-pass
   (att-progn
    (att-string "start")
    (att-progn (att-progn (att-variable 'foo)))
-   (att-string "end"))))
+   (att-string "end"))
+  ())
 
-(att-is
+ (att-progn
+  (att-string "start")
+  (att-variable 'foo)
+  (att-string "end"))
+ "flatten-pass for nested progn"
+ :test #'att-equal)
+
+(is
+ (flatten-pass
+  (att-progn
+   (att-string "start")
+   (att-if
+    (att-eval t)
+    (att-progn
+     (att-string "foo is: ")
+     (att-progn (att-variable 'foo))))
+   (att-string "end"))
+  ())
+
  (att-progn
   (att-string "start")
   (att-if
@@ -50,28 +66,10 @@ Copyright (c) 2014 κeen
     (att-variable 'foo))
    (att-progn (att-nil)))
   (att-string "end"))
+ "flatten-pass for if"
+ :test #'att-equal)
 
- (flatten-pass
-  (att-progn
-   (att-string "start")
-   (att-if
-    (att-eval t)
-    (att-progn
-     (att-string "foo is: ")
-     (att-progn (att-variable 'foo))))
-   (att-string "end"))))
-
-(att-is
- (att-progn
-  (att-string "start")
-  (att-loop
-   (att-progn (att-eval t))
-   (att-progn
-    (att-string "foo is: ")
-    (att-variable 'foo))
-   (att-progn (att-variable 'foo)))
-  (att-string "end"))
-
+(is
  (flatten-pass
   (att-progn
    (att-string "start")
@@ -81,45 +79,55 @@ Copyright (c) 2014 κeen
      (att-string "foo is: ")
      (att-progn (att-variable 'foo)))
     (att-progn (att-variable 'foo)))
-   (att-string "end"))))
+   (att-string "end"))
+  ())
 
-(att-is
- (att-string "test")
+ (att-progn
+  (att-string "start")
+  (att-loop
+   (att-progn (att-eval t))
+   (att-progn
+    (att-string "foo is: ")
+    (att-variable 'foo))
+   (att-progn (att-variable 'foo)))
+  (att-string "end"))
+ "flatten-pass for loop"
+ :test #'att-equal)
+
+(is
  (remove-progn-pass
-  (att-progn (att-string "test"))))
+  (att-progn (att-string "test"))
+  ())
+ (att-string "test")
+ "remove-progn-pass for simple progn"
+ :test #'att-equal)
 
-(att-is
- (att-if
-  (att-eval t)
-  (att-progn
-   (att-string "foo is: ")
-   (att-variable 'foo)))
+(is
  (remove-progn-pass
   (att-if
    (att-progn (att-eval t))
    (att-progn
     (att-string "foo is: ")
     (att-variable 'foo))
-   (att-progn (att-nil)))))
-
-(att-is
- (att-loop
+   (att-progn (att-nil)))
+  ())
+ (att-if
   (att-eval t)
   (att-progn
    (att-string "foo is: ")
-   (att-variable 'foo))
-  (att-variable 'foo))
- (att-loop
-  (att-eval t)
-  (att-progn
-   (att-string "foo is: ")
-   (att-variable 'foo))
-  (att-variable 'foo)))
+   (att-variable 'foo)))
+ "remove-progn-pass for if"
+ :test #'att-equal)
 
-(att-is
- (att-progn (att-string "foobar"))
+
+(is
  (append-sequence-pass
   (att-progn
    (att-string "foo")
-   (att-string "bar"))))
+   (att-string "bar"))
+  ())
+ (att-progn (att-string "foobar"))
+ "append-sequence-pass for string"
+ :test #'att-equal)
+
 (finalize)
