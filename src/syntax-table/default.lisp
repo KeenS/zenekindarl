@@ -103,7 +103,7 @@
 (defop op-include (and "include" white-spaces symbol-in-control)
   :transform (lambda (op sp filename)
                (declare (ignore op sp))
-               (att-output (att-string (read-file-into-string filename)))))
+               (parse 'template (read-file-into-string filename))))
 
 
 ;; (defop op-set (and "set" white-spaces symbol-in-control white-spaces symbol-in-control)
