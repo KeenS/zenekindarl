@@ -103,7 +103,7 @@
 (defop op-include (and "include" white-spaces symbol-in-control)
   :transform (lambda (op sp filename)
                (declare (ignore op sp))
-               (parse 'template (read-file-into-string filename))))
+               (parse 'template (read-file-into-string (merge-pathnames filename)))))
 
 
 ;; (defop op-set (and "set" white-spaces symbol-in-control white-spaces symbol-in-control)
@@ -115,4 +115,4 @@
 (defop op-insert (and "insert" white-spaces symbol-in-control)
   :transform (lambda (op sp filename)
                (declare (ignore op sp))
-               (att-output (att-string (read-file-into-string filename)))))
+               (att-output (att-string (read-file-into-string (merge-pathnames filename))))))
