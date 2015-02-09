@@ -1,1 +1,1 @@
-bar
+{{repeat 2 as i}}bar{{endrepeat}}
