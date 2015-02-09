@@ -18,7 +18,7 @@
            :render))
 (in-package :clta)
 
-(defun complie-template-string (backend str env)
+(defun compile-template-string (backend str env)
   (let* ((code (emit-code backend (apply-passes (parse-template-string str) env)))
          (syms (symbols backend)))
     (eval
