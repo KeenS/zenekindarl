@@ -28,7 +28,7 @@
 
 (defun render (template &rest args)
   (let  ((backend (or (getf args :backend) (make-backend :stream :stream '*standard-output*))))
-   (apply (complie-template-string backend template '(:known-args (:name "κeen"))) args)))
+   (apply (compile-template-string backend template '(:known-args (:name "κeen"))) args)))
 
 
 #+(or)
