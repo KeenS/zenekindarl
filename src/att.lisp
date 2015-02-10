@@ -17,6 +17,9 @@
            :att-variable
            :varsym
            :vartype
+
+           :att-gensym
+           :gensym-string
            
            :att-eval
            :sexp
@@ -100,6 +103,27 @@
 
 (defmethod att-equal ((x att-variable) (y att-variable))
   (and (eql (varsym x)  (varsym y))
+       (eql (vartype x) (vartype y))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; att-gensym
+(defclass att-gensym (att-variable)
+  ((gensym-string
+    :type '(or null string)
+    :accessor gensym-string
+    :initarg :gensym-string)))
+
+(defmethod print-object ((obj att-gensym) stream)
+  (format stream "#<ATT-GENSYM ~S>" (gensym-string obj)))
+
+(defun att-gensym (gensym-string &optional (type :anything))
+  (make-instance 'att-gensym
+                 :varsym (gensym gensym-string)
+                 :vartype type
+                 :gensym-string gensym-string))
+
+(defmethod att-equal ((x att-gensym) (y att-gensym))
+  (and (string= (gensym-string x)  (gensym-string y))
        (eql (vartype x) (vartype y))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

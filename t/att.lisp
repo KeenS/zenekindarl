@@ -46,6 +46,31 @@ Copyright (c) 2014 κeen
     "att-string equality with type omitted"
     :test #'att-equal)
 
+
+(is (type-of (att-gensym "var"))
+    'att-gensym
+    "att-gensym constructor")
+(is (att-gensym "var")
+    (att-gensym "var")
+    "att-gensym equality"
+    :test #'att-equal)
+
+(is (type-of (att-gensym "var" :string))
+    'att-gensym
+    "att-string constructor")
+(is (att-gensym "var" :string)
+    (att-gensym "var" :string)
+    "att-string equality"
+    :test #'att-equal)
+(isnt (att-gensym "var" :string)
+      (att-gensym "var" :anything)
+      "att-string equality with different type"
+      :test #'att-equal)
+(is (att-gensym "var")
+    (att-gensym "var" :anything)
+    "att-string equality with type omitted"
+    :test #'att-equal)
+
 (is (type-of (att-eval '(+ 1 2)))
     'att-eval
     "att-eval constructor")
