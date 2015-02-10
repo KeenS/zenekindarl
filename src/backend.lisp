@@ -16,9 +16,27 @@
 (defclass backend ()
   ((symbols
     :accessor symbols
+    :initform ())
+   (scopes
+    :accessor scopes
     :initform ())))
 
 (defgeneric make-backend (backend &key &allow-other-keys))
+
+(defgeneric push-scope (backend)
+  (:method (backend)
+    (push () (scopes backend))))
+(defgeneric pop-scope (backend)
+  (:method (backend)
+    (pop (scopes backend))))
+
+(defgeneric add-to-scope (sym backend)
+  (:method (sym backend)
+    (push sym (car (scopes backend)))))
+(defgeneric find-from-scope (sym backend)
+  (:method (sym backend)
+    (loop :for scope :in (scopes backend)
+          :thereis (member sym scope))))
 
 (defgeneric emit-code (backend obj)
   (:method (backend obj)
@@ -32,8 +50,10 @@
   (value obj))
 
 (defmethod emit-code (backend (obj att-variable))
-  (pushnew (varsym obj) (symbols backend))
-  (varsym obj))
+  (let ((sym (varsym obj)))
+    (unless (find-from-scope sym backend)
+      (push sym (symbols backend)))
+    sym))
 
 (defmethod emit-code (backend (obj att-constant))
   (declare (ignore backend))
@@ -61,8 +81,12 @@
 
 (defmethod emit-code (backend (obj att-loop))
   (with-slots (loop-seq body loop-var) obj
-    `(loop
-       ;; :FIXME: dirty hack
-        for ,(varsym loop-var)
-        in ,(emit-code backend loop-seq)
-        do ,(emit-code backend body))))
+    (let* ((seq (emit-code backend loop-seq))
+           (sym (varsym loop-var)))
+      (push-scope backend)
+      (add-to-scope sym backend)
+      `(loop
+         ;; :FIXME: dirty hack
+         :for ,sym
+         :in ,seq
+         :do ,(emit-code backend body)))))
