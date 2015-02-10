@@ -62,6 +62,7 @@
 (defmethod emit-code (backend (obj att-loop))
   (with-slots (loop-seq body loop-var) obj
     `(loop
-        for ,(emit-code backend loop-var)
+       ;; :FIXME: dirty hack
+        for ,(varsym loop-var)
         in ,(emit-code backend loop-seq)
         do ,(emit-code backend body))))
