@@ -266,7 +266,7 @@
         (format stream "#<ATT-LOOP ~s IN ~s ~s>" loop-var loop-seq body)
         (format stream "#<ATT-LOOP ~s ~s>" loop-seq body))))
 
-(defun att-loop (loop-seq body &optional (loop-var (att-variable (gensym "loopvar"))))
+(defun att-loop (loop-seq body &optional (loop-var (att-gensym "loopvar")))
   (make-instance 'att-loop
                  :loop-seq loop-seq
                  :body body

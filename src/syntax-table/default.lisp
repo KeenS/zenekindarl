@@ -86,7 +86,7 @@
                      (list (att-constant (iota i :start 1))
                            (att-variable (read-from-string var))))
                    (list (att-constant (iota i :start 1))
-                         (att-variable (gensym "repeatvar"))))))
+                         (att-gensym "repeatvar")))))
 
 (defop op-endrepeat "endrepeat")
 

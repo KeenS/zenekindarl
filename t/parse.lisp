@@ -42,7 +42,7 @@ Copyright (c) 2014 κeen
 (is (parse-template-string "{{repeat 10}}<li>item</li>{{endrepeat}}")
     (att-progn (att-loop (att-constant '(1 2 3 4 5 6 7 8 9 10))
                          (att-progn (att-output (att-string "<li>item</li>")))
-                         (att-variable (gensym "repeatvar"))))
+                         (att-gensym "repeatvar")))
     "repeat"
     :test #'att-equal)
 
