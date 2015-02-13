@@ -9,6 +9,7 @@
   (:export :print-object
            :att-node
            :att-leaf
+           :auto-escape
            :att-control
            
            :att-string
@@ -54,7 +55,11 @@
 (defclass att-node ()
   ())
 (defclass att-leaf (att-node)
-  ())
+  ((auto-escape
+    :type '(or null t)
+    :accessor auto-escape
+    :initarg :auto-escape
+    :initform t)))
 (defclass att-control (att-node)
   ())
 
@@ -69,7 +74,9 @@
   ((value
     :type 'string
     :accessor value
-    :initarg :value)))
+    :initarg :value)
+   (auto-escape
+    :initform nil)))
 
 (defmethod print-object ((obj att-string) stream)
   (format stream "#<ATT-STRING ~S>" (value obj)))
@@ -131,7 +138,9 @@
 (defclass att-constant (att-leaf)
   ((value
     :accessor value
-    :initarg :value)))
+    :initarg :value)
+   (auto-escape
+    :initform nil)))
 
 (defmethod print-object ((obj att-constant) stream)
   (format stream "#<ATT-CONSTANT ~S>" (value obj)))

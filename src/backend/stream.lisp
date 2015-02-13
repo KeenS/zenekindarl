@@ -21,20 +21,24 @@
 (defmethod make-backend ((backend (eql :stream)) &key stream &allow-other-keys)
   (make-instance 'stream-backend :stream stream))
 
-(defmethod emit-code ((backend stream-backend) (obj att-output))
+(defmethod emit-code ((backend stream-backend) (obj att-output) &key output-p)
   (with-slots (arg) obj
     (with-slots (stream%) backend
       (typecase arg
         (att-string
-         `(write-sequence ,(emit-code backend arg) ,stream%))
+         `(write-sequence ,(emit-code backend arg :output-p t) ,stream%))
         (att-variable
          (case (vartype arg)
            (:string
-            `(write-sequence ,(emit-code backend arg) ,stream%))
+            `(write-sequence ,(emit-code backend arg :output-p t) ,stream%))
            (:anything
-            `(princ ,(emit-code backend arg) ,stream%))))
+            (if (auto-escape arg)
+                `(write-sequence ,(emit-code backend arg :output-p t) ,stream%)
+                `(princ ,(emit-code backend arg :output-p t) ,stream%)))))
         (att-leaf
-         `(princ ,(emit-code backend arg) ,stream%))
+         (if (auto-escape arg)
+             `(write-sequence ,(emit-code backend arg :output-p t) ,stream%)
+             `(princ ,(emit-code backend arg :output-p t) ,stream%)))
         (t (call-next-method))))))
 
 
@@ -44,10 +48,10 @@
 (defmethod make-backend ((backend (eql :octet-stream)) &key stream &allow-other-keys)
   (make-instance 'stream-backend :stream stream))
 
-(defmethod emit-code ((backend octet-stream-backend) (obj att-string))
+(defmethod emit-code ((backend octet-stream-backend) (obj att-string) &key output-p)
   (string-to-octets (value obj)))
 
-(defmethod emit-code ((backend octet-stream-backend) (obj att-output))
+(defmethod emit-code ((backend octet-stream-backend) (obj att-output) &key output-p)
   (with-slots (arg) obj
     (if (and (typep arg 'att-variable)
              (eq (vartype arg) :string))
