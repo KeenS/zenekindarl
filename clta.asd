@@ -23,6 +23,7 @@
                :optima
                :cl-ppcre
                :esrap
+               :html-encode
                )
   :components ((:module "src"
                 :components
