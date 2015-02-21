@@ -22,6 +22,7 @@
   (make-instance 'stream-backend :stream (gensym "stream")))
 
 (defmethod emit-code ((backend stream-backend) (obj att-output) &key output-p)
+  (declare (ignore output-p))
   (with-slots (arg) obj
     (with-slots (stream%) backend
       (typecase arg
@@ -53,11 +54,12 @@
 (defclass octet-stream-backend (stream-backend)
   ())
 
-(defmethod make-backend ((backend (eql :octet-stream)) &key stream &allow-other-keys)
-  (make-instance 'stream-backend :stream stream))
+(defmethod make-backend ((backend (eql :octet-stream)) &key &allow-other-keys)
+  (make-instance 'octet-stream-backend :stream (gensym "stream")))
 
 
 (defmethod emit-code ((backend octet-stream-backend) (obj att-output) &key output-p)
+  (declare (ignore output-p))
   (with-slots (arg) obj
     (with-slots (stream%) backend
       (typecase arg
