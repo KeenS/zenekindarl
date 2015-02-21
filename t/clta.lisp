@@ -13,7 +13,11 @@ Copyright (c) 2014 κeen
   (:import-from :clta.backend.stream
    :make-backend)
   (:import-from :clta.backend.sequence
-   :make-backend))
+   :make-backend)
+  (:import-from :babel
+   :string-to-octets)
+  (:import-from :fast-io
+                :fast-output-stream))
 (in-package :clta-test)
 
 ;; NOTE: To run this test file, execute `(asdf:test-system :clta)' in your Lisp.
@@ -37,23 +41,37 @@ Copyright (c) 2014 κeen
 
 (plan nil)
 (diag "compile test with stream backend")
-
 (loop :for (template args result description) :in *suites*
       :do (ok (compile-template-string (make-backend :stream) template ()) description))
 
-(diag "compile test with string backend")
+(diag "compile test with octet stream backend")
+(loop :for (template args result description) :in *suites*
+      :do (ok (compile-template-string (make-backend :octet-stream) template ()) description))
 
+(diag "compile test with string backend")
 (loop :for (template args result description) :in *suites*
       :do (ok (compile-template-string (make-backend :string) template ()) description))
+
+(diag "compile test with octet backend")
+(loop :for (template args result description) :in *suites*
+      :do (ok (compile-template-string (make-backend :octet) template ()) description))
 
 (diag "render test with stream backend")
 (loop :for (template args result description) :in *suites*
       :do (is-print (apply #'render template args) result description))
 
-(diag "render test with string backend")
+(diag "render test with octet stream backend")
+#+nil
+(loop :for (template args result description) :in *suites*
+      :do (is-print (apply #'render template `(,(make-instance 'fast-output-stream) :backend ,(make-backend :octet-stream) ,@args)) (string-to-octets result) description))
 
+(diag "render test with string backend")
 (loop :for (template args result description) :in *suites*
       :do (is (apply #'render template (cons :backend (cons (make-backend :string) args))) result description))
-;; blah blah blah.
+
+(diag "render test with octet backend")
+#+nil
+(loop :for (template args result description) :in *suites*
+      :do (is (apply #'render template (cons :backend (cons (make-backend :octet) args))) (string-to-octets result) description))
 
 (finalize)
