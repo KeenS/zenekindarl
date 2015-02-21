@@ -9,6 +9,10 @@ Copyright (c) 2014 κeen
    :clta
         :cl-test-more)
   (:import-from :clta.backend
+   :make-backend)
+  (:import-from :clta.backend.stream
+   :make-backend)
+  (:import-from :clta.backend.sequence
    :make-backend))
 (in-package :clta-test)
 
@@ -46,10 +50,10 @@ Copyright (c) 2014 κeen
 (loop :for (template args result description) :in *suites*
       :do (is-print (apply #'render template args) result description))
 
-(diag "compile test with string backend")
+(diag "render test with string backend")
 
 (loop :for (template args result description) :in *suites*
-      :do (is-print (apply #'render template (cons :backend (cons (make-backend :string) args))) result description))
+      :do (is (apply #'render template (cons :backend (cons (make-backend :string) args))) result description))
 ;; blah blah blah.
 
 (finalize)
