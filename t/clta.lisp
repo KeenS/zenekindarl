@@ -35,12 +35,21 @@ Copyright (c) 2014 κeen
 (diag "compile test with stream backend")
 
 (loop :for (template args result description) :in *suites*
-           :do (ok (compile-template-string (make-backend :stream) template ()) description))
+      :do (ok (compile-template-string (make-backend :stream) template ()) description))
+
+(diag "compile test with string backend")
+
+(loop :for (template args result description) :in *suites*
+      :do (ok (compile-template-string (make-backend :string) template ()) description))
+
 (diag "render test with stream backend")
 (loop :for (template args result description) :in *suites*
       :do (is-print (apply #'render template args) result description))
 
+(diag "compile test with string backend")
 
+(loop :for (template args result description) :in *suites*
+      :do (is-print (apply #'render template (cons :backend (cons (make-backend :string) args))) result description))
 ;; blah blah blah.
 
 (finalize)
