@@ -24,6 +24,7 @@
                :cl-ppcre
                :esrap
                :html-encode
+               :fast-io
                )
   :components ((:module "src"
                 :components

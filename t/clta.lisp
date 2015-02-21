@@ -70,8 +70,7 @@ Copyright (c) 2014 κeen
       :do (is (apply #'render template (cons :backend (cons (make-backend :string) args))) result description))
 
 (diag "render test with octet backend")
-#+nil
 (loop :for (template args result description) :in *suites*
-      :do (is (apply #'render template (cons :backend (cons (make-backend :octet) args))) (string-to-octets result) description))
+      :do (is (apply #'render template (cons :backend (cons (make-backend :octet) args))) (string-to-octets result) :test #'equalp description))
 
 (finalize)

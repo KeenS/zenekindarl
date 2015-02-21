@@ -8,18 +8,23 @@
   (:use :cl :clta.util :clta.att :clta.backend)
   (:import-from :babel
                 :string-to-octets)
+  (:import-from :fast-io
+   :with-fast-output
+                :fast-write-sequence)
   (:export :stream-backend
            :octet-stream-backend
-           :stream-of))
+           :stream-of
+           :buffer-of))
 (in-package :clta.backend.stream)
 
 (defclass stream-backend (backend)
   ((stream%
     :accessor stream-of
-    :initarg :stream)))
+    :initarg :stream
+    :initform (gensym "stream"))))
 
 (defmethod make-backend ((backend (eql :stream)) &key &allow-other-keys)
-  (make-instance 'stream-backend :stream (gensym "stream")))
+  (make-instance 'stream-backend))
 
 (defmethod emit-code ((backend stream-backend) (obj att-output) &key output-p)
   (declare (ignore output-p))
@@ -52,29 +57,39 @@
 
 
 (defclass octet-stream-backend (stream-backend)
-  ())
+  ((buffer%
+    :accessor buffer-of
+    :initform (gensym "buffer"))))
 
 (defmethod make-backend ((backend (eql :octet-stream)) &key &allow-other-keys)
-  (make-instance 'octet-stream-backend :stream (gensym "stream")))
+  (make-instance 'octet-stream-backend))
 
+
+(defmethod emit-lambda ((backend octet-stream-backend) att)
+  (let* ((code (emit-code backend att))
+         (syms (symbols backend)))
+    (eval
+     `(lambda ,(cons (stream-of backend) (if syms `(&key ,@syms) ()))
+        (with-fast-output (,(buffer-of backend) ,(stream-of backend))
+          ,code)))))
 
 (defmethod emit-code ((backend octet-stream-backend) (obj att-output) &key output-p)
   (declare (ignore output-p))
   (with-slots (arg) obj
-    (with-slots (stream%) backend
+    (with-slots (buffer%) backend
       (typecase arg
         (att-string
-         `(write-sequence ,(string-to-octets (emit-code backend arg :output-p t)) ,stream%))
+         `(fast-write-sequence ,(string-to-octets (emit-code backend arg :output-p t)) ,buffer%))
         (att-variable
          (case (vartype arg)
            (:string
-            `(write-sequence (string-to-octets ,(emit-code backend arg :output-p t)) ,stream%))
+            `(fast-write-sequence (string-to-octets ,(emit-code backend arg :output-p t)) ,buffer%))
            (:anything
             (if (auto-escape arg)
-                `(write-sequence (string-to-octets ,(emit-code backend arg :output-p t)) ,stream%)
-                `(write-sequence (string-to-octets (princ-to-string ,(emit-code backend arg :output-p t))) ,stream%)))))
+                `(fast-write-sequence (string-to-octets ,(emit-code backend arg :output-p t)) ,buffer%)
+                `(fast-write-sequence (string-to-octets (princ-to-string ,(emit-code backend arg :output-p t))) ,buffer%)))))
         (att-leaf
          (if (auto-escape arg)
-             `(write-sequence (string-to-octets ,(emit-code backend arg :output-p t)) ,stream%)
-             `(write-sequence (string-to-octets (princ-to-string ,(emit-code backend arg :output-p t))) ,stream%)))
+             `(fast-rite-sequence (string-to-octets ,(emit-code backend arg :output-p t)) ,buffer%)
+             `(fast-write-sequence (string-to-octets (princ-to-string ,(emit-code backend arg :output-p t))) ,buffer%)))
         (t (call-next-method))))))

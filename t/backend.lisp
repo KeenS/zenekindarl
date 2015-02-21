@@ -15,45 +15,39 @@
                 :encode-for-tt))
 (in-package :clta.backend-test)
 
-(defmacro ast-is (got expect doc)
-  `(is ,got ,expect ,doc :test #'equalp))
-
 (plan nil)
 (diag "backend tests")
 
-(defvar *stream-output-backend* (make-instance 'stream-backend
-                                               :stream *standard-output*))
-
-(ast-is
- (emit-code *stream-output-backend* (att-output (att-string "aaa")))
+(is-expand
+ '#.(emit-code (make-backend :stream) (att-output (att-string "aaa")))
  
- `(write-sequence "aaa" ,*standard-output*)
+ '(write-sequence "aaa" $stream)
  "stream backend of att-string with att-output")
 
-(ast-is
- (emit-code *stream-output-backend* (att-eval '(+ 1 2)))
+(is-expand
+ '#.(emit-code (make-backend :stream) (att-eval '(+ 1 2)))
 
  '(+ 1 2)
  "stream backend of att-eval")
 
-(ast-is
- (emit-code *stream-output-backend* (att-output (att-eval '(+ 1 2))))
- `(write-sequence (encode-for-tt (princ-to-string(+ 1 2))) ,*standard-output*)
+(is-expand
+ '#.(emit-code (make-backend :stream) (att-output (att-eval '(+ 1 2))))
+ '(write-sequence (encode-for-tt (princ-to-string(+ 1 2))) $stream)
  "stream backend of att-eval with att-output")
 
-(ast-is
- (emit-code *stream-output-backend* (att-output (att-variable 'foo)))
+(is-expand
+ '#.(emit-code (make-backend :stream) (att-output (att-variable 'foo)))
 
- `(write-sequence (encode-for-tt (princ-to-string foo)) ,*standard-output*)
+ '(write-sequence (encode-for-tt (princ-to-string foo)) $stream)
  "stream backend of att-variable with att-output")
 
-(ast-is
- (emit-code *stream-output-backend* (att-output (att-variable 'foo :string)))
- `(write-sequence (encode-for-tt foo) ,*standard-output*)
+(is-expand
+ '#.(emit-code (make-backend :stream) (att-output (att-variable 'foo :string)))
+ '(write-sequence (encode-for-tt foo) $stream)
  "stream backend of att-variable with type with att-output")
 
-(ast-is
- (emit-code *stream-output-backend*
+(is-expand
+ '#.(emit-code (make-backend :stream)
   (att-if
    (att-eval t)
    (att-string "foo")))
@@ -63,8 +57,8 @@
    nil)
  "stream backend of att-if with else omitted")
 
-(ast-is
- (emit-code *stream-output-backend*
+(is-expand
+ '#.(emit-code (make-backend :stream)
   (att-if
    (att-eval t)
    (att-string "foo")

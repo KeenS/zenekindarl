@@ -6,6 +6,9 @@
 (in-package :cl-user)
 (defpackage clta.backend.sequence
   (:use :cl :clta.util :clta.att :clta.backend :clta.backend.stream)
+  (:import-from :fast-io
+   :with-fast-output
+   :fast-write-sequence)
   (:export :string-backend
            :octet-backend))
 (in-package :clta.backend.sequence)
@@ -17,7 +20,6 @@
 
 (defmethod make-backend ((backend (eql :string)) &key string &allow-other-keys)
   (make-instance 'string-backend
-                 :stream (gensym "stream")
                  :string string))
 
 (defmethod emit-lambda ((backend string-backend) att)
@@ -34,5 +36,12 @@
 
 (defmethod make-backend ((backend (eql :octet)) &key string &allow-other-keys)
   (make-instance 'octet-backend
-                 :stream (gensym "stream")
                  :string string))
+
+(defmethod emit-lambda ((backend octet-backend) att)
+  (let* ((code (emit-code backend att))
+         (syms (symbols backend)))
+    (eval
+     `(lambda ,(if syms `(&key ,@syms) ())
+        (with-fast-output (,(buffer-of backend))
+          ,code)))))
