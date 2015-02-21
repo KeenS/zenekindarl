@@ -18,8 +18,8 @@
     :accessor stream-of
     :initarg :stream)))
 
-(defmethod make-backend ((backend (eql :stream)) &key stream &allow-other-keys)
-  (make-instance 'stream-backend :stream stream))
+(defmethod make-backend ((backend (eql :stream)) &key &allow-other-keys)
+  (make-instance 'stream-backend :stream (gensym "stream")))
 
 (defmethod emit-code ((backend stream-backend) (obj att-output) &key output-p)
   (with-slots (arg) obj
@@ -41,6 +41,14 @@
              `(princ ,(emit-code backend arg :output-p t) ,stream%)))
         (t (call-next-method))))))
 
+(defmethod emit-lambda ((backend stream-backend) att)
+  (let* ((code (emit-code backend att))
+         (syms (symbols backend)))
+    (eval
+     `(lambda ,(cons (stream-of backend) (if syms `(&key ,@syms) ()))
+        ,code
+        t))))
+
 
 (defclass octet-stream-backend (stream-backend)
   ())
@@ -48,12 +56,23 @@
 (defmethod make-backend ((backend (eql :octet-stream)) &key stream &allow-other-keys)
   (make-instance 'stream-backend :stream stream))
 
-(defmethod emit-code ((backend octet-stream-backend) (obj att-string) &key output-p)
-  (string-to-octets (value obj)))
 
 (defmethod emit-code ((backend octet-stream-backend) (obj att-output) &key output-p)
   (with-slots (arg) obj
-    (if (and (typep arg 'att-variable)
-             (eq (vartype arg) :string))
-        `(write-sequence ,(string-to-octets (varsym arg)) ,(stream-of backend))
-        (call-next-method))))
+    (with-slots (stream%) backend
+      (typecase arg
+        (att-string
+         `(write-sequence ,(string-to-octets (emit-code backend arg :output-p t)) ,stream%))
+        (att-variable
+         (case (vartype arg)
+           (:string
+            `(write-sequence (string-to-octets ,(emit-code backend arg :output-p t)) ,stream%))
+           (:anything
+            (if (auto-escape arg)
+                `(write-sequence (string-to-octets ,(emit-code backend arg :output-p t)) ,stream%)
+                `(write-sequence (string-to-octets (princ-to-string ,(emit-code backend arg :output-p t))) ,stream%)))))
+        (att-leaf
+         (if (auto-escape arg)
+             `(write-sequence (string-to-octets ,(emit-code backend arg :output-p t)) ,stream%)
+             `(write-sequence (string-to-octets (princ-to-string ,(emit-code backend arg :output-p t))) ,stream%)))
+        (t (call-next-method))))))
