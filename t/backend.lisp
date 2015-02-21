@@ -70,7 +70,7 @@
  "stream backend of att-if")
 
 (is-expand
- '#.(emit-code *stream-output-backend*
+ '#.(emit-code (make-backend :stream)
             (att-loop
              (att-eval ''((:foo 1) (:foo 2) (:foo 3)))
              (att-variable 'foo)))
