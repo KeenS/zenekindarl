@@ -33,7 +33,8 @@
                  (:module "be"
                           :pathname "backend"
                           :depends-on ("backend")
-                          :components ((:file "stream")))
+                  :components ((:file "stream")
+                               (:file "sequence" :depends-on ("stream"))))
                  (:file "pass" :depends-on ("util" "att"))
                  (:file "parse" :depends-on ("att" "st"))
                  (:file "syntax-table")
