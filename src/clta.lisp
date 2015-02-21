@@ -24,6 +24,8 @@
 (defun render (template &rest args)
   (let* ((backend-given (getf args :backend))
          (backend (or backend-given (make-backend :stream))))
+    (when backend-given
+      (remf args :backend))
     (apply (compile-template-string backend template ())
            (if backend-given
                args
