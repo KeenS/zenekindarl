@@ -12,7 +12,8 @@
   :author "κeen"
   :license ""
   :depends-on (:clta
-               :cl-test-more)
+               :cl-test-more
+               :flexi-streams)
   :components ((:module "t"
                 :components
                 ((:test-file "clta")

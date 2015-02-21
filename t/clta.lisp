@@ -17,7 +17,9 @@ Copyright (c) 2014 κeen
   (:import-from :babel
    :string-to-octets)
   (:import-from :fast-io
-                :fast-output-stream))
+   :fast-output-stream)
+  (:import-from :flexi-streams
+                :with-output-to-sequence))
 (in-package :clta-test)
 
 ;; NOTE: To run this test file, execute `(asdf:test-system :clta)' in your Lisp.
@@ -61,9 +63,10 @@ Copyright (c) 2014 κeen
       :do (is-print (apply #'render template args) result description))
 
 (diag "render test with octet stream backend")
-#+nil
 (loop :for (template args result description) :in *suites*
-      :do (is-print (apply #'render template `(,(make-instance 'fast-output-stream) :backend ,(make-backend :octet-stream) ,@args)) (string-to-octets result) description))
+      :do (is (with-output-to-sequence (s :element-type '(unsigned-byte 8))
+                (apply #'render template `(:backend ,(make-backend :octet-stream) ,s ,@args)))
+              (string-to-octets result) :test #'equalp description))
 
 (diag "render test with string backend")
 (loop :for (template args result description) :in *suites*
