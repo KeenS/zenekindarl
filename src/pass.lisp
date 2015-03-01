@@ -10,7 +10,8 @@
                 :if-let)
   (:import-from :optima
                 :match)
-  (:export :*default-passes*
+  (:export :*optimizing-passes*
+           :*necesarry-passes*
            :apply-passes
            :flatten-pass
            :fold-variables-pass
@@ -119,10 +120,11 @@
   (declare (ignore env))
   (traverse-node #'append-sequence-impl obj))
 
-(defparameter *default-passes* (list #'fold-variables-pass #'flatten-pass #'remove-progn-pass #'append-sequence-pass ))
+(defparameter *optimizing-passes* (list #'fold-variables-pass #'flatten-pass #'remove-progn-pass #'append-sequence-pass))
+(defparameter *necessary-passes* ())
 
 (defun apply-passes (att env)
   (reduce (lambda (att pass)
             (funcall pass att env))
-          *default-passes*
+          (append *default-passes* *necessary-passes*)
           :initial-value att))
