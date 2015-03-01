@@ -21,7 +21,7 @@
 (is-expand
  '#.(emit-code (make-backend :stream) (att-output (att-string "aaa")))
  
- '(write-sequence "aaa" $stream)
+ '(write-string "aaa" $stream)
  "stream backend of att-string with att-output")
 
 (is-expand
@@ -32,18 +32,18 @@
 
 (is-expand
  '#.(emit-code (make-backend :stream) (att-output (att-eval '(+ 1 2))))
- '(write-sequence (encode-for-tt (princ-to-string(+ 1 2))) $stream)
+ '(write-string (encode-for-tt (princ-to-string(+ 1 2))) $stream)
  "stream backend of att-eval with att-output")
 
 (is-expand
  '#.(emit-code (make-backend :stream) (att-output (att-variable 'foo)))
 
- '(write-sequence (encode-for-tt (princ-to-string foo)) $stream)
+ '(write-string (encode-for-tt (princ-to-string foo)) $stream)
  "stream backend of att-variable with att-output")
 
 (is-expand
  '#.(emit-code (make-backend :stream) (att-output (att-variable 'foo :string)))
- '(write-sequence (encode-for-tt foo) $stream)
+ '(write-string (encode-for-tt foo) $stream)
  "stream backend of att-variable with type with att-output")
 
 (is-expand

@@ -32,18 +32,18 @@
     (with-slots (stream%) backend
       (typecase arg
         (att-string
-         `(write-sequence ,(emit-code backend arg :output-p t) ,stream%))
+         `(write-string ,(emit-code backend arg :output-p t) ,stream%))
         (att-variable
          (case (vartype arg)
            (:string
-            `(write-sequence ,(emit-code backend arg :output-p t) ,stream%))
+            `(write-string ,(emit-code backend arg :output-p t) ,stream%))
            (:anything
             (if (auto-escape arg)
-                `(write-sequence ,(emit-code backend arg :output-p t) ,stream%)
+                `(write-string ,(emit-code backend arg :output-p t) ,stream%)
                 `(princ ,(emit-code backend arg :output-p t) ,stream%)))))
         (att-leaf
          (if (auto-escape arg)
-             `(write-sequence ,(emit-code backend arg :output-p t) ,stream%)
+             `(write-string ,(emit-code backend arg :output-p t) ,stream%)
              `(princ ,(emit-code backend arg :output-p t) ,stream%)))
         (t (call-next-method))))))
 
