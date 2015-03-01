@@ -35,7 +35,8 @@
                           :pathname "backend"
                           :depends-on ("backend")
                   :components ((:file "stream")
-                               (:file "sequence" :depends-on ("stream"))))
+                               (:file "sequence" :depends-on ("stream"))
+                               (:file "fast-io" :depends-on ("sequence"))))
                  (:file "pass" :depends-on ("util" "att"))
                  (:file "parse" :depends-on ("att" "st"))
                  (:file "syntax-table")

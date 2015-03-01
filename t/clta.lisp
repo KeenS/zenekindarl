@@ -14,10 +14,13 @@ Copyright (c) 2014 κeen
    :make-backend)
   (:import-from :clta.backend.sequence
    :make-backend)
+  (:import-from :clta.backend.fast-io
+   :make-backend)
   (:import-from :babel
    :string-to-octets)
   (:import-from :fast-io
-   :fast-output-stream)
+   :fast-output-stream
+   :with-fast-output)
   (:import-from :flexi-streams
                 :with-output-to-sequence))
 (in-package :clta-test)
@@ -58,6 +61,10 @@ Copyright (c) 2014 κeen
 (loop :for (template args result description) :in *suites*
       :do (ok (compile-template-string (make-backend :octet) template ()) description))
 
+(diag "compile test with fast-io backend")
+(loop :for (template args result description) :in *suites*
+      :do (ok (compile-template-string (make-backend :fast-io) template ()) description))
+
 (diag "render test with stream backend")
 (loop :for (template args result description) :in *suites*
       :do (is-print (apply #'render template args) result description))
@@ -75,5 +82,11 @@ Copyright (c) 2014 κeen
 (diag "render test with octet backend")
 (loop :for (template args result description) :in *suites*
       :do (is (apply #'render template (cons :backend (cons (make-backend :octet) args))) (string-to-octets result) :test #'equalp description))
+
+(diag "render test with fast-io backend")
+(loop :for (template args result description) :in *suites*
+      :do (is (with-fast-output (buff)
+                (apply #'render template (cons :backend (cons (make-backend :fast-io) (cons buff args)))))
+              (string-to-octets result) :test #'equalp description))
 
 (finalize)
