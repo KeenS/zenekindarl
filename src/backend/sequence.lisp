@@ -34,9 +34,8 @@
 (defclass octet-backend (string-backend octet-stream-backend)
   ())
 
-(defmethod make-backend ((backend (eql :octet)) &key string &allow-other-keys)
-  (make-instance 'octet-backend
-                 :string string))
+(defmethod make-backend ((backend (eql :octet)) &key &allow-other-keys)
+  (make-instance 'octet-backend))
 
 (defmethod emit-lambda ((backend octet-backend) att)
   (let* ((code (emit-code backend att))
