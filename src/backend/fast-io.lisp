@@ -20,9 +20,8 @@
   (make-instance 'fast-io-backend))
 
 (defmethod emit-lambda ((backend fast-io-backend) att)
-  (let* ((code (emit-code backend att))
-         (syms (symbols backend)))
+  (let* ((code (emit-code backend att)))
     (eval
-     `(lambda (,(buffer-of backend) ,@(if syms `(&key ,@syms) ()))
+     `(lambda (,(buffer-of backend) ,@(emit-parameters backend))
         ,code))))
 

@@ -48,10 +48,9 @@
         (t (call-next-method))))))
 
 (defmethod emit-lambda ((backend stream-backend) att)
-  (let* ((code (emit-code backend att))
-         (syms (symbols backend)))
+  (let* ((code (emit-code backend att)))
     (eval
-     `(lambda ,(cons (stream-of backend) (if syms `(&key ,@syms) ()))
+     `(lambda ,(cons (stream-of backend) (emit-parameters backend))
         ,code
         t))))
 
@@ -69,7 +68,7 @@
   (let* ((code (emit-code backend att))
          (syms (symbols backend)))
     (eval
-     `(lambda ,(cons (stream-of backend) (if syms `(&key ,@syms) ()))
+     `(lambda ,(cons (stream-of backend) (emit-parameters backend))
         (with-fast-output (,(buffer-of backend) ,(stream-of backend))
           ,code)))))
 

@@ -1,18 +1,19 @@
 #|
-  This file is a part of clta project.
-  Copyright (c) 2014 κeen
+This file is a part of clta project.
+Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
 (defpackage clta.backend
   (:use :cl :clta.util :clta.att)
   (:import-from :html-encode
-                :encode-for-tt)
+   :encode-for-tt)
   (:export :backend
-           :make-backend
+   :make-backend
            :emit-code
-           :emit-lambda
-           :symbols))
+   :emit-lambda
+           :emit-parameters
+   :symbols))
 
 (in-package :clta.backend)
 
@@ -39,7 +40,7 @@
 (defgeneric find-from-scope (sym backend)
   (:method (sym backend)
     (loop :for scope :in (scopes backend)
-          :thereis (member sym scope))))
+            :thereis (member sym scope))))
 
 (defgeneric http-escape (obj sexp)
   (:method (obj sexp)
@@ -55,9 +56,9 @@
     (error "The backend ~A of ~A is not implemented" backend obj)))
 
 (defmethod emit-code :around (backend (obj att-leaf) &key output-p)
-      (if (and output-p (auto-escape obj))
-          (http-escape obj (call-next-method backend obj))
-          (call-next-method backend obj)))
+  (if (and output-p (auto-escape obj))
+      (http-escape obj (call-next-method backend obj))
+      (call-next-method backend obj)))
 ;;; You are to implement the backend specific `emit-code' for `att-output'
 ;; (defmethod emit-code (backend (obj att-output)))
 
@@ -97,7 +98,7 @@
 (defmethod emit-code (backend (obj att-progn) &key output-p)
   (cons 'progn (mapcar (lambda (node)
                          ;; :FIXME: mark output-p only the last one
-                            (emit-code backend node :output-p output-p))
+                         (emit-code backend node :output-p output-p))
                        (nodes obj))))
 
 (defmethod emit-code (backend (obj att-if) &key output-p)
@@ -116,14 +117,18 @@
       `(loop
          ;; :FIXME: dirty hack
          :for ,sym
-         :in ,seq
+           :in ,seq
          :do ,(emit-code backend body :output-p output-p)))))
+
+(defgeneric emit-parameters (backend)
+  (:method (backend)
+    (let ((syms (symbols backend)))
+      (if syms `(&key ,@syms) ()))))
 
 (defgeneric emit-lambda (backend att)
   (:method (backend att)
-   (let* ((code (emit-code backend att))
-          (syms (symbols backend)))
-     (eval
-      `(lambda ,(if syms `(&key ,@syms) ())
-         ,code
-         t)))))
+    (let* ((code (emit-code backend att)))
+      (eval
+       `(lambda ,(emit-parameters backend)
+          ,code
+          t)))))
