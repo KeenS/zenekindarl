@@ -13,13 +13,18 @@
    :clta.backend.stream
    :clta.util)
   (:import-from :alexandria
-                :if-let)
+                :read-file-into-string)
   (:export :compile-template-string
-           :render))
+           :compile-template-file
+           :render
+           :render-file))
 (in-package :clta)
 
 (defun compile-template-string (backend str env)
   (emit-lambda backend (apply-passes (parse-template-string str) env)))
+
+(defun compile-template-file (backend file env)
+  (compile-template-string backend (read-file-into-string file) env))
 
 (defun render (template &rest args)
   (let* ((backend-given (getf args :backend))
@@ -30,6 +35,9 @@
            (if backend-given
                args
                (cons *standard-output* args)))))
+
+(defun render-file (template-file &rest args)
+  (apply #'render (read-file-into-string template-file) args))
 
 
 #+(or)
