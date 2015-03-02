@@ -12,26 +12,33 @@
    :with-fast-output))
 (in-package :clta-bench)
 
-(defparameter *templates* '("simple.tmpl"))
+(defparameter *templates* '(("simple.tmpl" . ())))
 
-(defmacro bench1000000 (form)
-  `(time (loop :repeat 1000000 :do ,form)))
+(defmacro bench1000000 (title form)
+  `(progn
+     (write-line ,title)
+     (time (loop :repeat 1000000 :do ,form))))
 
-(defun bench/clta (tmpl)
+(defun bench/clta (tmpl args)
   (let ((stream-renderer (compile-template-file (make-backend :stream) tmpl ()))
         (octet-stream-renderer (compile-template-file (make-backend :octet-stream) tmpl ()))
         (string-renderer (compile-template-file (make-backend :string) tmpl ()))
         (octets-renderer (compile-template-file (make-backend :octets) tmpl ()))
         (fast-io-renderer (compile-template-file (make-backend :fast-io) tmpl ()))
         (/dev/null (make-broadcast-stream)))
-    (bench1000000 (funcall stream-renderer /dev/null))
-    (bench1000000 (funcall octet-stream-renderer /dev/null))
-    (bench1000000 (funcall string-renderer))
-    (bench1000000 (funcall octets-renderer))
-    (bench1000000 (with-fast-output (buff) (funcall fast-io-renderer buff)))))
+    (bench1000000 (format nil "compiled stream backend with ~a" tmpl)
+                  (apply stream-renderer /dev/null args))
+    (bench1000000 (format nil "compiled octet stream backend with ~a" tmpl)
+                  (apply octet-stream-renderer /dev/null args))
+    (bench1000000 (format nil "compiled string backend with ~a" tmpl)
+                  (apply string-renderer args))
+    (bench1000000 (format nil "compiled octet backend with ~a" tmpl)
+                  (apply octets-renderer args))
+    (bench1000000 (format nil "compiled fast-io backend with ~a" tmpl)
+                  (with-fast-output (buff) (apply fast-io-renderer buff args)))))
 
-(defun bench (tmpl)
-  (bench/clta tmpl))
+(defun bench (tmpl args)
+  (bench/clta tmpl args))
 
-(loop :for tmpl :in *templates*
-      :do (bench tmpl))
+(loop :for (tmpl . args) :in *templates*
+      :do (bench tmpl args))
