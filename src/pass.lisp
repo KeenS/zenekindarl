@@ -126,5 +126,5 @@
 (defun apply-passes (att env)
   (reduce (lambda (att pass)
             (funcall pass att env))
-          (append *default-passes* *necessary-passes*)
+          (append *optimizing-passes* *necessary-passes*)
           :initial-value att))
