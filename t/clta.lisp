@@ -59,7 +59,7 @@ Copyright (c) 2014 κeen
 
 (diag "compile test with octet backend")
 (loop :for (template args result description) :in *suites*
-      :do (ok (compile-template-string (make-backend :octet) template ()) description))
+      :do (ok (compile-template-string (make-backend :octets) template ()) description))
 
 (diag "compile test with fast-io backend")
 (loop :for (template args result description) :in *suites*
@@ -81,7 +81,7 @@ Copyright (c) 2014 κeen
 
 (diag "render test with octet backend")
 (loop :for (template args result description) :in *suites*
-      :do (is (apply #'render template (cons :backend (cons (make-backend :octet) args))) (string-to-octets result) :test #'equalp description))
+      :do (is (apply #'render template (cons :backend (cons (make-backend :octets) args))) (string-to-octets result) :test #'equalp description))
 
 (diag "render test with fast-io backend")
 (loop :for (template args result description) :in *suites*

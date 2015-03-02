@@ -11,10 +11,13 @@
    :clta.pass
    :clta.backend
    :clta.backend.stream
+   :clta.backend.sequence
+   :clta.backend.fast-io
    :clta.util)
   (:import-from :alexandria
                 :read-file-into-string)
-  (:export :compile-template-string
+  (:export :make-backend
+   :compile-template-string
            :compile-template-file
            :render
            :render-file))
