@@ -16,8 +16,6 @@ Like this
 .
 
 Wait a while before full documentation is prefared.
-## Installation
-Use quicklisp
 ## Author
 
 * κeen
