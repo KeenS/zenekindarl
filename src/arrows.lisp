@@ -1,19 +1,19 @@
 #|
-  This file is a part of clta project.
+  This file is a part of arrows project.
   Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage clta
+(defpackage arrows
   (:use
    :cl
-   :clta.parse
-   :clta.pass
-   :clta.backend
-   :clta.backend.stream
-   :clta.backend.sequence
-   :clta.backend.fast-io
-   :clta.util)
+   :arrows.parse
+   :arrows.pass
+   :arrows.backend
+   :arrows.backend.stream
+   :arrows.backend.sequence
+   :arrows.backend.fast-io
+   :arrows.util)
   (:import-from :alexandria
                 :read-file-into-string)
   (:export :make-backend
@@ -21,7 +21,7 @@
            :compile-template-file
            :render
            :render-file))
-(in-package :clta)
+(in-package :arrows)
 
 (defun compile-template-string (backend str env)
   (emit-lambda backend (apply-passes (parse-template-string str) env)))

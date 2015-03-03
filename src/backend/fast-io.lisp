@@ -1,9 +1,9 @@
 (in-package :cl-user)
-(defpackage clta.backend.fast-io
-  (:use :cl :clta.util :clta.att :clta.backend)
-  (:import-from :clta.backend.stream
+(defpackage arrows.backend.fast-io
+  (:use :cl :arrows.util :arrows.att :arrows.backend)
+  (:import-from :arrows.backend.stream
    :buffer-of)
-  (:import-from :clta.backend.sequence
+  (:import-from :arrows.backend.sequence
                 :octet-backend)
   (:import-from :babel
                 :string-to-octets)
@@ -11,7 +11,7 @@
    :with-fast-output
                 :fast-write-sequence)
   (:export :fast-io-backend))
-(in-package :clta.backend.fast-io)
+(in-package :arrows.backend.fast-io)
 
 (defclass fast-io-backend (octet-backend)
   ())

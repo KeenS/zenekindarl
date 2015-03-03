@@ -1,17 +1,17 @@
 #|
-  This file is a part of clta project.
+  This file is a part of arrows project.
   Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage clta.backend.sequence
-  (:use :cl :clta.util :clta.att :clta.backend :clta.backend.stream)
+(defpackage arrows.backend.sequence
+  (:use :cl :arrows.util :arrows.att :arrows.backend :arrows.backend.stream)
   (:import-from :fast-io
    :with-fast-output
    :fast-write-sequence)
   (:export :string-backend
            :octet-backend))
-(in-package :clta.backend.sequence)
+(in-package :arrows.backend.sequence)
 
 (defclass string-backend (stream-backend)
   ((string

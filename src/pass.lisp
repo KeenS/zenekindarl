@@ -1,11 +1,11 @@
 #|
-  This file is a part of clta project.
+  This file is a part of arrows project.
   Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage clta.pass
-  (:use :cl :clta.util :clta.att)
+(defpackage arrows.pass
+  (:use :cl :arrows.util :arrows.att)
   (:import-from :alexandria
                 :if-let)
   (:import-from :optima
@@ -17,7 +17,7 @@
            :fold-variables-pass
            :append-sequence-pass
            :remove-progn-pass))
-(in-package :clta.pass)
+(in-package :arrows.pass)
 
 (defgeneric traverse-node (func obj)
   (:method (func (obj att-progn))

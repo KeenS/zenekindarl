@@ -1,9 +1,9 @@
 (in-package :cl-user)
-(defpackage clta.syntax-table.default
+(defpackage arrows.syntax-table.default
   (:use :cl
         :esrap
-        :clta.att
-        :clta.syntax-table)
+        :arrows.att
+        :arrows.syntax-table)
   (:import-from :alexandria
                :read-file-into-string
                :iota)
@@ -11,7 +11,7 @@
            :control-if
            :control-var))
 
-(in-package clta.syntax-table.default)
+(in-package arrows.syntax-table.default)
 
 (defrule integer (+ (or "0" "1" "2" "3" "4" "5" "6" "7" "8" "9"))
   (:lambda (list)

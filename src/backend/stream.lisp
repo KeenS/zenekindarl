@@ -1,11 +1,11 @@
 #|
-  This file is a part of clta project.
+  This file is a part of arrows project.
   Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage clta.backend.stream
-  (:use :cl :clta.util :clta.att :clta.backend)
+(defpackage arrows.backend.stream
+  (:use :cl :arrows.util :arrows.att :arrows.backend)
   (:import-from :babel
                 :string-to-octets)
   (:import-from :fast-io
@@ -15,7 +15,7 @@
            :octet-stream-backend
            :stream-of
            :buffer-of))
-(in-package :clta.backend.stream)
+(in-package :arrows.backend.stream)
 
 (defclass stream-backend (backend)
   ((stream%

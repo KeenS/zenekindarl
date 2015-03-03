@@ -1,17 +1,17 @@
 #|
-This file is a part of clta project.
+This file is a part of arrows project.
 Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage clta.att-test
+(defpackage arrows.att-test
   (:use :cl
-        :clta.att
-        :clta.util
+        :arrows.att
+        :arrows.util
         :cl-test-more))
-(in-package :clta.att-test)
+(in-package :arrows.att-test)
 
-;; NOTE: To run this test file, execute `(asdf:test-system :clta)' in your Lisp.
+;; NOTE: To run this test file, execute `(asdf:test-system :arrows)' in your Lisp.
 
 (plan nil)
 (diag "att tests")

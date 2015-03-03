@@ -1,16 +1,16 @@
 #|
-This file is a part of clta project.
+This file is a part of arrows project.
 Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage clta.parse-test
+(defpackage arrows.parse-test
   (:use :cl
-        :clta.att
-        :clta.parse
-        :clta.util
+        :arrows.att
+        :arrows.parse
+        :arrows.util
         :cl-test-more))
-(in-package :clta.parse-test)
+(in-package :arrows.parse-test)
 
 (plan nil)
 (diag "test parse")

@@ -1,9 +1,9 @@
 (in-package :cl-user)
-(defpackage clta.syntax-table
+(defpackage arrows.syntax-table
   (:use :cl
         :esrap        
-        :clta.util
-        :clta.att)
+        :arrows.util
+        :arrows.att)
   (:import-from :alexandria
                 :maphash-values)
   (:export :default
@@ -16,7 +16,7 @@
            :defop
            :*markers*
            :*controls*))
-(in-package clta.syntax-table)
+(in-package arrows.syntax-table)
 
 (defrule white-space
     (or #\Space #\Tab #\Newline #\Return)

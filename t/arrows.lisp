@@ -1,20 +1,20 @@
 #|
-This file is a part of clta project.
+This file is a part of arrows project.
 Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage clta-test
+(defpackage arrows-test
   (:use :cl
-   :clta
+   :arrows
         :cl-test-more)
-  (:import-from :clta.backend
+  (:import-from :arrows.backend
    :make-backend)
-  (:import-from :clta.backend.stream
+  (:import-from :arrows.backend.stream
    :make-backend)
-  (:import-from :clta.backend.sequence
+  (:import-from :arrows.backend.sequence
    :make-backend)
-  (:import-from :clta.backend.fast-io
+  (:import-from :arrows.backend.fast-io
    :make-backend)
   (:import-from :babel
    :string-to-octets)
@@ -23,9 +23,9 @@ Copyright (c) 2014 κeen
    :with-fast-output)
   (:import-from :flexi-streams
                 :with-output-to-sequence))
-(in-package :clta-test)
+(in-package :arrows-test)
 
-;; NOTE: To run this test file, execute `(asdf:test-system :clta)' in your Lisp.
+;; NOTE: To run this test file, execute `(asdf:test-system :arrows)' in your Lisp.
 
 (defparameter *suites*
   '(("foo" () "foo" "simple string")

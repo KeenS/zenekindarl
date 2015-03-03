@@ -1,7 +1,6 @@
-WIP
 
-
-# Clta
+Template flies like an arrow
+# Arrows
 A Template Engine.
 
 Expected to be a fast, flexible, extensible, low memory usage, async, concurrent template engine.

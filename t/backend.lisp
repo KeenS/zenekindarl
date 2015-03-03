@@ -1,19 +1,19 @@
 #|
-  This file is a part of clta project.
+  This file is a part of arrows project.
   Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage clta.backend-test
+(defpackage arrows.backend-test
   (:use :cl
-        :clta.util
-        :clta.att
-        :clta.backend
-        :clta.backend.stream
+        :arrows.util
+        :arrows.att
+        :arrows.backend
+        :arrows.backend.stream
    :cl-test-more)
   (:import-from :html-encode
                 :encode-for-tt))
-(in-package :clta.backend-test)
+(in-package :arrows.backend-test)
 
 (plan nil)
 (diag "backend tests")

@@ -1,22 +1,22 @@
 #|
-  This file is a part of clta project.
+  This file is a part of arrows project.
   Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage clta-test-asd
+(defpackage arrows-test-asd
   (:use :cl :asdf))
-(in-package :clta-test-asd)
+(in-package :arrows-test-asd)
 
-(defsystem clta-test
+(defsystem arrows-test
   :author "κeen"
   :license ""
-  :depends-on (:clta
+  :depends-on (:arrows
                :cl-test-more
                :flexi-streams)
   :components ((:module "t"
                 :components
-                ((:test-file "clta")
+                ((:test-file "arrows")
                  (:test-file "att")
                  (:test-file "pass")
                  (:test-file "backend")

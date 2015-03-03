@@ -1,11 +1,11 @@
 #|
-This file is a part of clta project.
+This file is a part of arrows project.
 Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage clta.backend
-  (:use :cl :clta.util :clta.att)
+(defpackage arrows.backend
+  (:use :cl :arrows.util :arrows.att)
   (:import-from :html-encode
    :encode-for-tt)
   (:export :backend
@@ -15,7 +15,7 @@ Copyright (c) 2014 κeen
            :emit-parameters
    :symbols))
 
-(in-package :clta.backend)
+(in-package :arrows.backend)
 
 (defclass backend ()
   ((symbols

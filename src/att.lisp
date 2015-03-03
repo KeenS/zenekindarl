@@ -1,11 +1,11 @@
 #|
-  This file is a part of clta project.
+  This file is a part of arrows project.
   Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage clta.att
-  (:use :cl :clta.util)
+(defpackage arrows.att
+  (:use :cl :arrows.util)
   (:export :print-object
            :att-node
            :att-leaf
@@ -49,7 +49,7 @@
            :path
            
            :att-equal))
-(in-package :clta.att)
+(in-package :arrows.att)
 
 ;;; Abstract Template Tree
 (defclass att-node ()
