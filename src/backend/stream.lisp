@@ -89,6 +89,6 @@
                 `(fast-write-sequence (string-to-octets (princ-to-string ,(emit-code backend arg :output-p t))) ,buffer%)))))
         (att-leaf
          (if (auto-escape arg)
-             `(fast-rite-sequence (string-to-octets ,(emit-code backend arg :output-p t)) ,buffer%)
+             `(fast-write-sequence (string-to-octets ,(emit-code backend arg :output-p t)) ,buffer%)
              `(fast-write-sequence (string-to-octets (princ-to-string ,(emit-code backend arg :output-p t))) ,buffer%)))
         (t (call-next-method))))))
