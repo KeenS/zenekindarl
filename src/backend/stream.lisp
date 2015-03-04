@@ -56,9 +56,7 @@
 
 
 (defclass octet-stream-backend (stream-backend)
-  ((buffer%
-    :accessor buffer-of
-    :initform (gensym "buffer"))))
+  ())
 
 (defmethod make-backend ((backend (eql :octet-stream)) &key &allow-other-keys)
   (make-instance 'octet-stream-backend))
@@ -68,34 +66,33 @@
   (let* ((code (emit-code backend att)))
     (eval
      `(lambda ,(cons (stream-of backend) (emit-parameters backend))
-        (with-fast-output (,(buffer-of backend) ,(stream-of backend))
-          ,code)))))
+        ,code))))
 
 (defmethod emit-code ((backend octet-stream-backend) (obj att-output) &key output-p)
   (declare (ignore output-p))
   (with-slots (arg) obj
-    (with-slots (buffer%) backend
+    (with-slots (stream%) backend
       (typecase arg
         (att-string
-         `(fast-write-sequence ,(string-to-octets (emit-code backend arg :output-p t)) ,buffer%))
+         `(write-sequence ,(string-to-octets (emit-code backend arg :output-p t)) ,stream%))
         (att-variable
          (case (vartype arg)
            (:string
-            `(fast-write-sequence (string-to-octets ,(emit-code backend arg :output-p t)) ,buffer%))
+            `(write-sequence (string-to-octets ,(emit-code backend arg :output-p t)) ,stream%))
            (:anything
             (if (auto-escape arg)
-                `(fast-write-sequence (string-to-octets ,(emit-code backend arg :output-p t)) ,buffer%)
-                `(fast-write-sequence (string-to-octets (let ((val ,(emit-code backend arg :output-p t)))
+                `(write-sequence (string-to-octets ,(emit-code backend arg :output-p t)) ,stream%)
+                `(write-sequence (string-to-octets (let ((val ,(emit-code backend arg :output-p t)))
                                                           (if (stringp val)
                                                               val
                                                               (princ-to-string val))))
-                                      ,buffer%)))))
+                                      ,stream%)))))
         (att-leaf
          (if (auto-escape arg)
-             `(fast-write-sequence (string-to-octets ,(emit-code backend arg :output-p t)) ,buffer%)
-             `(fast-write-sequence (string-to-octets (let ((val ,(emit-code backend arg :output-p t)))
+             `(write-sequence (string-to-octets ,(emit-code backend arg :output-p t)) ,stream%)
+             `(write-sequence (string-to-octets (let ((val ,(emit-code backend arg :output-p t)))
                                                        (if (stringp val)
                                                            val
                                                            (princ-to-string val))))
-                                   ,buffer%)))
+                                   ,stream%)))
         (t (call-next-method))))))
