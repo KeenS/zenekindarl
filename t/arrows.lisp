@@ -8,14 +8,6 @@ Copyright (c) 2014 κeen
   (:use :cl
    :arrows
         :cl-test-more)
-  (:import-from :arrows.backend
-   :make-backend)
-  (:import-from :arrows.backend.stream
-   :make-backend)
-  (:import-from :arrows.backend.sequence
-   :make-backend)
-  (:import-from :arrows.backend.fast-io
-   :make-backend)
   (:import-from :babel
    :string-to-octets)
   (:import-from :fast-io
@@ -47,23 +39,23 @@ Copyright (c) 2014 κeen
 (plan nil)
 (diag "compile test with stream backend")
 (loop :for (template args result description) :in *suites*
-      :do (ok (compile-template-string (make-backend :stream) template ()) description))
+      :do (ok (compile-template-string :stream template ()) description))
 
 (diag "compile test with octet stream backend")
 (loop :for (template args result description) :in *suites*
-      :do (ok (compile-template-string (make-backend :octet-stream) template ()) description))
+      :do (ok (compile-template-string :octet-stream template ()) description))
 
 (diag "compile test with string backend")
 (loop :for (template args result description) :in *suites*
-      :do (ok (compile-template-string (make-backend :string) template ()) description))
+      :do (ok (compile-template-string :string template ()) description))
 
 (diag "compile test with octet backend")
 (loop :for (template args result description) :in *suites*
-      :do (ok (compile-template-string (make-backend :octets) template ()) description))
+      :do (ok (compile-template-string :octets template ()) description))
 
 (diag "compile test with fast-io backend")
 (loop :for (template args result description) :in *suites*
-      :do (ok (compile-template-string (make-backend :fast-io) template ()) description))
+      :do (ok (compile-template-string :fast-io template ()) description))
 
 (diag "render test with stream backend")
 (loop :for (template args result description) :in *suites*
@@ -72,21 +64,21 @@ Copyright (c) 2014 κeen
 (diag "render test with octet stream backend")
 (loop :for (template args result description) :in *suites*
       :do (is (with-output-to-sequence (s :element-type '(unsigned-byte 8))
-                (apply #'render template `(:backend ,(make-backend :octet-stream) ,s ,@args)))
+                (apply #'render template `(:backend :octet-stream ,s ,@args)))
               (string-to-octets result) :test #'equalp description))
 
 (diag "render test with string backend")
 (loop :for (template args result description) :in *suites*
-      :do (is (apply #'render template (cons :backend (cons (make-backend :string) args))) result description))
+      :do (is (apply #'render template (cons :backend (cons :string args))) result description))
 
 (diag "render test with octet backend")
 (loop :for (template args result description) :in *suites*
-      :do (is (apply #'render template (cons :backend (cons (make-backend :octets) args))) (string-to-octets result) :test #'equalp description))
+      :do (is (apply #'render template (cons :backend (cons :octets args))) (string-to-octets result) :test #'equalp description))
 
 (diag "render test with fast-io backend")
 (loop :for (template args result description) :in *suites*
       :do (is (with-fast-output (buff)
-                (apply #'render template (cons :backend (cons (make-backend :fast-io) (cons buff args)))))
+                (apply #'render template (cons :backend (cons :fast-io (cons buff args)))))
               (string-to-octets result) :test #'equalp description))
 
 (finalize)

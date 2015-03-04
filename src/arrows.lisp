@@ -16,22 +16,24 @@
    :arrows.util)
   (:import-from :alexandria
                 :read-file-into-string)
-  (:export :make-backend
-   :compile-template-string
+  (:export :compile-template-string
            :compile-template-file
            :render
            :render-file))
 (in-package :arrows)
 
 (defun compile-template-string (backend str env)
-  (emit-lambda backend (apply-passes (parse-template-string str) env)))
+  (emit-lambda (if (keywordp backend)
+                   (make-backend backend)
+                   (apply #'make-backend backend))
+               (apply-passes (parse-template-string str) env)))
 
 (defun compile-template-file (backend file env)
   (compile-template-string backend (read-file-into-string file) env))
 
 (defun render (template &rest args)
   (let* ((backend-given (getf args :backend))
-         (backend (or backend-given (make-backend :stream))))
+         (backend (or backend-given :stream)))
     (when backend-given
       (remf args :backend))
     (apply (compile-template-string backend template ())
@@ -48,6 +50,6 @@
         :name "κeen")
 
 #+(or)
-(let ((renderer (compile-template-string (make-backend :stream) "Hello {{var name}}!!" ())))
+(let ((renderer (compile-template-string :stream "Hello {{var name}}!!" ())))
   (funcall renderer *standard-output* :name "κeen"))
 
