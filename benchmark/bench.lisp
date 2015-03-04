@@ -11,10 +11,15 @@ Copyright (c) 2014 κeen
    :cl
    :arrows)
   (:import-from :fast-io
-   :with-fast-output))
+   :with-fast-output)
+  (:import-from :alexandria
+                :make-keyword))
 (in-package :arrows-bench)
 
-(defparameter *templates* '(("simple.tmpl" . ())))
+(defparameter *templates* `(("simple.tmpl" . ())
+                            ("1var.tmpl" . (:name "κeen"))
+                            ("100var.tmpl" . ,(loop :for i :from 1 :to 100
+                                                    :append (list (make-keyword (format nil "foo~a" i)) (format nil "bar~a" i))))))
 
 (defmacro bench1000000 (title form)
   `(progn
