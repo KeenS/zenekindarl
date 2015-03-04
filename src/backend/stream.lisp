@@ -65,8 +65,7 @@
 
 
 (defmethod emit-lambda ((backend octet-stream-backend) att)
-  (let* ((code (emit-code backend att))
-         (syms (symbols backend)))
+  (let* ((code (emit-code backend att)))
     (eval
      `(lambda ,(cons (stream-of backend) (emit-parameters backend))
         (with-fast-output (,(buffer-of backend) ,(stream-of backend))

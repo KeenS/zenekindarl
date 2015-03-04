@@ -37,8 +37,7 @@
   (make-instance 'octet-backend))
 
 (defmethod emit-lambda ((backend octet-backend) att)
-  (let* ((code (emit-code backend att))
-         (syms (symbols backend)))
+  (let* ((code (emit-code backend att)))
     (eval
      `(lambda ,(emit-parameters backend)
         (with-fast-output (,(buffer-of backend))

@@ -78,7 +78,6 @@ Copyright (c) 2014 κeen
     sym))
 
 (defmethod http-escape ((obj att-variable) sexp)
-  (declare (ignore obj))
   (if (eq (vartype obj) :string)
       `(encode-for-tt ,sexp)
       `(if (stringp ,sexp)
