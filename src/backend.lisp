@@ -82,7 +82,7 @@ Copyright (c) 2014 κeen
       `(encode-for-tt ,sexp)
       `(if (stringp ,sexp)
            (encode-for-tt ,sexp)
-           (call-next-method obj sexp))))
+           ,(call-next-method obj sexp))))
 
 (defmethod emit-code (backend (obj att-constant) &key output-p)
   (declare (ignore backend output-p))
