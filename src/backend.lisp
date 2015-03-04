@@ -81,7 +81,9 @@ Copyright (c) 2014 κeen
   (declare (ignore obj))
   (if (eq (vartype obj) :string)
       `(encode-for-tt ,sexp)
-      (call-next-method obj sexp)))
+      `(if (stringp ,sexp)
+           (encode-for-tt ,sexp)
+           (call-next-method obj sexp))))
 
 (defmethod emit-code (backend (obj att-constant) &key output-p)
   (declare (ignore backend output-p))

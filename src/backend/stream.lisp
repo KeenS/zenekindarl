@@ -86,9 +86,17 @@
            (:anything
             (if (auto-escape arg)
                 `(fast-write-sequence (string-to-octets ,(emit-code backend arg :output-p t)) ,buffer%)
-                `(fast-write-sequence (string-to-octets (princ-to-string ,(emit-code backend arg :output-p t))) ,buffer%)))))
+                `(fast-write-sequence (string-to-octets (let ((val ,(emit-code backend arg :output-p t)))
+                                                          (if (stringp val)
+                                                              val
+                                                              (princ-to-string val))))
+                                      ,buffer%)))))
         (att-leaf
          (if (auto-escape arg)
              `(fast-write-sequence (string-to-octets ,(emit-code backend arg :output-p t)) ,buffer%)
-             `(fast-write-sequence (string-to-octets (princ-to-string ,(emit-code backend arg :output-p t))) ,buffer%)))
+             `(fast-write-sequence (string-to-octets (let ((val ,(emit-code backend arg :output-p t)))
+                                                       (if (stringp val)
+                                                           val
+                                                           (princ-to-string val))))
+                                   ,buffer%)))
         (t (call-next-method))))))
