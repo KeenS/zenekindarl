@@ -19,12 +19,12 @@ Copyright (c) 2014 κeen
 (defparameter *templates* `(("simple.tmpl" . ())
                             ("1var.tmpl" . (:name "κeen"))
                             ("100var.tmpl" . ,(loop :for i :from 1 :to 100
-                                                    :append (list (make-keyword (format nil "foo~a" i)) (format nil "bar~a" i))))))
+                                                    :append (list (make-keyword (format nil "FOO~a" i)) (format nil "bar~a" i))))))
 
-(defmacro bench1000000 (title form)
+(defmacro bench10000 (title form)
   `(progn
      (write-line ,title)
-     (time (loop :repeat 1000000 :do ,form))))
+     (time (loop :repeat 10000 :do ,form))))
 
 (defmacro bench/arrows (tmpl args)
   (let ((stream-renderer (compile-template-file :stream tmpl ()))
@@ -34,16 +34,16 @@ Copyright (c) 2014 κeen
         (fast-io-renderer (compile-template-file :fast-io tmpl ())))
     `(progn
       (with-open-file (/dev/null "/dev/null" :direction :output :if-exists :append)
-        (bench1000000 (format nil "compiled stream backend with ~a" ,tmpl)
+        (bench10000 (format nil "compiled stream backend with ~a" ,tmpl)
                       (funcall ,stream-renderer /dev/null ,@args))
-        (bench1000000 (format nil "compiled string backend with ~a" ,tmpl)
+        (bench10000 (format nil "compiled string backend with ~a" ,tmpl)
                       (write-string (funcall ,string-renderer ,@args) /dev/null)))
       (with-open-file (/dev/null "/dev/null" :element-type '(unsigned-byte 8) :direction :output :if-exists :append)
-        (bench1000000 (format nil "compiled octet stream backend with ~a" ,tmpl)
+        (bench10000 (format nil "compiled octet stream backend with ~a" ,tmpl)
                       (funcall  ,octet-stream-renderer /dev/null ,@args))
-        (bench1000000 (format nil "compiled octet backend with ~a" ,tmpl)
+        (bench10000 (format nil "compiled octet backend with ~a" ,tmpl)
                       (write-sequence (funcall ,octets-renderer ,@args) /dev/null))
-        (bench1000000 (format nil "compiled fast-io backend with ~a" ,tmpl)
+        (bench10000 (format nil "compiled fast-io backend with ~a" ,tmpl)
                       (with-fast-output (buff /dev/null) (funcall ,fast-io-renderer buff ,@args)))))))
 
 (defmacro bench (tmpl args)
