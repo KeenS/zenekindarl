@@ -1,13 +1,13 @@
 #|
-  This file is a part of arrows project.
-  Copyright (c) 2014 κeen
+This file is a part of arrows project.
+Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
 (defpackage arrows.backend.sequence
   (:use :cl :arrows.util :arrows.att :arrows.backend :arrows.backend.stream)
   (:import-from :fast-io
-   :with-fast-output
+                :with-fast-output
                 :fast-write-sequence)
   (:import-from :babel
                 :string-to-octets)

@@ -1,6 +1,6 @@
 #|
-  This file is a part of arrows project.
-  Copyright (c) 2014 κeen
+This file is a part of arrows project.
+Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)

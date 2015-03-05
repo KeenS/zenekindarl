@@ -58,15 +58,15 @@
                      :collect (gethash marker *markers*))))
     `(progn
        ,@(loop :for (open-marker . close-marker) :in markers
-          :collect
-          `(defrule ,name
-            (and ,open-marker
-                 (? white-spaces)
-                 ,pattern
-                 (? white-spaces)
-                 ,close-marker)
-          (:function third)
-          ,@(if transform
-                `((:around ()
-                           (apply ,transform (call-transform))))
-                ()))))))
+            :collect
+            `(defrule ,name
+                 (and ,open-marker
+                      (? white-spaces)
+                      ,pattern
+                      (? white-spaces)
+                      ,close-marker)
+               (:function third)
+               ,@(if transform
+                     `((:around ()
+                                (apply ,transform (call-transform))))
+                     ()))))))

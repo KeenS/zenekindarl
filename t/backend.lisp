@@ -1,6 +1,6 @@
 #|
-  This file is a part of arrows project.
-  Copyright (c) 2014 κeen
+This file is a part of arrows project.
+Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
@@ -10,7 +10,7 @@
         :arrows.att
         :arrows.backend
         :arrows.backend.stream
-   :cl-test-more)
+        :cl-test-more)
   (:import-from :html-encode
                 :encode-for-tt))
 (in-package :arrows.backend-test)
@@ -48,9 +48,9 @@
 
 (is-expand
  '#.(emit-code (make-backend :stream)
-  (att-if
-   (att-eval t)
-   (att-string "foo")))
+               (att-if
+                (att-eval t)
+                (att-string "foo")))
 
  '(if t
    "foo"
@@ -59,10 +59,10 @@
 
 (is-expand
  '#.(emit-code (make-backend :stream)
-  (att-if
-   (att-eval t)
-   (att-string "foo")
-   (att-string "bar")))
+               (att-if
+                (att-eval t)
+                (att-string "foo")
+                (att-string "bar")))
 
  '(if t
    "foo"
@@ -71,12 +71,12 @@
 
 (is-expand
  '#.(emit-code (make-backend :stream)
-            (att-loop
-             (att-eval ''((:foo 1) (:foo 2) (:foo 3)))
-             (att-variable 'foo)))
+               (att-loop
+                (att-eval ''((:foo 1) (:foo 2) (:foo 3)))
+                (att-variable 'foo)))
 
  '(loop :for $loopvar :in '((:foo 1) (:foo 2) (:foo 3))
-   :do foo )
+     :do foo )
  "stream backend of loop")
 
 (finalize)

@@ -1,6 +1,6 @@
 #|
-  This file is a part of arrows project.
-  Copyright (c) 2014 κeen
+This file is a part of arrows project.
+Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
@@ -9,7 +9,7 @@
   (:import-from :babel
                 :string-to-octets)
   (:import-from :fast-io
-   :with-fast-output
+                :with-fast-output
                 :fast-write-sequence)
   (:export :stream-backend
            :octet-stream-backend
@@ -83,16 +83,16 @@
             (if (auto-escape arg)
                 `(write-sequence (string-to-octets ,(emit-code backend arg :output-p t)) ,stream%)
                 `(write-sequence (string-to-octets (let ((val ,(emit-code backend arg :output-p t)))
-                                                          (if (stringp val)
-                                                              val
-                                                              (princ-to-string val))))
-                                      ,stream%)))))
+                                                     (if (stringp val)
+                                                         val
+                                                         (princ-to-string val))))
+                                 ,stream%)))))
         (att-leaf
          (if (auto-escape arg)
              `(write-sequence (string-to-octets ,(emit-code backend arg :output-p t)) ,stream%)
              `(write-sequence (string-to-octets (let ((val ,(emit-code backend arg :output-p t)))
-                                                       (if (stringp val)
-                                                           val
-                                                           (princ-to-string val))))
-                                   ,stream%)))
+                                                  (if (stringp val)
+                                                      val
+                                                      (princ-to-string val))))
+                              ,stream%)))
         (t (call-next-method))))))

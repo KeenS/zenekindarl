@@ -7,13 +7,13 @@ Copyright (c) 2014 κeen
 (defpackage arrows.backend
   (:use :cl :arrows.util :arrows.att)
   (:import-from :html-encode
-   :encode-for-tt)
+                :encode-for-tt)
   (:export :backend
-   :make-backend
+           :make-backend
            :emit-code
-   :emit-lambda
+           :emit-lambda
            :emit-parameters
-   :symbols))
+           :symbols))
 
 (in-package :arrows.backend)
 
@@ -40,7 +40,7 @@ Copyright (c) 2014 κeen
 (defgeneric find-from-scope (sym backend)
   (:method (sym backend)
     (loop :for scope :in (scopes backend)
-            :thereis (member sym scope))))
+       :thereis (member sym scope))))
 
 (defgeneric http-escape (obj sexp)
   (:method (obj sexp)
@@ -116,10 +116,10 @@ Copyright (c) 2014 κeen
       (push-scope backend)
       (add-to-scope sym backend)
       `(loop
-         ;; :FIXME: dirty hack
-         :for ,sym
-           :in ,seq
-         :do ,(emit-code backend body :output-p output-p)))))
+          ;; :FIXME: dirty hack
+          :for ,sym
+          :in ,seq
+          :do ,(emit-code backend body :output-p output-p)))))
 
 (defgeneric emit-parameters (backend)
   (:method (backend)

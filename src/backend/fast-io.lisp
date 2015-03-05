@@ -2,13 +2,13 @@
 (defpackage arrows.backend.fast-io
   (:use :cl :arrows.util :arrows.att :arrows.backend)
   (:import-from :arrows.backend.stream
-   :buffer-of)
+                :buffer-of)
   (:import-from :arrows.backend.sequence
                 :octet-backend)
   (:import-from :babel
                 :string-to-octets)
   (:import-from :fast-io
-   :with-fast-output
+                :with-fast-output
                 :fast-write-sequence)
   (:export :fast-io-backend))
 (in-package :arrows.backend.fast-io)
