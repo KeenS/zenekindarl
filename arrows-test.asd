@@ -12,7 +12,7 @@
   :author "κeen"
   :license ""
   :depends-on (:arrows
-               :cl-test-more
+               :prove
                :flexi-streams)
   :components ((:module "t"
                 :components
