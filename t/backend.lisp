@@ -38,7 +38,9 @@ Copyright (c) 2014 κeen
 (is-expand
  '#.(emit-code (make-backend :stream) (att-output (att-variable 'foo)))
 
- '(write-string (encode-for-tt (princ-to-string foo)) $stream)
+ '(write-string (if (stringp foo)
+                    (encode-for-tt foo)
+                    (encode-for-tt (princ-to-string foo))) $stream)
  "stream backend of att-variable with att-output")
 
 (is-expand
