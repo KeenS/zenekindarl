@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/[KeenS]/[arrows].svg?branch=master)](https://travis-ci.org/[KeenS]/[arrows])
+[![Build Status](https://travis-ci.org/KeenS/arrows.svg?branch=master)](https://travis-ci.org/KeenS/arrows)
 # Arrows
 Template flies like an arrow
 
