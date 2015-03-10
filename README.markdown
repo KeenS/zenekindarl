@@ -1,7 +1,6 @@
-
-Template flies like an arrow
+[![Build Status](https://travis-ci.org/[KeenS]/[arrows].svg?branch=master)](https://travis-ci.org/[KeenS]/[arrows])
 # Arrows
-A Template Engine.
+Template flies like an arrow
 
 Expected to be a fast, flexible, extensible, low memory usage, async, concurrent template engine.
 
