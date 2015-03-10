@@ -9,4 +9,4 @@ matrix:
 install:
   - curl -L https://github.com/luismbo/cl-travis/raw/master/install.sh | sh
 script:
-  - cl -C KeenS/arrows/t/ -e "(print *default-pathname-defaults*)" -e "(ql:quickload :prove)"  -e "(unless (prove:run :arrows-test) (uiop:quit 1))"
+  - cl -C t/ -e "(ql:quickload :prove)"  -e "(unless (prove:run :arrows-test) (uiop:quit 1))"
