@@ -25,6 +25,7 @@
                :esrap
                :html-encode
                :fast-io
+               :big-string
                )
   :components ((:module "src"
                 :components
