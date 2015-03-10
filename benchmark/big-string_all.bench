@@ -1,0 +1,418 @@
+This is SBCL 1.2.9, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+; compiling file "/home/kim/.cim/quicklisp/dists/quicklisp/software/big-string-20130615-hg/package.lisp" (written 10 MAR 2015 06:13:52 PM):
+; compiling (DEFPACKAGE #:BIG-STRING ...)
+
+; /home/kim/.cache/common-lisp/sbcl-1.2.9-linux-x64/home/kim/.cim/quicklisp/dists/quicklisp/software/big-string-20130615-hg/package-TMP.fasl written
+; compilation finished in 0:00:00.015
+; compiling file "/home/kim/.cim/quicklisp/dists/quicklisp/software/big-string-20130615-hg/big-string.lisp" (written 10 MAR 2015 06:13:52 PM):
+; compiling (IN-PACKAGE #:BIG-STRING)
+; compiling (DEFTYPE ARRAY-SIZE ...)
+; compiling (DEFTYPE BIG-STRING-SIZE ...)
+; compiling (DEFSTRUCT (BIG-STRING # ...) ...)
+; compiling (DECLAIM (FTYPE # ...))
+; compiling (DEFUN BIG-STRING-LENGTH ...)
+; compiling (DECLAIM (FTYPE # ...))
+; compiling (DEFUN BIG-STRING-APPEND ...)
+; compiling (DECLAIM (FTYPE # ...) ...)
+; compiling (DEFUN BINARY-SEARCH ...)
+; compiling (DECLAIM (FTYPE # ...))
+; compiling (DEFUN BIG-STRING-CHAR ...)
+; compiling (DEFUN BIG-STRING-SUBSTRING ...)
+; compiling (DECLAIM (FTYPE # ...))
+; compiling (DEFUN STRING-OF-BIG-STRING ...)
+
+; /home/kim/.cache/common-lisp/sbcl-1.2.9-linux-x64/home/kim/.cim/quicklisp/dists/quicklisp/software/big-string-20130615-hg/big-string-TMP.fasl written
+; compilation finished in 0:00:00.212
+; compiling file "/home/kim/Lisp/arrows/src/util.lisp" (written 10 MAR 2015 05:40:06 PM):
+; compiling (IN-PACKAGE :CL-USER)
+; compiling (DEFPACKAGE ARROWS.UTIL ...)
+; compiling (IN-PACKAGE :ARROWS.UTIL)
+; compiling (DEFTYPE OCTETS ...)
+; compiling (DEFUN OCTETS ...)
+; compiling (DEFUN COLLECT-HASH-KEY ...)
+; compiling (DEFUN COLLECT-HASH-VALUE ...)
+
+; /home/kim/.cache/common-lisp/sbcl-1.2.9-linux-x64/home/kim/Lisp/arrows/src/util-TMP.fasl written
+; compilation finished in 0:00:00.048
+; compiling file "/home/kim/Lisp/arrows/src/att.lisp" (written 05 MAR 2015 10:34:39 AM):
+; compiling (IN-PACKAGE :CL-USER)
+; compiling (DEFPACKAGE ARROWS.ATT ...)
+; compiling (IN-PACKAGE :ARROWS.ATT)
+; compiling (DEFCLASS ATT-NODE ...)
+; compiling (DEFCLASS ATT-LEAF ...)
+; compiling (DEFCLASS ATT-CONTROL ...)
+; compiling (DEFGENERIC ATT-EQUAL ...)
+; compiling (DEFCLASS ATT-STRING ...)
+; compiling (DEFMETHOD PRINT-OBJECT ...)
+; compiling (DEFUN ATT-STRING ...)
+; compiling (DEFMETHOD ATT-EQUAL ...)
+; compiling (DEFCLASS ATT-VARIABLE ...)
+; compiling (DEFMETHOD PRINT-OBJECT ...)
+; compiling (DEFUN ATT-VARIABLE ...)
+; compiling (DEFMETHOD ATT-EQUAL ...)
+; compiling (DEFCLASS ATT-GENSYM ...)
+; compiling (DEFMETHOD PRINT-OBJECT ...)
+; compiling (DEFUN ATT-GENSYM ...)
+; compiling (DEFMETHOD ATT-EQUAL ...)
+; compiling (DEFCLASS ATT-CONSTANT ...)
+; compiling (DEFMETHOD PRINT-OBJECT ...)
+; compiling (DEFUN ATT-CONSTANT ...)
+; compiling (DEFMETHOD ATT-EQUAL ...)
+; compiling (DEFCLASS ATT-EVAL ...)
+; compiling (DEFMETHOD PRINT-OBJECT ...)
+; compiling (DEFUN ATT-EVAL ...)
+; compiling (DEFMETHOD ATT-EQUAL ...)
+; compiling (DEFCLASS ATT-NIL ...)
+; compiling (DEFUN ATT-NIL ...)
+; compiling (DEFMETHOD ATT-EQUAL ...)
+; compiling (DEFCLASS ATT-OUTPUT ...)
+; compiling (DEFMETHOD PRINT-OBJECT ...)
+; compiling (DEFUN ATT-OUTPUT ...)
+; compiling (DEFMETHOD ATT-EQUAL ...)
+; compiling (DEFCLASS ATT-PROGN ...)
+; compiling (DEFMETHOD PRINT-OBJECT ...)
+; compiling (DEFUN ATT-PROGN ...)
+; compiling (DEFMETHOD ATT-EQUAL ...)
+; compiling (DEFCLASS ATT-IF ...)
+; compiling (DEFMETHOD PRINT-OBJECT ...)
+; compiling (DEFUN ATT-IF ...)
+; compiling (DEFMETHOD ATT-EQUAL ...)
+; compiling (DEFCLASS ATT-LOOP ...)
+; compiling (DEFMETHOD PRINT-OBJECT ...)
+; compiling (DEFUN ATT-LOOP ...)
+; compiling (DEFMETHOD ATT-EQUAL ...)
+; compiling (DEFCLASS ATT-INCLUDE ...)
+; compiling (DEFMETHOD PRINT-OBJECT ...)
+; compiling (DEFUN ATT-INCLUDE ...)
+; compiling (DEFMETHOD ATT-EQUAL ...)
+
+; /home/kim/.cache/common-lisp/sbcl-1.2.9-linux-x64/home/kim/Lisp/arrows/src/att-TMP.fasl written
+; compilation finished in 0:00:00.475
+; compiling file "/home/kim/Lisp/arrows/src/syntax-table.lisp" (written 05 MAR 2015 10:35:02 AM):
+; compiling (IN-PACKAGE :CL-USER)
+; compiling (DEFPACKAGE ARROWS.SYNTAX-TABLE ...)
+; compiling (IN-PACKAGE ARROWS.SYNTAX-TABLE)
+; compiling (DEFRULE WHITE-SPACE ...)
+; compiling (DEFRULE WHITE-SPACES ...)
+; compiling (DEFCLASS SYNTAX-TABLE ...)
+; compiling (DEFPARAMETER *CONTROLS* ...)
+; compiling (DEFPARAMETER *MARKERS* ...)
+; compiling (DEFMACRO DEFMARKERS ...)
+; compiling (DEFMACRO DEFCONTROL ...)
+; compiling (DEFMACRO DEFOP ...)
+
+; /home/kim/.cache/common-lisp/sbcl-1.2.9-linux-x64/home/kim/Lisp/arrows/src/syntax-table-TMP.fasl written
+; compilation finished in 0:00:00.063
+; compiling file "/home/kim/Lisp/arrows/src/syntax-table/default.lisp" (written 03 MAR 2015 11:33:43 PM):
+; compiling (IN-PACKAGE :CL-USER)
+; compiling (DEFPACKAGE ARROWS.SYNTAX-TABLE.DEFAULT ...)
+; compiling (IN-PACKAGE ARROWS.SYNTAX-TABLE.DEFAULT)
+; compiling (DEFRULE INTEGER ...)
+; compiling (DEFRULE TEMPLATE ...)
+; compiling (DEFRULE SYMBOL-IN-CONTROL ...)
+; compiling (DEFMARKERS DEFAULT ...)
+; compiling (DEFCONTROL CONTROL-IF ...)
+; compiling (DEFCONTROL CONTROL-VAR ...)
+; compiling (DEFCONTROL CONTROL-REPEAT ...)
+; compiling (DEFCONTROL CONTROL-LOOP ...)
+; compiling (DEFCONTROL CONTROL-INCLUDE ...)
+; compiling (DEFCONTROL CONTROL-INSERT ...)
+; compiling (DEFOP OP-IF ...)
+; compiling (DEFOP OP-ELSE ...)
+; compiling (DEFOP OP-ENDIF ...)
+; compiling (DEFOP OP-VAR ...)
+; compiling (DEFOP OP-REPEAT ...)
+; compiling (DEFOP OP-ENDREPEAT ...)
+; compiling (DEFOP OP-LOOP ...)
+; compiling (DEFOP OP-ENDLOOP ...)
+; compiling (DEFOP OP-INCLUDE ...)
+; compiling (DEFOP OP-INSERT ...)
+
+; /home/kim/.cache/common-lisp/sbcl-1.2.9-linux-x64/home/kim/Lisp/arrows/src/syntax-table/default-TMP.fasl written
+; compilation finished in 0:00:00.146
+; compiling file "/home/kim/Lisp/arrows/src/parse.lisp" (written 03 MAR 2015 11:33:43 PM):
+; compiling (IN-PACKAGE :CL-USER)
+; compiling (DEFPACKAGE ARROWS.PARSE ...)
+; compiling (IN-PACKAGE ARROWS.PARSE)
+; compiling (DEFUN PARSE-TEMPLATE-STRING ...)
+; compiling (DEFUN PARSE-TEMPLATE-FILE ...)
+
+; /home/kim/.cache/common-lisp/sbcl-1.2.9-linux-x64/home/kim/Lisp/arrows/src/parse-TMP.fasl written
+; compilation finished in 0:00:00.012
+; compiling file "/home/kim/Lisp/arrows/src/pass.lisp" (written 05 MAR 2015 10:34:55 AM):
+; compiling (IN-PACKAGE :CL-USER)
+; compiling (DEFPACKAGE ARROWS.PASS ...)
+; compiling (IN-PACKAGE :ARROWS.PASS)
+; compiling (DEFGENERIC TRAVERSE-NODE ...)
+; compiling (DEFGENERIC APPEND-ATT-NODE-AUX ...)
+; compiling (DEFUN APPEND-ATT-NODE ...)
+; compiling (DEFGENERIC FLATTEN-IMPL ...)
+; compiling (DEFUN FLATTEN-PASS ...)
+; compiling (DEFGENERIC REMOVE-PROGN-IMPL ...)
+; compiling (DEFUN REMOVE-PROGN-PASS ...)
+; compiling (DEFGENERIC FOLD-VARIABLES-IMPL ...)
+; compiling (DEFUN FOLD-VARIABLES-PASS ...)
+; compiling (DEFGENERIC APPEND-SEQUENCE-IMPL ...)
+; compiling (DEFUN APPEND-SEQUENCE-PASS ...)
+; compiling (DEFPARAMETER *OPTIMIZING-PASSES* ...)
+; compiling (DEFPARAMETER *NECESSARY-PASSES* ...)
+; compiling (DEFUN APPLY-PASSES ...)
+
+; /home/kim/.cache/common-lisp/sbcl-1.2.9-linux-x64/home/kim/Lisp/arrows/src/pass-TMP.fasl written
+; compilation finished in 0:00:00.340
+; compiling file "/home/kim/Lisp/arrows/src/backend.lisp" (written 05 MAR 2015 10:34:43 AM):
+; compiling (IN-PACKAGE :CL-USER)
+; compiling (DEFPACKAGE ARROWS.BACKEND ...)
+; compiling (IN-PACKAGE :ARROWS.BACKEND)
+; compiling (DEFCLASS BACKEND ...)
+; compiling (DEFGENERIC MAKE-BACKEND ...)
+; compiling (DEFGENERIC PUSH-SCOPE ...)
+; compiling (DEFGENERIC POP-SCOPE ...)
+; compiling (DEFGENERIC ADD-TO-SCOPE ...)
+; compiling (DEFGENERIC FIND-FROM-SCOPE ...)
+; compiling (DEFGENERIC HTTP-ESCAPE ...)
+; compiling (DEFGENERIC EMIT-CODE ...)
+; compiling (DEFMETHOD EMIT-CODE ...)
+; compiling (DEFMETHOD EMIT-CODE ...)
+; compiling (DEFMETHOD HTTP-ESCAPE ...)
+; compiling (DEFMETHOD EMIT-CODE ...)
+; compiling (DEFMETHOD HTTP-ESCAPE ...)
+; compiling (DEFMETHOD EMIT-CODE ...)
+; compiling (DEFMETHOD EMIT-CODE ...)
+; compiling (DEFMETHOD EMIT-CODE ...)
+; compiling (DEFMETHOD EMIT-CODE ...)
+; compiling (DEFMETHOD EMIT-CODE ...)
+; compiling (DEFMETHOD EMIT-CODE ...)
+; compiling (DEFGENERIC EMIT-PARAMETERS ...)
+; compiling (DEFGENERIC EMIT-LAMBDA ...)
+
+; /home/kim/.cache/common-lisp/sbcl-1.2.9-linux-x64/home/kim/Lisp/arrows/src/backend-TMP.fasl written
+; compilation finished in 0:00:00.354
+; compiling file "/home/kim/Lisp/arrows/src/backend/stream.lisp" (written 05 MAR 2015 10:35:17 AM):
+; compiling (IN-PACKAGE :CL-USER)
+; compiling (DEFPACKAGE ARROWS.BACKEND.STREAM ...)
+; compiling (IN-PACKAGE :ARROWS.BACKEND.STREAM)
+; compiling (DEFCLASS STREAM-BACKEND ...)
+; compiling (DEFMETHOD MAKE-BACKEND ...)
+; compiling (DEFMETHOD EMIT-CODE ...)
+; compiling (DEFMETHOD EMIT-LAMBDA ...)
+; compiling (DEFCLASS OCTET-STREAM-BACKEND ...)
+; compiling (DEFMETHOD MAKE-BACKEND ...)
+; compiling (DEFMETHOD EMIT-LAMBDA ...)
+; compiling (DEFMETHOD EMIT-CODE ...)
+
+; /home/kim/.cache/common-lisp/sbcl-1.2.9-linux-x64/home/kim/Lisp/arrows/src/backend/stream-TMP.fasl written
+; compilation finished in 0:00:00.153
+; compiling file "/home/kim/Lisp/arrows/src/backend/sequence.lisp" (written 10 MAR 2015 06:18:25 PM):
+; compiling (IN-PACKAGE :CL-USER)
+; compiling (DEFPACKAGE ARROWS.BACKEND.SEQUENCE ...)
+; compiling (IN-PACKAGE :ARROWS.BACKEND.SEQUENCE)
+; compiling (DEFCLASS STRING-BACKEND ...)
+; compiling (DEFMETHOD MAKE-BACKEND ...)
+; compiling (DEFMETHOD EMIT-LAMBDA ...)
+; compiling (DEFMETHOD EMIT-CODE ...)
+; compiling (DEFCLASS OCTET-BACKEND ...)
+; compiling (DEFMETHOD MAKE-BACKEND ...)
+; compiling (DEFMETHOD EMIT-CODE ...)
+; compiling (DEFMETHOD EMIT-LAMBDA ...)
+
+; /home/kim/.cache/common-lisp/sbcl-1.2.9-linux-x64/home/kim/Lisp/arrows/src/backend/sequence-TMP.fasl written
+; compilation finished in 0:00:00.215
+; compiling file "/home/kim/Lisp/arrows/src/backend/fast-io.lisp" (written 05 MAR 2015 10:35:11 AM):
+; compiling (IN-PACKAGE :CL-USER)
+; compiling (DEFPACKAGE ARROWS.BACKEND.FAST-IO ...)
+; compiling (IN-PACKAGE :ARROWS.BACKEND.FAST-IO)
+; compiling (DEFCLASS FAST-IO-BACKEND ...)
+; compiling (DEFMETHOD MAKE-BACKEND ...)
+; compiling (DEFMETHOD EMIT-LAMBDA ...)
+
+; /home/kim/.cache/common-lisp/sbcl-1.2.9-linux-x64/home/kim/Lisp/arrows/src/backend/fast-io-TMP.fasl written
+; compilation finished in 0:00:00.027
+; compiling file "/home/kim/Lisp/arrows/src/arrows.lisp" (written 05 MAR 2015 10:34:35 AM):
+; compiling (IN-PACKAGE :CL-USER)
+; compiling (DEFPACKAGE ARROWS ...)
+; compiling (IN-PACKAGE :ARROWS)
+; compiling (DEFUN COMPILE-TEMPLATE-STRING ...)
+; compiling (DEFUN COMPILE-TEMPLATE-FILE ...)
+; compiling (DEFUN RENDER ...)
+; compiling (DEFUN RENDER-FILE ...)
+
+; /home/kim/.cache/common-lisp/sbcl-1.2.9-linux-x64/home/kim/Lisp/arrows/src/arrows-TMP.fasl written
+; compilation finished in 0:00:00.020
+compiled stream backend with simple.tmpl
+Evaluation took:
+  0.027 seconds of real time
+  0.027388 seconds of total run time (0.023432 user, 0.003956 system)
+  100.00% CPU
+  65,638,500 processor cycles
+  0 bytes consed
+  
+compiled string backend with simple.tmpl
+Evaluation took:
+  0.128 seconds of real time
+  0.127764 seconds of total run time (0.127749 user, 0.000015 system)
+  100.00% CPU
+  306,787,936 processor cycles
+  12,661,472 bytes consed
+  
+compiled octet stream backend with simple.tmpl
+Evaluation took:
+  0.009 seconds of real time
+  0.008321 seconds of total run time (0.004317 user, 0.004004 system)
+  88.89% CPU
+  19,980,956 processor cycles
+  0 bytes consed
+  
+compiled octet backend with simple.tmpl
+Evaluation took:
+  0.019 seconds of real time
+  0.018575 seconds of total run time (0.018575 user, 0.000000 system)
+  100.00% CPU
+  44,345,480 processor cycles
+  5,418,272 bytes consed
+  
+compiled fast-io backend with simple.tmpl
+Evaluation took:
+  0.011 seconds of real time
+  0.010517 seconds of total run time (0.010517 user, 0.000000 system)
+  100.00% CPU
+  25,028,852 processor cycles
+  949,344 bytes consed
+  
+compiled stream backend with 1var.tmpl
+Evaluation took:
+  0.046 seconds of real time
+  0.046628 seconds of total run time (0.046628 user, 0.000000 system)
+  102.17% CPU
+  111,576,680 processor cycles
+  5,270,352 bytes consed
+  
+compiled string backend with 1var.tmpl
+Evaluation took:
+  0.184 seconds of real time
+  0.183554 seconds of total run time (0.175620 user, 0.007934 system)
+  [ Run times consist of 0.036 seconds GC time, and 0.148 seconds non-GC time. ]
+  100.00% CPU
+  440,355,012 processor cycles
+  18,226,288 bytes consed
+  
+compiled octet stream backend with 1var.tmpl
+Evaluation took:
+  0.057 seconds of real time
+  0.057112 seconds of total run time (0.053074 user, 0.004038 system)
+  100.00% CPU
+  136,925,752 processor cycles
+  5,601,808 bytes consed
+  
+compiled octet backend with 1var.tmpl
+Evaluation took:
+  0.071 seconds of real time
+  0.070760 seconds of total run time (0.066768 user, 0.003992 system)
+  100.00% CPU
+  170,059,496 processor cycles
+  14,705,088 bytes consed
+  
+compiled fast-io backend with 1var.tmpl
+Evaluation took:
+  0.060 seconds of real time
+  0.057268 seconds of total run time (0.057243 user, 0.000025 system)
+  95.00% CPU
+  144,379,352 processor cycles
+  6,541,424 bytes consed
+  
+compiled stream backend with 100var.tmpl
+Evaluation took:
+  2.545 seconds of real time
+  2.539201 seconds of total run time (2.471148 user, 0.068053 system)
+  [ Run times consist of 0.258 seconds GC time, and 2.282 seconds non-GC time. ]
+  99.76% CPU
+  6,094,799,000 processor cycles
+  528,003,232 bytes consed
+  
+compiled string backend with 100var.tmpl
+Evaluation took:
+  4.114 seconds of real time
+  4.100087 seconds of total run time (4.083887 user, 0.016200 system)
+  [ Run times consist of 0.173 seconds GC time, and 3.928 seconds non-GC time. ]
+  99.66% CPU
+  9,850,856,450 processor cycles
+  752,315,008 bytes consed
+  
+compiled octet stream backend with 100var.tmpl
+Evaluation took:
+  4.793 seconds of real time
+  4.780487 seconds of total run time (4.740402 user, 0.040085 system)
+  [ Run times consist of 0.146 seconds GC time, and 4.635 seconds non-GC time. ]
+  99.73% CPU
+  11,476,148,752 processor cycles
+  560,014,592 bytes consed
+  
+compiled octet backend with 100var.tmpl
+Evaluation took:
+  3.631 seconds of real time
+  3.622008 seconds of total run time (3.578137 user, 0.043871 system)
+  [ Run times consist of 0.158 seconds GC time, and 3.465 seconds non-GC time. ]
+  99.75% CPU
+  8,692,652,476 processor cycles
+  641,439,056 bytes consed
+  
+compiled fast-io backend with 100var.tmpl
+Evaluation took:
+  5.140 seconds of real time
+  5.130135 seconds of total run time (5.090138 user, 0.039997 system)
+  [ Run times consist of 0.132 seconds GC time, and 4.999 seconds non-GC time. ]
+  99.81% CPU
+  12,307,115,644 processor cycles
+  560,970,128 bytes consed
+  
+compiled stream backend with repeat.tmpl
+Evaluation took:
+  2.350 seconds of real time
+  2.345515 seconds of total run time (2.317617 user, 0.027898 system)
+  [ Run times consist of 0.136 seconds GC time, and 2.210 seconds non-GC time. ]
+  99.83% CPU
+  5,628,944,028 processor cycles
+  527,988,560 bytes consed
+  
+compiled string backend with repeat.tmpl
+Evaluation took:
+  3.268 seconds of real time
+  3.260879 seconds of total run time (3.232914 user, 0.027965 system)
+  [ Run times consist of 0.189 seconds GC time, and 3.072 seconds non-GC time. ]
+  99.79% CPU
+  7,826,456,368 processor cycles
+  681,095,648 bytes consed
+  
+compiled octet stream backend with repeat.tmpl
+Evaluation took:
+  4.956 seconds of real time
+  4.947695 seconds of total run time (4.931663 user, 0.016032 system)
+  [ Run times consist of 0.164 seconds GC time, and 4.784 seconds non-GC time. ]
+  99.84% CPU
+  11,867,712,992 processor cycles
+  559,997,968 bytes consed
+  
+compiled octet backend with repeat.tmpl
+Evaluation took:
+  3.223 seconds of real time
+  3.216265 seconds of total run time (3.196273 user, 0.019992 system)
+  [ Run times consist of 0.153 seconds GC time, and 3.064 seconds non-GC time. ]
+  99.78% CPU
+  7,715,372,788 processor cycles
+  583,192,000 bytes consed
+  
+compiled fast-io backend with repeat.tmpl
+Evaluation took:
+  5.916 seconds of real time
+  5.880891 seconds of total run time (5.825316 user, 0.055575 system)
+  [ Run times consist of 0.171 seconds GC time, and 5.710 seconds non-GC time. ]
+  99.41% CPU
+  14,167,424,400 processor cycles
+  560,970,352 bytes consed
+  
