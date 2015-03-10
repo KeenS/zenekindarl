@@ -22,8 +22,8 @@
                  (:test-file "backend")
                  (:test-file "parse"))))
 
-  :defsystem-depends-on (:cl-test-more)
+  :defsystem-depends-on (:prove)
   :perform (test-op :after (op c)
-                    (funcall (intern #. (string :run-test-system) :cl-test-more)
+                    (funcall (intern #. (string :run-test-system) :prove)
                              c)
                     (asdf:clear-system c)))
