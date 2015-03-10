@@ -8,6 +8,6 @@ matrix:
 
 install:
   - curl -L https://github.com/luismbo/cl-travis/raw/master/install.sh | sh
-
+  - ql install arrows
 script:
   - cl -e "(require 'asdf)" -e "(require 'arrows-test)" -e "(unless (prove:run :arrows-test) (uiop:quit 1))"
