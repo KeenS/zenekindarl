@@ -1,10 +1,10 @@
 (in-package :cl-user)
 (defpackage arrows.parse
   (:use :cl
-        :esrap
         :arrows.att
-        :arrows.syntax-table
-        :arrows.syntax-table.default)
+        :arrows.lexer
+        :arrows.lexer.default
+        :arrows.parser)
   (:import-from :alexandria
                 :read-file-into-string)
   (:export :parse-template-string
@@ -12,7 +12,7 @@
 (in-package arrows.parse)
 
 (defun parse-template-string (str)
-  (parse 'template str))
+  (mpc:run (arrows.parser:=template) (arrows.lexer.default:lex str)))
 
 (defun parse-template-file (file)
   (parse-template-string (read-file-into-string file)))

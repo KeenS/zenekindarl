@@ -25,6 +25,8 @@
                :esrap
                :html-encode
                :fast-io
+               :mpc
+               :cl-annot
                )
   :components ((:module "src"
                 :components
@@ -37,8 +39,15 @@
                   :components ((:file "stream")
                                (:file "sequence" :depends-on ("stream"))
                                (:file "fast-io" :depends-on ("sequence"))))
+                 (:file "token")
                  (:file "pass" :depends-on ("util" "att"))
-                 (:file "parse" :depends-on ("att" "st"))
+                 (:file "parse" :depends-on ("att" "lexer" "le" "parser"))
+                 (:file "lexer")
+                 (:module "le"
+                          :pathname "lexer"
+                          :depends-on ("lexer" "token")
+                          :components ((:file "default")))
+                 (:file "parser" :depends-on ("token" "att" "lexer" "le"))
                  (:file "syntax-table")
                  (:module "st"
                           :pathname "syntax-table"
