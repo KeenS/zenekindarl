@@ -1,17 +1,17 @@
 #|
-This file is a part of clta project.
+This file is a part of arrows project.
 Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage clta.att-test
+(defpackage arrows.att-test
   (:use :cl
-        :clta.att
-        :clta.util
+        :arrows.att
+        :arrows.util
         :cl-test-more))
-(in-package :clta.att-test)
+(in-package :arrows.att-test)
 
-;; NOTE: To run this test file, execute `(asdf:test-system :clta)' in your Lisp.
+;; NOTE: To run this test file, execute `(asdf:test-system :arrows)' in your Lisp.
 
 (plan nil)
 (diag "att tests")
@@ -43,6 +43,31 @@ Copyright (c) 2014 κeen
       :test #'att-equal)
 (is (att-variable 'var)
     (att-variable 'var :anything)
+    "att-string equality with type omitted"
+    :test #'att-equal)
+
+
+(is (type-of (att-gensym "var"))
+    'att-gensym
+    "att-gensym constructor")
+(is (att-gensym "var")
+    (att-gensym "var")
+    "att-gensym equality"
+    :test #'att-equal)
+
+(is (type-of (att-gensym "var" :string))
+    'att-gensym
+    "att-string constructor")
+(is (att-gensym "var" :string)
+    (att-gensym "var" :string)
+    "att-string equality"
+    :test #'att-equal)
+(isnt (att-gensym "var" :string)
+      (att-gensym "var" :anything)
+      "att-string equality with different type"
+      :test #'att-equal)
+(is (att-gensym "var")
+    (att-gensym "var" :anything)
     "att-string equality with type omitted"
     :test #'att-equal)
 

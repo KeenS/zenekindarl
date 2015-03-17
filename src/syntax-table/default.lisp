@@ -1,9 +1,9 @@
 (in-package :cl-user)
-(defpackage clta.syntax-table.default
+(defpackage arrows.syntax-table.default
   (:use :cl
         :esrap
-        :clta.att
-        :clta.syntax-table)
+        :arrows.att
+        :arrows.syntax-table)
   (:import-from :alexandria
                :read-file-into-string
                :iota)
@@ -11,7 +11,7 @@
            :control-if
            :control-var))
 
-(in-package clta.syntax-table.default)
+(in-package arrows.syntax-table.default)
 
 (defrule integer (+ (or "0" "1" "2" "3" "4" "5" "6" "7" "8" "9"))
   (:lambda (list)
@@ -86,7 +86,7 @@
                      (list (att-constant (iota i :start 1))
                            (att-variable (read-from-string var))))
                    (list (att-constant (iota i :start 1))
-                         (att-variable (gensym "repeatvar"))))))
+                         (att-gensym "repeatvar")))))
 
 (defop op-endrepeat "endrepeat")
 
@@ -103,7 +103,7 @@
 (defop op-include (and "include" white-spaces symbol-in-control)
   :transform (lambda (op sp filename)
                (declare (ignore op sp))
-               (att-output (att-string (read-file-into-string filename)))))
+               (parse 'template (read-file-into-string (merge-pathnames filename)))))
 
 
 ;; (defop op-set (and "set" white-spaces symbol-in-control white-spaces symbol-in-control)
@@ -115,4 +115,4 @@
 (defop op-insert (and "insert" white-spaces symbol-in-control)
   :transform (lambda (op sp filename)
                (declare (ignore op sp))
-               (att-output (att-string (read-file-into-string filename)))))
+               (att-output (att-string (read-file-into-string (merge-pathnames filename))))))

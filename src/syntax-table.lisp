@@ -1,9 +1,9 @@
 (in-package :cl-user)
-(defpackage clta.syntax-table
+(defpackage arrows.syntax-table
   (:use :cl
         :esrap        
-        :clta.util
-        :clta.att)
+        :arrows.util
+        :arrows.att)
   (:import-from :alexandria
                 :maphash-values)
   (:export :default
@@ -16,7 +16,7 @@
            :defop
            :*markers*
            :*controls*))
-(in-package clta.syntax-table)
+(in-package arrows.syntax-table)
 
 (defrule white-space
     (or #\Space #\Tab #\Newline #\Return)
@@ -58,15 +58,15 @@
                      :collect (gethash marker *markers*))))
     `(progn
        ,@(loop :for (open-marker . close-marker) :in markers
-          :collect
-          `(defrule ,name
-            (and ,open-marker
-                 (? white-spaces)
-                 ,pattern
-                 (? white-spaces)
-                 ,close-marker)
-          (:function third)
-          ,@(if transform
-                `((:around ()
-                           (apply ,transform (call-transform))))
-                ()))))))
+            :collect
+            `(defrule ,name
+                 (and ,open-marker
+                      (? white-spaces)
+                      ,pattern
+                      (? white-spaces)
+                      ,close-marker)
+               (:function third)
+               ,@(if transform
+                     `((:around ()
+                                (apply ,transform (call-transform))))
+                     ()))))))

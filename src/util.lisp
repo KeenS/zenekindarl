@@ -1,9 +1,9 @@
 (in-package :cl-user)
-(defpackage clta.util
+(defpackage arrows.util
   (:use :cl)
   (:export :octets
            :collect-hash-value))
-(in-package :clta.util)
+(in-package :arrows.util)
 
 (deftype octets ()
   '(simple-array (unsigned-byte 8) (*)))

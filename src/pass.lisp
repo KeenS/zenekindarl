@@ -1,22 +1,23 @@
 #|
-  This file is a part of clta project.
-  Copyright (c) 2014 κeen
+This file is a part of arrows project.
+Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage clta.pass
-  (:use :cl :clta.util :clta.att)
+(defpackage arrows.pass
+  (:use :cl :arrows.util :arrows.att)
   (:import-from :alexandria
                 :if-let)
   (:import-from :optima
                 :match)
-  (:export :*default-passes*
+  (:export :*optimizing-passes*
+           :*necesarry-passes*
            :apply-passes
            :flatten-pass
            :fold-variables-pass
            :append-sequence-pass
            :remove-progn-pass))
-(in-package :clta.pass)
+(in-package :arrows.pass)
 
 (defgeneric traverse-node (func obj)
   (:method (func (obj att-progn))
@@ -119,10 +120,11 @@
   (declare (ignore env))
   (traverse-node #'append-sequence-impl obj))
 
-(defparameter *default-passes* (list #'fold-variables-pass #'flatten-pass #'remove-progn-pass #'append-sequence-pass ))
+(defparameter *optimizing-passes* (list #'fold-variables-pass #'flatten-pass #'remove-progn-pass #'append-sequence-pass))
+(defparameter *necessary-passes* ())
 
 (defun apply-passes (att env)
   (reduce (lambda (att pass)
             (funcall pass att env))
-          *default-passes*
+          (append *optimizing-passes* *necessary-passes*)
           :initial-value att))

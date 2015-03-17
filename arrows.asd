@@ -1,5 +1,5 @@
 #|
-  This file is a part of clta project.
+  This file is a part of arrows project.
   Copyright (c) 2014 κeen
 |#
 
@@ -8,11 +8,11 @@
 |#
 
 (in-package :cl-user)
-(defpackage clta-asd
+(defpackage arrows-asd
   (:use :cl :asdf))
-(in-package :clta-asd)
+(in-package :arrows-asd)
 
-(defsystem clta
+(defsystem arrows
   :version "0.1"
   :author "κeen"
   :license ""
@@ -23,16 +23,20 @@
                :optima
                :cl-ppcre
                :esrap
+               :html-encode
+               :fast-io
                )
   :components ((:module "src"
                 :components
-                ((:file "clta" :depends-on ("parse" "pass" "backend" "be"))
+                ((:file "arrows" :depends-on ("parse" "pass" "backend" "be"))
                  (:file "att" :depends-on ("util"))
                  (:file "backend" :depends-on ("util" "att"))
                  (:module "be"
                           :pathname "backend"
                           :depends-on ("backend")
-                          :components ((:file "stream")))
+                  :components ((:file "stream")
+                               (:file "sequence" :depends-on ("stream"))
+                               (:file "fast-io" :depends-on ("sequence"))))
                  (:file "pass" :depends-on ("util" "att"))
                  (:file "parse" :depends-on ("att" "st"))
                  (:file "syntax-table")
@@ -54,4 +58,4 @@
                                :fill-pointer t)))
           (setf (fill-pointer seq) (read-sequence seq stream))
           seq)))
-  :in-order-to ((test-op (test-op clta-test))))
+  :in-order-to ((test-op (test-op arrows-test))))

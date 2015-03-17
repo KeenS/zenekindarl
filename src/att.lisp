@@ -1,14 +1,15 @@
 #|
-  This file is a part of clta project.
-  Copyright (c) 2014 κeen
+This file is a part of arrows project.
+Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage clta.att
-  (:use :cl :clta.util)
+(defpackage arrows.att
+  (:use :cl :arrows.util)
   (:export :print-object
            :att-node
            :att-leaf
+           :auto-escape
            :att-control
            
            :att-string
@@ -17,6 +18,9 @@
            :att-variable
            :varsym
            :vartype
+
+           :att-gensym
+           :gensym-string
            
            :att-eval
            :sexp
@@ -45,13 +49,17 @@
            :path
            
            :att-equal))
-(in-package :clta.att)
+(in-package :arrows.att)
 
 ;;; Abstract Template Tree
 (defclass att-node ()
   ())
 (defclass att-leaf (att-node)
-  ())
+  ((auto-escape
+    :type '(or null t)
+    :accessor auto-escape
+    :initarg :auto-escape
+    :initform t)))
 (defclass att-control (att-node)
   ())
 
@@ -66,7 +74,9 @@
   ((value
     :type 'string
     :accessor value
-    :initarg :value)))
+    :initarg :value)
+   (auto-escape
+    :initform nil)))
 
 (defmethod print-object ((obj att-string) stream)
   (format stream "#<ATT-STRING ~S>" (value obj)))
@@ -103,11 +113,34 @@
        (eql (vartype x) (vartype y))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; att-gensym
+(defclass att-gensym (att-variable)
+  ((gensym-string
+    :type '(or null string)
+    :accessor gensym-string
+    :initarg :gensym-string)))
+
+(defmethod print-object ((obj att-gensym) stream)
+  (format stream "#<ATT-GENSYM ~S>" (gensym-string obj)))
+
+(defun att-gensym (gensym-string &optional (type :anything))
+  (make-instance 'att-gensym
+                 :varsym (gensym gensym-string)
+                 :vartype type
+                 :gensym-string gensym-string))
+
+(defmethod att-equal ((x att-gensym) (y att-gensym))
+  (and (string= (gensym-string x)  (gensym-string y))
+       (eql (vartype x) (vartype y))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; att-constant
 (defclass att-constant (att-leaf)
   ((value
     :accessor value
-    :initarg :value)))
+    :initarg :value)
+   (auto-escape
+    :initform nil)))
 
 (defmethod print-object ((obj att-constant) stream)
   (format stream "#<ATT-CONSTANT ~S>" (value obj)))
@@ -242,7 +275,7 @@
         (format stream "#<ATT-LOOP ~s IN ~s ~s>" loop-var loop-seq body)
         (format stream "#<ATT-LOOP ~s ~s>" loop-seq body))))
 
-(defun att-loop (loop-seq body &optional (loop-var (att-variable (gensym "loopvar"))))
+(defun att-loop (loop-seq body &optional (loop-var (att-gensym "loopvar")))
   (make-instance 'att-loop
                  :loop-seq loop-seq
                  :body body

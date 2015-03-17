@@ -1,15 +1,15 @@
 (in-package :cl-user)
-(defpackage clta.parse
+(defpackage arrows.parse
   (:use :cl
         :esrap
-        :clta.att
-        :clta.syntax-table
-        :clta.syntax-table.default)
+        :arrows.att
+        :arrows.syntax-table
+        :arrows.syntax-table.default)
   (:import-from :alexandria
                 :read-file-into-string)
   (:export :parse-template-string
            :parse-template-file))
-(in-package clta.parse)
+(in-package arrows.parse)
 
 (defun parse-template-string (str)
   (parse 'template str))

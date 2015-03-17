@@ -1,16 +1,16 @@
 #|
-This file is a part of clta project.
+This file is a part of arrows project.
 Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage clta.parse-test
+(defpackage arrows.parse-test
   (:use :cl
-        :clta.att
-        :clta.parse
-        :clta.util
+        :arrows.att
+        :arrows.parse
+        :arrows.util
         :cl-test-more))
-(in-package :clta.parse-test)
+(in-package :arrows.parse-test)
 
 (plan nil)
 (diag "test parse")
@@ -42,7 +42,7 @@ Copyright (c) 2014 κeen
 (is (parse-template-string "{{repeat 10}}<li>item</li>{{endrepeat}}")
     (att-progn (att-loop (att-constant '(1 2 3 4 5 6 7 8 9 10))
                          (att-progn (att-output (att-string "<li>item</li>")))
-                         (att-variable (gensym "repeatvar"))))
+                         (att-gensym "repeatvar")))
     "repeat"
     :test #'att-equal)
 
@@ -64,10 +64,19 @@ Copyright (c) 2014 κeen
     "loop"
     :test #'att-equal)
 
-(is (parse-template-string "the content of foo is {{insert \"foo\"}}")
+(is (parse-template-string "the content of foo is {{insert foo}}")
     (att-progn (att-output (att-string "the content of foo is "))
-               (att-output (att-string "bar")))
+               (att-output (att-string "{{repeat 2 as i}}bar{{endrepeat}}")))
     "insert"
+    :test #'att-equal)
+
+(is (parse-template-string "the content of foo is {{include foo}}")
+    (att-progn (att-output (att-string "the content of foo is "))
+               (att-progn (att-loop
+                           (att-constant '(1 2))
+                           (att-progn (att-output (att-string "bar")))
+                           (att-variable 'i))))
+    "include"
     :test #'att-equal)
 (finalize)
 

@@ -1,16 +1,16 @@
 #|
-This file is a part of clta project.
+This file is a part of arrows project.
 Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage clta.pass-test
+(defpackage arrows.pass-test
   (:use :cl
-        :clta.att
-        :clta.pass
-        :clta.util
+        :arrows.att
+        :arrows.pass
+        :arrows.util
         :cl-test-more))
-(in-package :clta.pass-test)
+(in-package :arrows.pass-test)
 
 (plan nil)
 (diag "test pass")
