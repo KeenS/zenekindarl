@@ -64,13 +64,13 @@ Copyright (c) 2014 κeen
     "loop"
     :test #'att-equal)
 
-(is (parse-template-string "the content of foo is {{insert foo}}")
+(is (parse-template-string "the content of foo is {{insert \"foo\"}}")
     (att-progn (att-output (att-string "the content of foo is "))
                (att-output (att-string "{{repeat 2 as i}}bar{{endrepeat}}")))
     "insert"
     :test #'att-equal)
 
-(is (parse-template-string "the content of foo is {{include foo}}")
+(is (parse-template-string "the content of foo is {{include \"foo\"}}")
     (att-progn (att-output (att-string "the content of foo is "))
                (att-progn (att-loop
                            (att-constant '(1 2))
