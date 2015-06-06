@@ -2,7 +2,8 @@
 (defpackage arrows.lexer.default
   (:use :cl
         :arrows.util
-        :arrows.token)
+        :arrows.token
+        :arrows.lexer)
   (:import-from :alexandria
                 :if-let
                 :iota
@@ -53,7 +54,7 @@
      (make-token-loop :start start :end end :seq (iota seq :start 1) :loop-sym var))))
 
 (defun tokenize-include (start end rest)
-  (make-token-include :start start :end end :include-template (lex (read-file-into-string (merge-pathnames (car rest))))))
+  (make-token-include :start start :end end :include-template (lex (read-file-into-string (merge-pathnames (car rest))) :default)))
 
 (defun tokenize-insert (start end rest)
   (make-token-insert :start start :end end :insert-string (read-file-into-string (merge-pathnames (car rest)))))
@@ -83,7 +84,7 @@
      :until endp
      :finally (return (cons result end))))
 
-(defun lex (str)
+(defmethod lex (str (lexer (eql :default)))
   (labels ((aux (start result)
              (let* ((end (search "{{" str :test #'char= :start2 start)))
                (if end
