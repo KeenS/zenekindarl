@@ -2,19 +2,18 @@
 (defpackage arrows.token
   (:use :cl
         :mpc
-        :annot.class)
-  (:export
-   :token-string-p
-   :token-variable-p
-   :token-if-p
-   :token-else-p
-   :token-end-p
-   :token-loop-p
-   :token-include-p
-   :token-insert-p))
+        :annot.class))
 (in-package arrows.token)
 
 (annot:enable-annot-syntax)
+(export '(token-string-p
+          token-variable-p
+          token-if-p
+          token-else-p
+          token-end-p
+          token-loop-p
+          token-include-p
+          token-insert-p))
 
 @export-accessors
 (defstruct token
