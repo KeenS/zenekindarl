@@ -37,7 +37,9 @@
           (body       (=template))
           (_          (=token-end)))
     (=result (att-loop
-              (att-variable (token-seq token-loop))
+              (if (symbolp (token-seq token-loop))
+                  (att-variable (token-seq token-loop))
+                  (att-constant (token-seq token-loop)))
               body
               (if (token-loop-sym token-loop)
                   (att-variable (token-loop-sym token-loop))

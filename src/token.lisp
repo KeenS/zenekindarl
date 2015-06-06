@@ -67,7 +67,7 @@
 (defstruct (token-loop
              (:conc-name token-)
              (:include token))
-  (seq () :type list)
+  (seq () :type (or list symbol))
   (loop-sym nil :type (or null symbol)))
 
 @export

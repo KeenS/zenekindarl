@@ -39,7 +39,8 @@
 (defun tokenize-loop (start end rest)
   (destructuring-bind (seq as var) rest
     @ignore as
-    (make-token-loop :start start :end end :seq seq :loop-sym var)))
+    (make-token-loop :start start :end end
+                     :seq seq :loop-sym var)))
 
 (defun tokenize-repeat (start end rest)
   (if (= (length rest) 1)
