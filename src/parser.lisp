@@ -26,7 +26,9 @@
           (then     (=template))
           (else     (=maybe (=and (=token-else) (=template))))
           (_        (=token-end)))
-    (=result (att-if (att-eval (token-cond-clause token-if))
+    (=result (att-if (if (symbolp (token-cond-clause token-if))
+                         (att-variable (token-cond-clause token-if))
+                         (att-eval (token-cond-clause token-if)))
                      then
                      (if else
                          (car else)
