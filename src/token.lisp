@@ -76,7 +76,7 @@
 (defstruct (token-include
              (:conc-name token-)
              (:include token))
-  (include-string "" :type string))
+  (include-template nil :type list))
 
 @export
 @export-accessors

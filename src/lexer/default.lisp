@@ -50,10 +50,10 @@
      (make-token-loop :start start :end end :seq (iota seq :start 1) :loop-sym var))))
 
 (defun tokenize-include (start end rest)
-  (read-file-into-string (merge-pathnames (car rest))))
+  (make-token-include :start start :end end :include-template (lex (read-file-into-string (merge-pathnames (car rest))))))
 
 (defun tokenize-insert (start end rest)
-  (read-file-into-string (merge-pathnames (car rest))))
+  (make-token-insert :start start :end end :insert-string (read-file-into-string (merge-pathnames (car rest)))))
 
 (defun tokenize (obj start end)
   (if (stringp obj)

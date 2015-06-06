@@ -47,7 +47,8 @@
 
 (defun =control-include ()
   (=let* ((token-include (=token-include)))
-    (=result (att-string (token-include-string)))))
+    (=result (run (=template)
+                  (token-include-template token-include)))))
 
 (defun =control-insert ()
   (=let* ((token-insert (=token-insert)))
