@@ -23,5 +23,6 @@
   (let* ((code (emit-code backend att)))
     (eval
      `(lambda (,(buffer-of backend) ,@(emit-parameters backend))
+        (declare (ignorable ,(buffer-of backend)))
         ,code))))
 

@@ -51,6 +51,7 @@ Copyright (c) 2014 κeen
   (let* ((code (emit-code backend att)))
     (eval
      `(lambda ,(cons (stream-of backend) (emit-parameters backend))
+        (declare (ignorable ,(stream-of backend)))
         ,code
         t))))
 
@@ -66,6 +67,7 @@ Copyright (c) 2014 κeen
   (let* ((code (emit-code backend att)))
     (eval
      `(lambda ,(cons (stream-of backend) (emit-parameters backend))
+        (declare (ignorable ,(stream-of backend)))
         ,code))))
 
 (defmethod emit-code ((backend octet-stream-backend) (obj att-output) &key output-p)
