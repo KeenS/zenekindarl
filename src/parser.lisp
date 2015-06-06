@@ -15,7 +15,7 @@
 
 (defun =template-string ()
   (=let* ((token-string (=token-string)))
-    (=result (att-string (token-str token-string)))))
+    (=result (att-output (att-string (token-str token-string))))))
 
 (defun =control-variable ()
   (=let* ((token-variable (=token-variable)))
@@ -51,7 +51,7 @@
 
 (defun =control-insert ()
   (=let* ((token-insert (=token-insert)))
-    (=result (att-string (token-insert-string)))))
+    (=result (att-output (att-string (token-insert-string token-insert))))))
 
 
 (defun =template ()
