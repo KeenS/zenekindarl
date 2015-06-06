@@ -23,7 +23,7 @@ Copyright (c) 2014 κeen
 (is (parse-template-string "{{var sym}}")
     (att-progn
      (att-output (att-string ""))
-     (att-output (att-variable 'sym))
+     (att-output (att-variable 'arrows.lexer.default::sym))
      (att-output (att-string "")))
     "var"
     :test #'att-equal)
@@ -31,7 +31,7 @@ Copyright (c) 2014 κeen
 (is (parse-template-string "{{if cond}}aaa{{endif}}")
     (att-progn
      (att-output (att-string ""))
-     (att-if (att-variable 'cond)
+     (att-if (att-variable 'arrows.lexer.default::cond)
              (att-progn (att-output (att-string "aaa")))
              (att-nil))
      (att-output (att-string "")))
@@ -41,7 +41,7 @@ Copyright (c) 2014 κeen
 (is (parse-template-string "{{if cond}}aaa{{else}}bbb{{endif}}")
     (att-progn
      (att-output (att-string ""))
-     (att-if (att-variable 'cond)
+     (att-if (att-variable 'arrows.lexer.default::cond)
              (att-progn (att-output (att-string "aaa")))
              (att-progn (att-output (att-string "bbb"))))
      (att-output (att-string "")))
@@ -49,9 +49,12 @@ Copyright (c) 2014 κeen
     :test #'att-equal)
 
 (is (parse-template-string "{{repeat 10}}<li>item</li>{{endrepeat}}")
-    (att-progn (att-loop (att-constant '(1 2 3 4 5 6 7 8 9 10))
-                         (att-progn (att-output (att-string "<li>item</li>")))
-                         (att-gensym "repeatvar")))
+    (att-progn
+     (att-output (att-string ""))
+     (att-loop (att-constant '(1 2 3 4 5 6 7 8 9 10))
+               (att-progn (att-output (att-string "<li>item</li>")))
+               (att-gensym "loopvar"))
+     (att-output (att-string "")))
     "repeat"
     :test #'att-equal)
 
@@ -60,9 +63,9 @@ Copyright (c) 2014 κeen
      (att-output (att-string ""))
      (att-loop (att-constant '(1 2 3 4 5 6 7 8 9 10))
                          (att-progn (att-output (att-string "<li>item"))
-                                    (att-output (att-variable 'i))
+                                    (att-output (att-variable 'arrows.lexer.default::i))
                                     (att-output (att-string "</li>")))
-                         (att-variable 'i))
+                         (att-variable 'arrows.lexer.default::i))
      (att-output (att-string "")))
     "repeat with index"
     :test #'att-equal)
@@ -70,11 +73,11 @@ Copyright (c) 2014 κeen
 (is (parse-template-string "{{loop seq as i}}<li>item{{var i}}</li>{{endloop}}")
     (att-progn
      (att-output (att-string ""))
-     (att-loop (att-variable 'seq)
+     (att-loop (att-variable 'arrows.lexer.default::seq)
                          (att-progn (att-output (att-string "<li>item"))
-                                    (att-output (att-variable 'i))
+                                    (att-output (att-variable 'arrows.lexer.default::i))
                                     (att-output (att-string "</li>")))
-                         (att-variable 'i))
+                         (att-variable 'arrows.lexer.default::i))
      (att-output (att-string "")))
     "loop"
     :test #'att-equal)
@@ -89,7 +92,6 @@ Copyright (c) 2014 κeen
 
 (is (parse-template-string "the content of foo is {{include \"foo\"}}")
     (att-progn
-     (att-output (att-string ""))
      (att-output
       (att-string "the content of foo is "))
      (att-progn
@@ -97,7 +99,7 @@ Copyright (c) 2014 κeen
       (att-loop
        (att-constant '(1 2))
        (att-progn (att-output (att-string "bar")))
-       (att-variable 'i))
+       (att-variable 'arrows.lexer.default::i))
       (att-output (att-string "")))
      (att-output (att-string "")))
     "include"
