@@ -19,7 +19,7 @@
 
 (defun =control-variable ()
   (=let* ((token-variable (=token-variable)))
-    (=result (att-variable (token-var token-variable)))))
+    (=result (att-output (att-variable (token-value token-variable))))))
 
 (defun =control-if ()
   (=let* ((token-if (=token-if))
