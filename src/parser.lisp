@@ -31,7 +31,7 @@
                          (att-eval (token-cond-clause token-if)))
                      then
                      (if else
-                         (car else)
+                         else
                          (att-nil))))))
 
 (defun =control-loop ()
