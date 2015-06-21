@@ -1,4 +1,4 @@
-This is SBCL 1.2.9, an implementation of ANSI Common Lisp.
+This is SBCL 1.2.12.67-dbf1043, an implementation of ANSI Common Lisp.
 More information about SBCL is available at <http://www.sbcl.org/>.
 
 SBCL is free software, provided as is, with absolutely no warranty.
@@ -7,172 +7,173 @@ BSD-style licenses.  See the CREDITS and COPYING files in the
 distribution for more information.
 compiled stream backend with simple.tmpl
 Evaluation took:
-  0.027 seconds of real time
-  0.027330 seconds of total run time (0.027330 user, 0.000000 system)
+  0.028 seconds of real time
+  0.028000 seconds of total run time (0.028000 user, 0.000000 system)
   100.00% CPU
-  65,401,872 processor cycles
+  65,179,244 processor cycles
   0 bytes consed
   
 compiled string backend with simple.tmpl
 Evaluation took:
-  0.054 seconds of real time
-  0.054629 seconds of total run time (0.038745 user, 0.015884 system)
-  101.85% CPU
-  131,044,680 processor cycles
-  19,677,632 bytes consed
+  0.052 seconds of real time
+  0.052000 seconds of total run time (0.052000 user, 0.000000 system)
+  100.00% CPU
+  123,509,264 processor cycles
+  19,678,336 bytes consed
   
 compiled octet stream backend with simple.tmpl
 Evaluation took:
-  0.008 seconds of real time
-  0.008322 seconds of total run time (0.008304 user, 0.000018 system)
-  100.00% CPU
-  19,923,752 processor cycles
+  0.009 seconds of real time
+  0.012000 seconds of total run time (0.012000 user, 0.000000 system)
+  133.33% CPU
+  21,069,904 processor cycles
   0 bytes consed
   
 compiled octet backend with simple.tmpl
 Evaluation took:
-  0.021 seconds of real time
-  0.021347 seconds of total run time (0.017499 user, 0.003848 system)
-  100.00% CPU
-  51,200,340 processor cycles
-  5,450,896 bytes consed
+  0.018 seconds of real time
+  0.016000 seconds of total run time (0.016000 user, 0.000000 system)
+  88.89% CPU
+  44,948,480 processor cycles
+  5,450,816 bytes consed
   
 compiled fast-io backend with simple.tmpl
 Evaluation took:
   0.011 seconds of real time
-  0.010989 seconds of total run time (0.006837 user, 0.004152 system)
-  100.00% CPU
-  26,323,180 processor cycles
-  982,064 bytes consed
+  0.008000 seconds of total run time (0.008000 user, 0.000000 system)
+  72.73% CPU
+  26,679,396 processor cycles
+  982,096 bytes consed
   
 compiled stream backend with 1var.tmpl
 Evaluation took:
-  0.048 seconds of real time
-  0.047909 seconds of total run time (0.043918 user, 0.003991 system)
-  100.00% CPU
-  114,898,304 processor cycles
-  5,270,400 bytes consed
+  0.046 seconds of real time
+  0.044000 seconds of total run time (0.044000 user, 0.000000 system)
+  95.65% CPU
+  110,740,556 processor cycles
+  5,270,528 bytes consed
   
 compiled string backend with 1var.tmpl
 Evaluation took:
-  0.104 seconds of real time
-  0.104103 seconds of total run time (0.088352 user, 0.015751 system)
-  [ Run times consist of 0.026 seconds GC time, and 0.079 seconds non-GC time. ]
-  100.00% CPU
-  249,824,272 processor cycles
-  31,496,016 bytes consed
+  0.106 seconds of real time
+  0.108000 seconds of total run time (0.104000 user, 0.004000 system)
+  [ Run times consist of 0.032 seconds GC time, and 0.076 seconds non-GC time. ]
+  101.89% CPU
+  253,507,540 processor cycles
+  31,496,112 bytes consed
   
 compiled octet stream backend with 1var.tmpl
 Evaluation took:
-  0.053 seconds of real time
-  0.052906 seconds of total run time (0.052847 user, 0.000059 system)
-  100.00% CPU
-  126,764,244 processor cycles
-  5,601,760 bytes consed
+  0.055 seconds of real time
+  0.056000 seconds of total run time (0.052000 user, 0.004000 system)
+  101.82% CPU
+  132,874,736 processor cycles
+  5,601,856 bytes consed
   
 compiled octet backend with 1var.tmpl
 Evaluation took:
-  0.065 seconds of real time
-  0.064332 seconds of total run time (0.056496 user, 0.007836 system)
-  98.46% CPU
-  154,710,668 processor cycles
-  14,737,808 bytes consed
+  0.067 seconds of real time
+  0.068000 seconds of total run time (0.068000 user, 0.000000 system)
+  101.49% CPU
+  158,926,956 processor cycles
+  14,705,360 bytes consed
   
 compiled fast-io backend with 1var.tmpl
 Evaluation took:
-  0.059 seconds of real time
-  0.058770 seconds of total run time (0.058770 user, 0.000000 system)
-  100.00% CPU
-  140,723,384 processor cycles
-  6,574,160 bytes consed
+  0.175 seconds of real time
+  0.172000 seconds of total run time (0.148000 user, 0.024000 system)
+  [ Run times consist of 0.108 seconds GC time, and 0.064 seconds non-GC time. ]
+  98.29% CPU
+  417,650,780 processor cycles
+  6,573,904 bytes consed
   
 compiled stream backend with 100var.tmpl
 Evaluation took:
-  2.567 seconds of real time
-  2.560707 seconds of total run time (2.464943 user, 0.095764 system)
-  [ Run times consist of 0.262 seconds GC time, and 2.299 seconds non-GC time. ]
-  99.77% CPU
-  6,145,924,024 processor cycles
-  527,993,792 bytes consed
+  2.465 seconds of real time
+  2.452000 seconds of total run time (2.344000 user, 0.108000 system)
+  [ Run times consist of 0.280 seconds GC time, and 2.172 seconds non-GC time. ]
+  99.47% CPU
+  5,901,814,252 processor cycles
+  527,984,592 bytes consed
   
 compiled string backend with 100var.tmpl
 Evaluation took:
-  2.471 seconds of real time
-  2.464702 seconds of total run time (2.424839 user, 0.039863 system)
-  [ Run times consist of 0.158 seconds GC time, and 2.307 seconds non-GC time. ]
-  99.76% CPU
-  5,916,689,896 processor cycles
-  753,067,744 bytes consed
+  2.374 seconds of real time
+  2.368000 seconds of total run time (2.332000 user, 0.036000 system)
+  [ Run times consist of 0.136 seconds GC time, and 2.232 seconds non-GC time. ]
+  99.75% CPU
+  5,683,364,740 processor cycles
+  753,096,432 bytes consed
   
 compiled octet stream backend with 100var.tmpl
 Evaluation took:
-  4.761 seconds of real time
-  4.752628 seconds of total run time (4.736562 user, 0.016066 system)
-  [ Run times consist of 0.135 seconds GC time, and 4.618 seconds non-GC time. ]
-  99.83% CPU
-  11,399,628,048 processor cycles
-  560,018,672 bytes consed
+  4.809 seconds of real time
+  4.792000 seconds of total run time (4.764000 user, 0.028000 system)
+  [ Run times consist of 0.124 seconds GC time, and 4.668 seconds non-GC time. ]
+  99.65% CPU
+  11,514,511,280 processor cycles
+  560,011,632 bytes consed
   
 compiled octet backend with 100var.tmpl
 Evaluation took:
-  3.440 seconds of real time
-  3.433652 seconds of total run time (3.397685 user, 0.035967 system)
-  [ Run times consist of 0.143 seconds GC time, and 3.291 seconds non-GC time. ]
-  99.83% CPU
-  8,238,240,580 processor cycles
-  641,443,600 bytes consed
+  3.352 seconds of real time
+  3.332000 seconds of total run time (3.308000 user, 0.024000 system)
+  [ Run times consist of 0.132 seconds GC time, and 3.200 seconds non-GC time. ]
+  99.40% CPU
+  8,025,656,804 processor cycles
+  641,450,320 bytes consed
   
 compiled fast-io backend with 100var.tmpl
 Evaluation took:
-  4.904 seconds of real time
-  4.896597 seconds of total run time (4.884566 user, 0.012031 system)
-  [ Run times consist of 0.132 seconds GC time, and 4.765 seconds non-GC time. ]
-  99.86% CPU
-  11,742,041,816 processor cycles
-  560,970,896 bytes consed
+  5.064 seconds of real time
+  5.040000 seconds of total run time (5.008000 user, 0.032000 system)
+  [ Run times consist of 0.108 seconds GC time, and 4.932 seconds non-GC time. ]
+  99.53% CPU
+  12,123,826,176 processor cycles
+  560,970,416 bytes consed
   
 compiled stream backend with repeat.tmpl
 Evaluation took:
-  2.221 seconds of real time
-  2.216439 seconds of total run time (2.208427 user, 0.008012 system)
-  [ Run times consist of 0.146 seconds GC time, and 2.071 seconds non-GC time. ]
-  99.77% CPU
-  5,318,945,500 processor cycles
-  527,998,992 bytes consed
+  2.065 seconds of real time
+  2.052000 seconds of total run time (2.024000 user, 0.028000 system)
+  [ Run times consist of 0.124 seconds GC time, and 1.928 seconds non-GC time. ]
+  99.37% CPU
+  4,944,545,880 processor cycles
+  527,999,184 bytes consed
   
 compiled string backend with repeat.tmpl
 Evaluation took:
-  2.035 seconds of real time
-  2.030563 seconds of total run time (2.006622 user, 0.023941 system)
-  [ Run times consist of 0.154 seconds GC time, and 1.877 seconds non-GC time. ]
-  99.80% CPU
-  4,872,844,716 processor cycles
-  627,035,632 bytes consed
+  2.022 seconds of real time
+  2.008000 seconds of total run time (1.968000 user, 0.040000 system)
+  [ Run times consist of 0.164 seconds GC time, and 1.844 seconds non-GC time. ]
+  99.31% CPU
+  4,842,272,470 processor cycles
+  626,983,456 bytes consed
   
 compiled octet stream backend with repeat.tmpl
 Evaluation took:
-  5.139 seconds of real time
-  5.131901 seconds of total run time (5.103895 user, 0.028006 system)
-  [ Run times consist of 0.164 seconds GC time, and 4.968 seconds non-GC time. ]
-  99.86% CPU
-  12,303,936,124 processor cycles
+  5.241 seconds of real time
+  5.224000 seconds of total run time (5.192000 user, 0.032000 system)
+  [ Run times consist of 0.156 seconds GC time, and 5.068 seconds non-GC time. ]
+  99.68% CPU
+  12,549,660,112 processor cycles
   559,998,016 bytes consed
   
 compiled octet backend with repeat.tmpl
 Evaluation took:
-  3.252 seconds of real time
-  3.246142 seconds of total run time (3.226186 user, 0.019956 system)
-  [ Run times consist of 0.148 seconds GC time, and 3.099 seconds non-GC time. ]
-  99.82% CPU
-  7,787,828,608 processor cycles
-  583,191,728 bytes consed
+  3.112 seconds of real time
+  3.108000 seconds of total run time (3.088000 user, 0.020000 system)
+  [ Run times consist of 0.140 seconds GC time, and 2.968 seconds non-GC time. ]
+  99.87% CPU
+  7,451,505,260 processor cycles
+  583,193,328 bytes consed
   
 compiled fast-io backend with repeat.tmpl
 Evaluation took:
-  5.923 seconds of real time
-  5.910971 seconds of total run time (5.891008 user, 0.019963 system)
-  [ Run times consist of 0.167 seconds GC time, and 5.744 seconds non-GC time. ]
-  99.80% CPU
-  14,182,716,240 processor cycles
-  560,971,056 bytes consed
+  5.484 seconds of real time
+  5.460000 seconds of total run time (5.456000 user, 0.004000 system)
+  [ Run times consist of 0.152 seconds GC time, and 5.308 seconds non-GC time. ]
+  99.56% CPU
+  13,132,090,664 processor cycles
+  560,970,896 bytes consed
   
