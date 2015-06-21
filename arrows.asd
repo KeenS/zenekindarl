@@ -22,7 +22,6 @@
                :babel
                :optima
                :cl-ppcre
-               :esrap
                :html-encode
                :fast-io
                :mpc
