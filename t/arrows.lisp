@@ -39,23 +39,23 @@ Copyright (c) 2014 κeen
 (plan nil)
 (diag "compile test with stream backend")
 (loop :for (template args result description) :in *suites*
-   :do (ok (compile-template-string :stream template ()) description))
+   :do (ok (compile-template-string :stream template) description))
 
 (diag "compile test with octet stream backend")
 (loop :for (template args result description) :in *suites*
-   :do (ok (compile-template-string :octet-stream template ()) description))
+   :do (ok (compile-template-string :octet-stream template) description))
 
 (diag "compile test with string backend")
 (loop :for (template args result description) :in *suites*
-   :do (ok (compile-template-string :string template ()) description))
+   :do (ok (compile-template-string :string template) description))
 
 (diag "compile test with octet backend")
 (loop :for (template args result description) :in *suites*
-   :do (ok (compile-template-string :octets template ()) description))
+   :do (ok (compile-template-string :octets template) description))
 
 (diag "compile test with fast-io backend")
 (loop :for (template args result description) :in *suites*
-   :do (ok (compile-template-string :fast-io template ()) description))
+   :do (ok (compile-template-string :fast-io template) description))
 
 (diag "render test with stream backend")
 (loop :for (template args result description) :in *suites*
