@@ -80,7 +80,7 @@
   (loop
      :for i := start :then end
      :for (endp atom end) := (read-out str i)
-     :collect atom :into result
+     :if atom :collect atom :into result
      :until endp
      :finally (return (cons result end))))
 
