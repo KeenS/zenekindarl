@@ -30,11 +30,11 @@ Copyright (c) 2014 κeen
      (time (loop :repeat 10000 :do ,form))))
 
 (defmacro bench/arrows (tmpl args)
-  (let ((stream-renderer (compile-template-file :stream tmpl ()))
-        (octet-stream-renderer (compile-template-file :octet-stream tmpl ()))
-        (string-renderer (compile-template-file :string tmpl ()))
-        (octets-renderer (compile-template-file :octets tmpl ()))
-        (fast-io-renderer (compile-template-file :fast-io tmpl ())))
+  (let ((stream-renderer       (compile-template-file :stream tmpl))
+        (octet-stream-renderer (compile-template-file :octet-stream tmpl))
+        (string-renderer       (compile-template-file :string tmpl))
+        (octets-renderer       (compile-template-file :octets tmpl))
+        (fast-io-renderer      (compile-template-file :fast-io tmpl)))
     `(progn
        (with-open-file (/dev/null "/dev/null" :direction :output :if-exists :append)
          (bench10000 (format nil "compiled stream backend with ~a" ,tmpl)
