@@ -48,11 +48,6 @@
                           :depends-on ("lexer" "token")
                           :components ((:file "default")))
                  (:file "parser" :depends-on ("token" "att" "lexer" "le"))
-                 (:file "syntax-table")
-                 (:module "st"
-                          :pathname "syntax-table"
-                          :depends-on ("syntax-table")
-                          :components ((:file "default")))
                  (:file "util"))))
   :description ""
   :long-description
