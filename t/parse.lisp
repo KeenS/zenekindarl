@@ -70,6 +70,18 @@ Copyright (c) 2014 κeen
     "repeat with index"
     :test #'att-equal)
 
+(is (parse-template-string "{{repeat 10 as i }}<li>item{{var i}}</li>{{endrepeat}}")
+    (att-progn
+     (att-output (att-string ""))
+     (att-loop (att-constant '(1 2 3 4 5 6 7 8 9 10))
+                         (att-progn (att-output (att-string "<li>item"))
+                                    (att-output (att-variable 'arrows.lexer.default::i))
+                                    (att-output (att-string "</li>")))
+                         (att-variable 'arrows.lexer.default::i))
+     (att-output (att-string "")))
+    "repeat with index with trailing space"
+    :test #'att-equal)
+
 (is (parse-template-string "{{loop seq as i}}<li>item{{var i}}</li>{{endloop}}")
     (att-progn
      (att-output (att-string ""))
@@ -80,6 +92,18 @@ Copyright (c) 2014 κeen
                          (att-variable 'arrows.lexer.default::i))
      (att-output (att-string "")))
     "loop"
+    :test #'att-equal)
+
+(is (parse-template-string "{{loop seq as i }}<li>item{{var i}}</li>{{endloop}}")
+    (att-progn
+     (att-output (att-string ""))
+     (att-loop (att-variable 'arrows.lexer.default::seq)
+                         (att-progn (att-output (att-string "<li>item"))
+                                    (att-output (att-variable 'arrows.lexer.default::i))
+                                    (att-output (att-string "</li>")))
+                         (att-variable 'arrows.lexer.default::i))
+     (att-output (att-string "")))
+    "loop with trailing space"
     :test #'att-equal)
 
 (is (parse-template-string "the content of foo is {{insert \"foo\"}}")
