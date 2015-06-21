@@ -50,14 +50,15 @@ return: A keyword argumented lambda.
 .
 If args have `:backend backend' key-value pair, this function uses it. If not given the backend is :stream and stream is *standard-output*.
 And also if `:syntax syntax' is given, use it or default to :default. "
-  (let* ((backend-given (getf args :backend))
+  (let* ((backend-given (ignore-errors (getf args :backend)))
          (backend (or backend-given :stream))
-         (syntax-given (getf args :syntax))
+         (syntax-given (ignore-errors (getf args :syntax)))
          (syntax (or syntax-given :default)))
-    (when backend-given
-      (remf args :backend))
-    (when syntax-given
-      (remf args :syntax))
+    (ignore-errors
+      (when  backend-given
+        (remf args :backend))
+      (when syntax-given
+        (remf args :syntax)))
     (apply (compile-template-string backend template :syntax syntax)
            (if backend-given
                args
