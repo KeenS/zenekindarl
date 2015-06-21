@@ -22,21 +22,25 @@ Copyright (c) 2014 κeen
            :render-file))
 (in-package :arrows)
 
-(defun compile-template-string (backend str env)
+(defun compile-template-string (backend str &key (syntax :default) (env ()))
   (emit-lambda (if (keywordp backend)
                    (make-backend backend)
                    (apply #'make-backend backend))
-               (apply-passes (parse-template-string str) env)))
+               (apply-passes (parse-template-string str syntax) env)))
 
-(defun compile-template-file (backend file env)
-  (compile-template-string backend (read-file-into-string file) env))
+(defun compile-template-file (backend file &key (syntax :default) (env ()))
+  (compile-template-string backend (read-file-into-string file) :syntax syntax :env env))
 
 (defun render (template &rest args)
   (let* ((backend-given (getf args :backend))
-         (backend (or backend-given :stream)))
+         (backend (or backend-given :stream))
+         (syntax-given (getf args :syntax))
+         (syntax (or syntax-given :default)))
     (when backend-given
       (remf args :backend))
-    (apply (compile-template-string backend template ())
+    (when syntax-given
+      (remf args :syntax))
+    (apply (compile-template-string backend template :syntax syntax)
            (if backend-given
                args
                (cons *standard-output* args)))))
@@ -50,6 +54,6 @@ Copyright (c) 2014 κeen
         :name "κeen")
 
 #+(or)
-(let ((renderer (compile-template-string :stream "Hello {{var name}}!!" ())))
+(let ((renderer (compile-template-string :stream "Hello {{var name}}!!")))
   (funcall renderer *standard-output* :name "κeen"))
 

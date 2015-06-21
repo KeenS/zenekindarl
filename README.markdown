@@ -12,6 +12,11 @@ Like this
         :name "κeen")
 ```
 
+```lisp
+(let ((renderer (compile-template-string :stream "Hello {{var name}}!!")))
+  (funcall renderer *standard-output* :name "κeen"))
+```
+
 .
 
 Wait a while before full documentation is prefared.
@@ -30,7 +35,7 @@ The benchmark code for Arrows:
 
     > (time
        (with-open-file (out #P"~/Desktop/out" :direction :output :if-exists :supersede)
-         (let ((fun (arrows:compile-template-string :stream "Hello {{var name}}!!" nil)))
+         (let ((fun (arrows:compile-template-string :stream "Hello {{var name}}!!")))
            (loop repeat 1000000
               do (funcall fun out :name "κeen")))))
     Evaluation took:
