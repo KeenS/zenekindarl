@@ -37,6 +37,8 @@ Copyright (c) 2014 κeen
     ("the content of foo is {{include \"foo\"}}" () "the content of foo is barbar" "against include")
     ("the content of var is {{include \"var\"}}" (:bar "var") "the content of var is var" "include with includee cotaining template string")))
 
+(setf *default-pathname-defaults* (asdf:system-relative-pathname 'zenekindarl "t/"))
+
 (plan nil)
 (diag "compile test with stream backend")
 (loop :for (template args result description) :in *suites*
