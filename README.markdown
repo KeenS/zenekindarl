@@ -65,6 +65,8 @@ The benchmark code for a template engine in Python:
 ## Syntax
 
 ### Variable
+variables will be HTML escaped
+
 
 ```html
 {{var foo}}
@@ -98,7 +100,6 @@ The benchmark code for a template engine in Python:
 
 
 ### Insert
-
 
 ```html
 See code below
