@@ -1,16 +1,18 @@
 language: lisp
-sudo: required
+sudo: false
+
 env:
+  global:
+    - PATH=~/.roswell/bin:$PATH
+    - ROSWELL_INSTALL_DIR=$HOME/.roswell
   matrix:
-    - LISP=sbcl
-    - LISP=ccl
+    - LISP=sbcl-bin
+    - LISP=ccl-bin
     - LISP=clisp
 
-matrix:
-  allow_failures:
-
 install:
-  - curl -L https://github.com/luismbo/cl-travis/raw/master/install.sh | sh
+  - curl -L https://raw.githubusercontent.com/snmsts/roswell/release/scripts/install-for-ci.sh | sh
+  - ros install prove
+
 script:
-  - cd t
-  - cl -e "(ql:quickload :prove)"  -e "(unless (prove:run :zenekindarl-test) (uiop:quit 1))"
+  - run-prove zenekindarl-test.asd
