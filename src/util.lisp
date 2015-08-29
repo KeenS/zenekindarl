@@ -1,8 +1,7 @@
 (in-package :cl-user)
 (defpackage zenekindarl.util
   (:use :cl)
-  (:export :octets
-           :collect-hash-value))
+  (:export :octets))
 (in-package :zenekindarl.util)
 
 (deftype octets ()
@@ -13,13 +12,3 @@
               :element-type '(unsigned-byte 8)
               :initial-contents contents))
 
-(defun collect-hash-key (func hash)
-  (loop
-     :for key :being :the :hash-keys :of hash
-     :collect (funcall func key)))
-
-
-(defun collect-hash-value (func hash)
-  (loop
-     :for value :being :the :hash-values :of hash
-     :collect (funcall func value)))
