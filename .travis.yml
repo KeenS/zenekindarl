@@ -9,7 +9,6 @@ env:
   matrix:
     - LISP=sbcl-bin COVERALLS=true
     - LISP=ccl-bin
-    - LISP=clisp
 
 install:
   - curl -L https://raw.githubusercontent.com/snmsts/roswell/release/scripts/install-for-ci.sh | sh
