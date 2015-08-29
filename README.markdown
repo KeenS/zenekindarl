@@ -64,6 +64,61 @@ The benchmark code for a template engine in Python:
     user    0m24.069s
     sys	    0m0.190s
 
+## Syntax
+
+### Variable
+
+```html
+{{var foo}}
+```
+
+### Repeat
+
+```html
+{{repeat 10}}hello{{endrepeat}}
+```
+
+```
+{{repeat n as i}}<li>{{var i}}th item{{endrepeat}}
+```
+
+### Loop
+
+```html
+<ol>
+  {{loop items as item}}
+  <li>{{var item}}
+  {{endloop}}
+</ol>
+```
+
+### If
+
+```
+{{if new-p}}New{{else}}Old{{endif}}
+```
+
+
+### Insert
+
+
+```html
+See code below
+<code><pre>
+{{insert "snippet.lisp"}}
+</pre></code>
+```
+
+### Include
+
+
+```html
+<nav>
+{{incude "sidebar.tmpl"}}
+</nav>
+```
+
+
 ## Author
 
 * κeen
