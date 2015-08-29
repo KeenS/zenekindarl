@@ -48,7 +48,7 @@
                           :components ((:file "default")))
                  (:file "parser" :depends-on ("token" "att" "lexer" "le"))
                  (:file "util"))))
-  :description ""
+  :description "A fast precompiling template engine"
   :long-description
   #.(with-open-file (stream (merge-pathnames
                              #p"README.markdown"
