@@ -16,6 +16,7 @@ Copyright (c) 2014 κeen
    :zenekindarl.util)
   (:import-from :alexandria
                 :read-file-into-string)
+  (:nicknames :zen)
   (:export :compile-template-string
            :compile-template-file
            :render
