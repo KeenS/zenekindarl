@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/KeenS/zenekindarl.svg?branch=master)](https://travis-ci.org/KeenS/zenekindarl)
+[![Coverage Status](https://coveralls.io/repos/KeenS/zenekindarl/badge.svg?branch=master)](https://coveralls.io/r/KeenS/zenekindarl)
+
 # Zenekindarl
 Expected to be a fast, flexible, extensible, low memory usage, async, concurrent template engine.
 
