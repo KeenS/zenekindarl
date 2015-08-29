@@ -16,4 +16,5 @@ install:
   - ros install prove
 
 script:
-  - run-prove zenekindarl-test.asd
+  - cd t
+  - run-prove ../zenekindarl-test.asd
