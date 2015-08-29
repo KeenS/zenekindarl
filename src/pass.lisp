@@ -40,6 +40,12 @@ Copyright (c) 2014 κeen
               (traverse-node func (loop-seq obj))
               (traverse-node func (body obj))
               (traverse-node func (loop-var obj)))))
+  (:method (func (obj att-repeat))
+    (funcall func
+             (att-repeat
+              (traverse-node func (repeat-times obj))
+              (traverse-node func (body obj))
+              (traverse-node func (repeat-var obj)))))
   (:method (func (obj att-node))
     (funcall func obj)))
 

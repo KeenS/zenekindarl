@@ -48,10 +48,10 @@
 
 (defun tokenize-repeat (start end rest)
   (if (= (length rest) 1)
-      (make-token-loop :start start :end end :seq (iota (car rest) :start 1)) 
-   (destructuring-bind (seq as var) rest
+      (make-token-repeat :start start :end end :times (car rest)) 
+   (destructuring-bind (times as var) rest
      @ignore as
-     (make-token-loop :start start :end end :seq (iota seq :start 1) :loop-sym var))))
+     (make-token-repeat :start start :end end :times times :repeat-sym var))))
 
 (defun tokenize-include (start end rest)
   (make-token-include :start start :end end :include-template (lex (read-file-into-string (merge-pathnames (car rest))) :default)))

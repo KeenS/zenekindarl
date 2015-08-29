@@ -12,6 +12,7 @@
           token-else-p
           token-end-p
           token-loop-p
+          token-repeat-p
           token-include-p
           token-insert-p))
 
@@ -68,6 +69,15 @@
              (:include token))
   (seq () :type (or list symbol))
   (loop-sym nil :type (or null symbol)))
+
+@export
+@export-accessors
+@export-constructors
+(defstruct (token-repeat
+             (:conc-name token-)
+             (:include token))
+  (times () :type (or integer symbol))
+  (repeat-sym nil :type (or null symbol)))
 
 @export
 @export-accessors

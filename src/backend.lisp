@@ -121,6 +121,16 @@ Copyright (c) 2014 κeen
           :in ,seq
           :do ,(emit-code backend body :output-p output-p)))))
 
+(defmethod emit-code (backend (obj att-repeat) &key output-p)
+  (with-slots (repeat-times body repeat-var) obj
+    (let* ((times (emit-code backend repeat-times))
+           (sym (varsym repeat-var)))
+      (push-scope backend)
+      (add-to-scope sym backend)
+      `(dotimes (,sym ,times)
+          ;; :FIXME: dirty hack
+         ,(emit-code backend body :output-p output-p)))))
+
 (defgeneric emit-parameters (backend)
   (:method (backend)
     (let ((syms (symbols backend)))

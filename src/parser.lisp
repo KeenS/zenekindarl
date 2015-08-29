@@ -10,6 +10,7 @@
 (defun =token-else () (=satisfies #'token-else-p))
 (defun =token-end () (=satisfies #'token-end-p))
 (defun =token-loop () (=satisfies #'token-loop-p))
+(defun =token-repeat () (=satisfies #'token-repeat-p))
 (defun =token-include () (=satisfies #'token-include-p))
 (defun =token-insert () (=satisfies #'token-insert-p))
 
@@ -47,6 +48,19 @@
                   (att-variable (token-loop-sym token-loop))
                   (att-gensym "loopvar"))))))
 
+(defun =control-repeat ()
+  (=let* ((token-repeat (=token-repeat))
+          (body       (=template))
+          (_          (=token-end)))
+    (=result (att-repeat
+              (if (symbolp (token-times token-repeat))
+                  (att-variable (token-times token-repeat))
+                  (att-constant (token-times token-repeat)))
+              body
+              (if (token-repeat-sym token-repeat)
+                  (att-variable (token-repeat-sym token-repeat))
+                  (att-gensym "repeatvar"))))))
+
 (defun =control-include ()
   (=let* ((token-include (=token-include)))
     (=result (run (=template)
@@ -64,6 +78,7 @@
                  (=control-variable)
                  (=control-if)
                  (=control-loop)
+                 (=control-repeat)
                  (=control-include)
                  (=control-insert)))))
     (=result (apply #'att-progn tmp))))

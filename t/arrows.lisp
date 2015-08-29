@@ -25,6 +25,7 @@ Copyright (c) 2014 κeen
     ("bar {{var bar}}" (:bar "bar") "bar bar" "simple variable")
     ("bar {{var bar}}" (:bar "<bar>") "bar &lt;bar&gt;" "variable containing html meta char")
     ("bar{{repeat 3}} {{var bar}}{{endrepeat}}" (:bar "bar") "bar bar bar bar" "repeat")
+    ("bar{{repeat n}} {{var bar}}{{endrepeat}}" (:n 3 :bar "bar") "bar bar bar bar" "repeat")
     ("{{loop items as i}}<li>{{var i}}</li>{{endloop}}" (:items ("uragasumi" "hakkaisan" "dassai")) "<li>uragasumi</li><li>hakkaisan</li><li>dassai</li>" "loop")
     ("{{loop items as i}}<li>{{var i}}</li>{{endloop}}" (:items ()) "" "loop with loopee being nil")
     ("<li>{{if new-p}}New! {{endif}}blahblah</li>" (:new-p t) "<li>New! blahblah</li>" "if")

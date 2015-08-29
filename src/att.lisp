@@ -45,6 +45,11 @@ Copyright (c) 2014 κeen
            :loop-var
            :body
            
+           :att-repeat
+           :repeat-times
+           :repeat-var
+           :body
+           
            :att-include
            :path
            
@@ -286,6 +291,42 @@ Copyright (c) 2014 κeen
                   (loop-seq y))
        (att-equal (loop-var x)
                   (loop-var y))
+       (att-equal (body x)
+                  (body y))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; att-repeat
+(defclass att-repeat (att-control)
+  ((repeat-times
+      :type 'att-leaf
+      :accessor repeat-times
+      :initarg :repeat-times)
+   (repeat-var
+      :type 'att-variable
+      :accessor repeat-var
+      :initarg :repeat-var)
+   (body
+    :type 'att-node
+    :accessor body
+    :initarg :body)))
+
+(defmethod print-object ((obj att-repeat) stream)
+  (with-slots (repeat-times repeat-var body) obj
+    (if repeat-var
+        (format stream "#<ATT-REPEAT ~s IN ~s ~s>" repeat-var repeat-times body)
+        (format stream "#<ATT-REPEAT ~s ~s>" repeat-times body))))
+
+(defun att-repeat (repeat-times body &optional (repeat-var (att-gensym "repeatvar")))
+  (make-instance 'att-repeat
+                 :repeat-times repeat-times
+                 :body body
+                 :repeat-var repeat-var))
+
+(defmethod att-equal ((x att-repeat) (y att-repeat))
+  (and (att-equal (repeat-times x)
+                  (repeat-times y))
+       (att-equal (repeat-var x)
+                  (repeat-var y))
        (att-equal (body x)
                   (body y))))
 
