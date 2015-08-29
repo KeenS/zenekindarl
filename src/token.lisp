@@ -1,9 +1,9 @@
 (in-package :cl-user)
-(defpackage arrows.token
+(defpackage zenekindarl.token
   (:use :cl
         :mpc
         :annot.class))
-(in-package arrows.token)
+(in-package zenekindarl.token)
 
 (annot:enable-annot-syntax)
 (export '(token-string-p

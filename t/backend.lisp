@@ -1,19 +1,19 @@
 #|
-This file is a part of arrows project.
+This file is a part of zenekindarl project.
 Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage arrows.backend-test
+(defpackage zenekindarl.backend-test
   (:use :cl
-        :arrows.util
-        :arrows.att
-        :arrows.backend
-        :arrows.backend.stream
+        :zenekindarl.util
+        :zenekindarl.att
+        :zenekindarl.backend
+        :zenekindarl.backend.stream
         :cl-test-more)
   (:import-from :html-encode
                 :encode-for-tt))
-(in-package :arrows.backend-test)
+(in-package :zenekindarl.backend-test)
 
 (plan nil)
 (diag "backend tests")

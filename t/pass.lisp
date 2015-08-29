@@ -1,16 +1,16 @@
 #|
-This file is a part of arrows project.
+This file is a part of zenekindarl project.
 Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage arrows.pass-test
+(defpackage zenekindarl.pass-test
   (:use :cl
-        :arrows.att
-        :arrows.pass
-        :arrows.util
+        :zenekindarl.att
+        :zenekindarl.pass
+        :zenekindarl.util
         :cl-test-more))
-(in-package :arrows.pass-test)
+(in-package :zenekindarl.pass-test)
 
 (plan nil)
 (diag "test pass")

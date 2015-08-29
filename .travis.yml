@@ -11,4 +11,4 @@ install:
   - curl -L https://github.com/luismbo/cl-travis/raw/master/install.sh | sh
 script:
   - cd t
-  - cl -e "(ql:quickload :prove)"  -e "(unless (prove:run :arrows-test) (uiop:quit 1))"
+  - cl -e "(ql:quickload :prove)"  -e "(unless (prove:run :zenekindarl-test) (uiop:quit 1))"

@@ -1,7 +1,7 @@
 (in-package :cl-user)
-(defpackage arrows.lexer
+(defpackage zenekindarl.lexer
   (:use :cl)
   (:export lex))
-(in-package arrows.lexer)
+(in-package zenekindarl.lexer)
 
 (defgeneric lex (template lexer))

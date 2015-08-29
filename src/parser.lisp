@@ -1,8 +1,8 @@
 (in-package :cl-user)
-(defpackage :arrows.parser
-  (:use :cl :arrows.util :arrows.token :arrows.att :mpc)
+(defpackage :zenekindarl.parser
+  (:use :cl :zenekindarl.util :zenekindarl.token :zenekindarl.att :mpc)
   (:export :=template))
-(in-package :arrows.parser)
+(in-package :zenekindarl.parser)
 
 (defun =token-string () (=satisfies #'token-string-p))
 (defun =token-variable () (=satisfies #'token-variable-p))

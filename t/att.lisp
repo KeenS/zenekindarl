@@ -1,17 +1,17 @@
 #|
-This file is a part of arrows project.
+This file is a part of zenekindarl project.
 Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage arrows.att-test
+(defpackage zenekindarl.att-test
   (:use :cl
-        :arrows.att
-        :arrows.util
+        :zenekindarl.att
+        :zenekindarl.util
         :cl-test-more))
-(in-package :arrows.att-test)
+(in-package :zenekindarl.att-test)
 
-;; NOTE: To run this test file, execute `(asdf:test-system :arrows)' in your Lisp.
+;; NOTE: To run this test file, execute `(asdf:test-system :zenekindarl)' in your Lisp.
 
 (plan nil)
 (diag "att tests")

@@ -1,11 +1,11 @@
 #|
-This file is a part of arrows project.
+This file is a part of zenekindarl project.
 Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage arrows.pass
-  (:use :cl :arrows.util :arrows.att)
+(defpackage zenekindarl.pass
+  (:use :cl :zenekindarl.util :zenekindarl.att)
   (:import-from :alexandria
                 :if-let)
   (:import-from :optima
@@ -17,7 +17,7 @@ Copyright (c) 2014 κeen
            :fold-variables-pass
            :append-sequence-pass
            :remove-progn-pass))
-(in-package :arrows.pass)
+(in-package :zenekindarl.pass)
 
 (defgeneric traverse-node (func obj)
   (:method (func (obj att-progn))

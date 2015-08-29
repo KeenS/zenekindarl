@@ -1,26 +1,26 @@
 #|
-This file is a part of arrows project.
+This file is a part of zenekindarl project.
 Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage arrows
+(defpackage zenekindarl
   (:use
    :cl
-   :arrows.parse
-   :arrows.pass
-   :arrows.backend
-   :arrows.backend.stream
-   :arrows.backend.sequence
-   :arrows.backend.fast-io
-   :arrows.util)
+   :zenekindarl.parse
+   :zenekindarl.pass
+   :zenekindarl.backend
+   :zenekindarl.backend.stream
+   :zenekindarl.backend.sequence
+   :zenekindarl.backend.fast-io
+   :zenekindarl.util)
   (:import-from :alexandria
                 :read-file-into-string)
   (:export :compile-template-string
            :compile-template-file
            :render
            :render-file))
-(in-package :arrows)
+(in-package :zenekindarl)
 
 (defun compile-template-string (backend str &key (syntax :default) (env ()))
   "compiles `str' with `env' and emmit renderer with backend `backend'.

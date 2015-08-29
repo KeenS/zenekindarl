@@ -1,9 +1,9 @@
 (in-package :cl-user)
-(defpackage arrows.util
+(defpackage zenekindarl.util
   (:use :cl)
   (:export :octets
            :collect-hash-value))
-(in-package :arrows.util)
+(in-package :zenekindarl.util)
 
 (deftype octets ()
   '(simple-array (unsigned-byte 8) (*)))

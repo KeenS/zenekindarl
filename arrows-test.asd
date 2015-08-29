@@ -1,22 +1,22 @@
 #|
-  This file is a part of arrows project.
+  This file is a part of zenekindarl project.
   Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage arrows-test-asd
+(defpackage zenekindarl-test-asd
   (:use :cl :asdf))
-(in-package :arrows-test-asd)
+(in-package :zenekindarl-test-asd)
 
-(defsystem arrows-test
+(defsystem zenekindarl-test
   :author "κeen"
   :license ""
-  :depends-on (:arrows
+  :depends-on (:zenekindarl
                :prove
                :flexi-streams)
   :components ((:module "t"
                 :components
-                ((:test-file "arrows")
+                ((:test-file "zenekindarl")
                  (:test-file "att")
                  (:test-file "pass")
                  (:test-file "backend")

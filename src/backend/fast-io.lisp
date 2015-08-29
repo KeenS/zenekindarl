@@ -1,9 +1,9 @@
 (in-package :cl-user)
-(defpackage arrows.backend.fast-io
-  (:use :cl :arrows.util :arrows.att :arrows.backend)
-  (:import-from :arrows.backend.stream
+(defpackage zenekindarl.backend.fast-io
+  (:use :cl :zenekindarl.util :zenekindarl.att :zenekindarl.backend)
+  (:import-from :zenekindarl.backend.stream
                 :buffer-of)
-  (:import-from :arrows.backend.sequence
+  (:import-from :zenekindarl.backend.sequence
                 :octet-backend)
   (:import-from :babel
                 :string-to-octets)
@@ -11,7 +11,7 @@
                 :with-fast-output
                 :fast-write-sequence)
   (:export :fast-io-backend))
-(in-package :arrows.backend.fast-io)
+(in-package :zenekindarl.backend.fast-io)
 
 (defclass fast-io-backend (octet-backend)
   ())

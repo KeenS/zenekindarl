@@ -1,12 +1,12 @@
 #|
-This file is a part of arrows project.
+This file is a part of zenekindarl project.
 Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage arrows-test
+(defpackage zenekindarl-test
   (:use :cl
-        :arrows
+        :zenekindarl
         :cl-test-more)
   (:import-from :babel
                 :string-to-octets)
@@ -15,9 +15,9 @@ Copyright (c) 2014 κeen
                 :with-fast-output)
   (:import-from :flexi-streams
                 :with-output-to-sequence))
-(in-package :arrows-test)
+(in-package :zenekindarl-test)
 
-;; NOTE: To run this test file, execute `(asdf:test-system :arrows)' in your Lisp.
+;; NOTE: To run this test file, execute `(asdf:test-system :zenekindarl)' in your Lisp.
 
 (defparameter *suites*
   '(("foo" () "foo" "simple string")

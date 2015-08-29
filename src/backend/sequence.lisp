@@ -1,11 +1,11 @@
 #|
-This file is a part of arrows project.
+This file is a part of zenekindarl project.
 Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage arrows.backend.sequence
-  (:use :cl :arrows.util :arrows.att :arrows.backend :arrows.backend.stream)
+(defpackage zenekindarl.backend.sequence
+  (:use :cl :zenekindarl.util :zenekindarl.att :zenekindarl.backend :zenekindarl.backend.stream)
   (:import-from :fast-io
                 :with-fast-output
                 :fast-write-sequence)
@@ -13,7 +13,7 @@ Copyright (c) 2014 κeen
                 :string-to-octets)
   (:export :string-backend
            :octet-backend))
-(in-package :arrows.backend.sequence)
+(in-package :zenekindarl.backend.sequence)
 
 (defclass string-backend (stream-backend)
   ((string

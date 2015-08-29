@@ -1,11 +1,11 @@
 #|
-This file is a part of arrows project.
+This file is a part of zenekindarl project.
 Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage arrows.backend
-  (:use :cl :arrows.util :arrows.att)
+(defpackage zenekindarl.backend
+  (:use :cl :zenekindarl.util :zenekindarl.att)
   (:import-from :html-encode
                 :encode-for-tt)
   (:export :backend
@@ -15,7 +15,7 @@ Copyright (c) 2014 κeen
            :emit-parameters
            :symbols))
 
-(in-package :arrows.backend)
+(in-package :zenekindarl.backend)
 
 (defclass backend ()
   ((symbols

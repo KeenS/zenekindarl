@@ -1,5 +1,5 @@
 #|
-  This file is a part of arrows project.
+  This file is a part of zenekindarl project.
   Copyright (c) 2014 κeen
 |#
 
@@ -8,11 +8,11 @@
 |#
 
 (in-package :cl-user)
-(defpackage arrows-asd
+(defpackage zenekindarl-asd
   (:use :cl :asdf))
-(in-package :arrows-asd)
+(in-package :zenekindarl-asd)
 
-(defsystem arrows
+(defsystem zenekindarl
   :version "0.1"
   :author "κeen"
   :license ""
@@ -29,7 +29,7 @@
                )
   :components ((:module "src"
                 :components
-                ((:file "arrows" :depends-on ("parse" "pass" "backend" "be"))
+                ((:file "zenekindarl" :depends-on ("parse" "pass" "backend" "be"))
                  (:file "att" :depends-on ("util"))
                  (:file "backend" :depends-on ("util" "att"))
                  (:module "be"
@@ -61,4 +61,4 @@
                                :fill-pointer t)))
           (setf (fill-pointer seq) (read-sequence seq stream))
           seq)))
-  :in-order-to ((test-op (test-op arrows-test))))
+  :in-order-to ((test-op (test-op zenekindarl-test))))

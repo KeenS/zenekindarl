@@ -1,16 +1,16 @@
 #|
-This file is a part of arrows project.
+This file is a part of zenekindarl project.
 Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage arrows.parse-test
+(defpackage zenekindarl.parse-test
   (:use :cl
-        :arrows.att
-        :arrows.parse
-        :arrows.util
+        :zenekindarl.att
+        :zenekindarl.parse
+        :zenekindarl.util
         :cl-test-more))
-(in-package :arrows.parse-test)
+(in-package :zenekindarl.parse-test)
 
 (plan nil)
 (diag "test parse")
@@ -23,7 +23,7 @@ Copyright (c) 2014 κeen
 (is (parse-template-string "{{var sym}}")
     (att-progn
      (att-output (att-string ""))
-     (att-output (att-variable 'arrows.lexer.default::sym))
+     (att-output (att-variable 'zenekindarl.lexer.default::sym))
      (att-output (att-string "")))
     "var"
     :test #'att-equal)
@@ -31,7 +31,7 @@ Copyright (c) 2014 κeen
 (is (parse-template-string "{{if cond}}aaa{{endif}}")
     (att-progn
      (att-output (att-string ""))
-     (att-if (att-variable 'arrows.lexer.default::cond)
+     (att-if (att-variable 'zenekindarl.lexer.default::cond)
              (att-progn (att-output (att-string "aaa")))
              (att-nil))
      (att-output (att-string "")))
@@ -41,7 +41,7 @@ Copyright (c) 2014 κeen
 (is (parse-template-string "{{if cond}}aaa{{else}}bbb{{endif}}")
     (att-progn
      (att-output (att-string ""))
-     (att-if (att-variable 'arrows.lexer.default::cond)
+     (att-if (att-variable 'zenekindarl.lexer.default::cond)
              (att-progn (att-output (att-string "aaa")))
              (att-progn (att-output (att-string "bbb"))))
      (att-output (att-string "")))
@@ -63,9 +63,9 @@ Copyright (c) 2014 κeen
      (att-output (att-string ""))
      (att-repeat (att-constant 10)
                  (att-progn (att-output (att-string "<li>item"))
-                            (att-output (att-variable 'arrows.lexer.default::i))
+                            (att-output (att-variable 'zenekindarl.lexer.default::i))
                             (att-output (att-string "</li>")))
-                 (att-variable 'arrows.lexer.default::i))
+                 (att-variable 'zenekindarl.lexer.default::i))
      (att-output (att-string "")))
     "repeat with index"
     :test #'att-equal)
@@ -75,9 +75,9 @@ Copyright (c) 2014 κeen
      (att-output (att-string ""))
      (att-repeat (att-constant 10)
                  (att-progn (att-output (att-string "<li>item"))
-                            (att-output (att-variable 'arrows.lexer.default::i))
+                            (att-output (att-variable 'zenekindarl.lexer.default::i))
                             (att-output (att-string "</li>")))
-                 (att-variable 'arrows.lexer.default::i))
+                 (att-variable 'zenekindarl.lexer.default::i))
      (att-output (att-string "")))
     "repeat with index with trailing space"
     :test #'att-equal)
@@ -85,11 +85,11 @@ Copyright (c) 2014 κeen
 (is (parse-template-string "{{repeat n as i }}<li>item{{var i}}</li>{{endrepeat}}")
     (att-progn
      (att-output (att-string ""))
-     (att-repeat (att-variable 'arrows.lexer.default::n)
+     (att-repeat (att-variable 'zenekindarl.lexer.default::n)
                  (att-progn (att-output (att-string "<li>item"))
-                            (att-output (att-variable 'arrows.lexer.default::i))
+                            (att-output (att-variable 'zenekindarl.lexer.default::i))
                             (att-output (att-string "</li>")))
-                 (att-variable 'arrows.lexer.default::i))
+                 (att-variable 'zenekindarl.lexer.default::i))
      (att-output (att-string "")))
     "repeat on variable with index with trailing space"
     :test #'att-equal)
@@ -97,11 +97,11 @@ Copyright (c) 2014 κeen
 (is (parse-template-string "{{loop seq as i}}<li>item{{var i}}</li>{{endloop}}")
     (att-progn
      (att-output (att-string ""))
-     (att-loop (att-variable 'arrows.lexer.default::seq)
+     (att-loop (att-variable 'zenekindarl.lexer.default::seq)
                          (att-progn (att-output (att-string "<li>item"))
-                                    (att-output (att-variable 'arrows.lexer.default::i))
+                                    (att-output (att-variable 'zenekindarl.lexer.default::i))
                                     (att-output (att-string "</li>")))
-                         (att-variable 'arrows.lexer.default::i))
+                         (att-variable 'zenekindarl.lexer.default::i))
      (att-output (att-string "")))
     "loop"
     :test #'att-equal)
@@ -109,11 +109,11 @@ Copyright (c) 2014 κeen
 (is (parse-template-string "{{loop seq as i }}<li>item{{var i}}</li>{{endloop}}")
     (att-progn
      (att-output (att-string ""))
-     (att-loop (att-variable 'arrows.lexer.default::seq)
+     (att-loop (att-variable 'zenekindarl.lexer.default::seq)
                          (att-progn (att-output (att-string "<li>item"))
-                                    (att-output (att-variable 'arrows.lexer.default::i))
+                                    (att-output (att-variable 'zenekindarl.lexer.default::i))
                                     (att-output (att-string "</li>")))
-                         (att-variable 'arrows.lexer.default::i))
+                         (att-variable 'zenekindarl.lexer.default::i))
      (att-output (att-string "")))
     "loop with trailing space"
     :test #'att-equal)
@@ -135,7 +135,7 @@ Copyright (c) 2014 κeen
       (att-repeat
        (att-constant 2)
        (att-progn (att-output (att-string "bar")))
-       (att-variable 'arrows.lexer.default::i))
+       (att-variable 'zenekindarl.lexer.default::i))
       (att-output (att-string "")))
      (att-output (att-string "")))
     "include"

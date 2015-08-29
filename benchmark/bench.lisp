@@ -1,20 +1,20 @@
 #|
-This file is a part of arrows project.
+This file is a part of zenekindarl project.
 Copyright (c) 2014 κeen
 |#
 
 
 ;;; To run benchmark, simply cd to here and load this file.
 (in-package :cl-user)
-(defpackage arrows-bench
+(defpackage zenekindarl-bench
   (:use
    :cl
-   :arrows)
+   :zenekindarl)
   (:import-from :fast-io
                 :with-fast-output)
   (:import-from :alexandria
                 :make-keyword))
-(in-package :arrows-bench)
+(in-package :zenekindarl-bench)
 
 (defparameter *templates* `(("simple.tmpl" . ())
                             ("1var.tmpl" . (:name "κeen"))
@@ -29,7 +29,7 @@ Copyright (c) 2014 κeen
      (write-line ,title)
      (time (loop :repeat 10000 :do ,form))))
 
-(defmacro bench/arrows (tmpl args)
+(defmacro bench/zenekindarl (tmpl args)
   (let ((stream-renderer       (compile-template-file :stream tmpl))
         (octet-stream-renderer (compile-template-file :octet-stream tmpl))
         (string-renderer       (compile-template-file :string tmpl))
@@ -50,7 +50,7 @@ Copyright (c) 2014 κeen
                      (with-fast-output (buff /dev/null) (funcall ,fast-io-renderer buff ,@args)))))))
 
 (defmacro bench (tmpl args)
-  `(bench/arrows ,tmpl ,args))
+  `(bench/zenekindarl ,tmpl ,args))
 
 #.`(progn
      ,@(loop :for (tmpl . args) :in *templates*

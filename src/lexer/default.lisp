@@ -1,15 +1,15 @@
 (in-package :cl-user)
-(defpackage arrows.lexer.default
+(defpackage zenekindarl.lexer.default
   (:use :cl
-        :arrows.util
-        :arrows.token
-        :arrows.lexer)
+        :zenekindarl.util
+        :zenekindarl.token
+        :zenekindarl.lexer)
   (:import-from :alexandria
                 :if-let
                 :iota
                 :read-file-into-string)
   (:export :lex))
-(in-package arrows.lexer.default)
+(in-package zenekindarl.lexer.default)
 (annot:enable-annot-syntax)
 
 
@@ -18,7 +18,7 @@
       (read-from-string str nil nil :start start)
     (if-let ((i (and (symbolp atom)
                      (search "}}" str :start2 start :end2 end)))
-             (*package* (find-package :arrows.lexer.default)))
+             (*package* (find-package :zenekindarl.lexer.default)))
       (multiple-value-bind (atom end)
           (read-from-string str nil nil :start start :end i)
         (list t atom (+ end (length "}}"))))

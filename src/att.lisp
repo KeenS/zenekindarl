@@ -1,11 +1,11 @@
 #|
-This file is a part of arrows project.
+This file is a part of zenekindarl project.
 Copyright (c) 2014 κeen
 |#
 
 (in-package :cl-user)
-(defpackage arrows.att
-  (:use :cl :arrows.util)
+(defpackage zenekindarl.att
+  (:use :cl :zenekindarl.util)
   (:export :print-object
            :att-node
            :att-leaf
@@ -54,7 +54,7 @@ Copyright (c) 2014 κeen
            :path
            
            :att-equal))
-(in-package :arrows.att)
+(in-package :zenekindarl.att)
 
 ;;; Abstract Template Tree
 (defclass att-node ()

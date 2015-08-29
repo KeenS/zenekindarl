@@ -1,7 +1,5 @@
-[![Build Status](https://travis-ci.org/KeenS/arrows.svg?branch=master)](https://travis-ci.org/KeenS/arrows)
-# Arrows
-Template flies like an arrow
-
+[![Build Status](https://travis-ci.org/KeenS/zenekindarl.svg?branch=master)](https://travis-ci.org/KeenS/zenekindarl)
+# Zenekindarl
 Expected to be a fast, flexible, extensible, low memory usage, async, concurrent template engine.
 
 ## Usage
@@ -19,23 +17,23 @@ Like this
 
 .
 
-Wait a while before full documentation is prefared.
+For more information, see docstring 
 
 ## Instant Benchmark
-Arrows perform **x16** as fast as a template engine in Python in the following instant benchmark.
+Zenekindarl perform **x16** as fast as a template engine in Python in the following instant benchmark.
 
 ![Benchmark](https://docs.google.com/spreadsheets/d/1M8x9dcK8ToL4-tfVUfGnCh_OOtttJpXxK905raA0eas/pubchart?oid=1882415724&format=image)
 
 Template engines     | Time[sec]
 ---------------------|----------
-Arrows, SBCL 1.1.8   | 1.365
+Zenekindarl, SBCL 1.1.8   | 1.365
 Jinja2, Python 2.7.5 | 24.07
 
-The benchmark code for Arrows:
+The benchmark code for Zenekindarl:
 
     > (time
        (with-open-file (out #P"~/Desktop/out" :direction :output :if-exists :supersede)
-         (let ((fun (arrows:compile-template-string :stream "Hello {{var name}}!!")))
+         (let ((fun (zenekindarl:compile-template-string :stream "Hello {{var name}}!!")))
            (loop repeat 1000000
               do (funcall fun out :name "κeen")))))
     Evaluation took:
