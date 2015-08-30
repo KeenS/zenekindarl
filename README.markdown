@@ -81,7 +81,7 @@ variables will be HTML escaped
 ```
 
 ```
-{{repeat n as i}}<li>{{var i}}th item{{endrepeat}}
+{{repeat n as i}}<li>{{var i}}th item</li>{{endrepeat}}
 ```
 
 ### Loop
@@ -89,7 +89,7 @@ variables will be HTML escaped
 ```html
 <ol>
   {{loop items as item}}
-  <li>{{var item}}
+  <li>{{var item}}</li>
   {{endloop}}
 </ol>
 ```
