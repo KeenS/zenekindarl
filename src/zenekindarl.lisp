@@ -35,10 +35,14 @@ return: A keyword argumented lambda.
         If the backend is :fast-io, it looks like (lambda (fast-io-buffer &key ...) ...).
         Keys are free variables appear in the template."
 
-  (emit-lambda (if (keywordp backend)
-                   (make-backend backend)
-                   (apply #'make-backend backend))
-               (apply-passes (parse-template-string str syntax) env)))
+  (let ((lam (emit-lambda (if (keywordp backend)
+                          (make-backend backend)
+                          (apply #'make-backend backend))
+                          (apply-passes (parse-template-string str syntax) env)))
+        (name (gensym "name")))
+    (setf (symbol-function name) lam)
+    (compile name)
+    (symbol-function name)))
 
 (defun compile-template-file (backend file &key (syntax :default) (env ()))
   "Read `file' into string and passes `compile-template-string'"
