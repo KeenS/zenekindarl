@@ -1,179 +1,224 @@
-This is SBCL 1.2.12.67-dbf1043, an implementation of ANSI Common Lisp.
+This is SBCL 1.2.13.89-31d4aef, an implementation of ANSI Common Lisp.
 More information about SBCL is available at <http://www.sbcl.org/>.
 
 SBCL is free software, provided as is, with absolutely no warranty.
 It is mostly in the public domain; some portions are provided under
 BSD-style licenses.  See the CREDITS and COPYING files in the
 distribution for more information.
-compiled stream backend with simple.tmpl
+zenekindarl
+compiled stream backend with simple.tmpl.zenekindarl
 Evaluation took:
   0.028 seconds of real time
   0.028000 seconds of total run time (0.028000 user, 0.000000 system)
   100.00% CPU
-  65,179,244 processor cycles
+  65,772,876 processor cycles
   0 bytes consed
   
-compiled string backend with simple.tmpl
+compiled string backend with simple.tmpl.zenekindarl
 Evaluation took:
-  0.052 seconds of real time
+  0.051 seconds of real time
   0.052000 seconds of total run time (0.052000 user, 0.000000 system)
-  100.00% CPU
-  123,509,264 processor cycles
-  19,678,336 bytes consed
+  101.96% CPU
+  124,215,844 processor cycles
+  19,678,432 bytes consed
   
-compiled octet stream backend with simple.tmpl
+compiled octet stream backend with simple.tmpl.zenekindarl
 Evaluation took:
   0.009 seconds of real time
   0.012000 seconds of total run time (0.012000 user, 0.000000 system)
   133.33% CPU
-  21,069,904 processor cycles
+  22,722,600 processor cycles
   0 bytes consed
   
-compiled octet backend with simple.tmpl
+compiled octet backend with simple.tmpl.zenekindarl
 Evaluation took:
-  0.018 seconds of real time
-  0.016000 seconds of total run time (0.016000 user, 0.000000 system)
-  88.89% CPU
-  44,948,480 processor cycles
-  5,450,816 bytes consed
+  0.020 seconds of real time
+  0.020000 seconds of total run time (0.020000 user, 0.000000 system)
+  100.00% CPU
+  46,782,176 processor cycles
+  5,450,848 bytes consed
   
-compiled fast-io backend with simple.tmpl
+compiled fast-io backend with simple.tmpl.zenekindarl
 Evaluation took:
   0.011 seconds of real time
-  0.008000 seconds of total run time (0.008000 user, 0.000000 system)
-  72.73% CPU
-  26,679,396 processor cycles
-  982,096 bytes consed
+  0.012000 seconds of total run time (0.012000 user, 0.000000 system)
+  109.09% CPU
+  27,682,560 processor cycles
+  949,328 bytes consed
   
-compiled stream backend with 1var.tmpl
+WARNING: New template printer for #P"simple.tmpl.html-template" created
+html-template
+render simple.tmpl.html-template
 Evaluation took:
-  0.046 seconds of real time
-  0.044000 seconds of total run time (0.044000 user, 0.000000 system)
-  95.65% CPU
-  110,740,556 processor cycles
-  5,270,528 bytes consed
+  0.040 seconds of real time
+  0.040000 seconds of total run time (0.040000 user, 0.000000 system)
+  100.00% CPU
+  16 lambdas converted
+  96,169,564 processor cycles
+  883,840 bytes consed
   
-compiled string backend with 1var.tmpl
+zenekindarl
+compiled stream backend with 1var.tmpl.zenekindarl
 Evaluation took:
-  0.106 seconds of real time
-  0.108000 seconds of total run time (0.104000 user, 0.004000 system)
-  [ Run times consist of 0.032 seconds GC time, and 0.076 seconds non-GC time. ]
-  101.89% CPU
-  253,507,540 processor cycles
-  31,496,112 bytes consed
+  0.047 seconds of real time
+  0.048000 seconds of total run time (0.048000 user, 0.000000 system)
+  102.13% CPU
+  112,512,712 processor cycles
+  5,270,352 bytes consed
   
-compiled octet stream backend with 1var.tmpl
+compiled string backend with 1var.tmpl.zenekindarl
 Evaluation took:
-  0.055 seconds of real time
-  0.056000 seconds of total run time (0.052000 user, 0.004000 system)
-  101.82% CPU
-  132,874,736 processor cycles
-  5,601,856 bytes consed
+  0.078 seconds of real time
+  0.080000 seconds of total run time (0.080000 user, 0.000000 system)
+  102.56% CPU
+  187,137,124 processor cycles
+  31,528,544 bytes consed
   
-compiled octet backend with 1var.tmpl
+compiled octet stream backend with 1var.tmpl.zenekindarl
+Evaluation took:
+  0.059 seconds of real time
+  0.060000 seconds of total run time (0.060000 user, 0.000000 system)
+  101.69% CPU
+  142,600,360 processor cycles
+  5,601,968 bytes consed
+  
+compiled octet backend with 1var.tmpl.zenekindarl
+Evaluation took:
+  0.167 seconds of real time
+  0.168000 seconds of total run time (0.156000 user, 0.012000 system)
+  [ Run times consist of 0.092 seconds GC time, and 0.076 seconds non-GC time. ]
+  100.60% CPU
+  398,850,904 processor cycles
+  14,696,608 bytes consed
+  
+compiled fast-io backend with 1var.tmpl.zenekindarl
 Evaluation took:
   0.067 seconds of real time
-  0.068000 seconds of total run time (0.068000 user, 0.000000 system)
+  0.068000 seconds of total run time (0.064000 user, 0.004000 system)
   101.49% CPU
-  158,926,956 processor cycles
-  14,705,360 bytes consed
+  161,409,576 processor cycles
+  6,541,200 bytes consed
   
-compiled fast-io backend with 1var.tmpl
+WARNING: New template printer for #P"1var.tmpl.html-template" created
+html-template
+render 1var.tmpl.html-template
 Evaluation took:
-  0.175 seconds of real time
-  0.172000 seconds of total run time (0.148000 user, 0.024000 system)
-  [ Run times consist of 0.108 seconds GC time, and 0.064 seconds non-GC time. ]
-  98.29% CPU
-  417,650,780 processor cycles
-  6,573,904 bytes consed
+  0.090 seconds of real time
+  0.088000 seconds of total run time (0.080000 user, 0.008000 system)
+  97.78% CPU
+  213,243,288 processor cycles
+  5,450,912 bytes consed
   
-compiled stream backend with 100var.tmpl
+zenekindarl
+compiled stream backend with 100var.tmpl.zenekindarl
 Evaluation took:
-  2.465 seconds of real time
-  2.452000 seconds of total run time (2.344000 user, 0.108000 system)
-  [ Run times consist of 0.280 seconds GC time, and 2.172 seconds non-GC time. ]
+  2.461 seconds of real time
+  2.448000 seconds of total run time (2.376000 user, 0.072000 system)
+  [ Run times consist of 0.216 seconds GC time, and 2.232 seconds non-GC time. ]
   99.47% CPU
-  5,901,814,252 processor cycles
-  527,984,592 bytes consed
+  5,893,828,288 processor cycles
+  527,999,152 bytes consed
   
-compiled string backend with 100var.tmpl
+compiled string backend with 100var.tmpl.zenekindarl
 Evaluation took:
-  2.374 seconds of real time
-  2.368000 seconds of total run time (2.332000 user, 0.036000 system)
-  [ Run times consist of 0.136 seconds GC time, and 2.232 seconds non-GC time. ]
-  99.75% CPU
-  5,683,364,740 processor cycles
-  753,096,432 bytes consed
+  2.423 seconds of real time
+  2.412000 seconds of total run time (2.380000 user, 0.032000 system)
+  [ Run times consist of 0.144 seconds GC time, and 2.268 seconds non-GC time. ]
+  99.55% CPU
+  5,801,216,352 processor cycles
+  753,058,640 bytes consed
   
-compiled octet stream backend with 100var.tmpl
+compiled octet stream backend with 100var.tmpl.zenekindarl
 Evaluation took:
-  4.809 seconds of real time
-  4.792000 seconds of total run time (4.764000 user, 0.028000 system)
-  [ Run times consist of 0.124 seconds GC time, and 4.668 seconds non-GC time. ]
-  99.65% CPU
-  11,514,511,280 processor cycles
-  560,011,632 bytes consed
+  4.831 seconds of real time
+  4.812000 seconds of total run time (4.780000 user, 0.032000 system)
+  [ Run times consist of 0.124 seconds GC time, and 4.688 seconds non-GC time. ]
+  99.61% CPU
+  11,567,130,530 processor cycles
+  559,998,144 bytes consed
   
-compiled octet backend with 100var.tmpl
+compiled octet backend with 100var.tmpl.zenekindarl
 Evaluation took:
-  3.352 seconds of real time
-  3.332000 seconds of total run time (3.308000 user, 0.024000 system)
-  [ Run times consist of 0.132 seconds GC time, and 3.200 seconds non-GC time. ]
-  99.40% CPU
-  8,025,656,804 processor cycles
-  641,450,320 bytes consed
+  3.124 seconds of real time
+  3.108000 seconds of total run time (3.064000 user, 0.044000 system)
+  [ Run times consist of 0.116 seconds GC time, and 2.992 seconds non-GC time. ]
+  99.49% CPU
+  7,480,992,676 processor cycles
+  641,442,256 bytes consed
   
-compiled fast-io backend with 100var.tmpl
+compiled fast-io backend with 100var.tmpl.zenekindarl
 Evaluation took:
-  5.064 seconds of real time
-  5.040000 seconds of total run time (5.008000 user, 0.032000 system)
-  [ Run times consist of 0.108 seconds GC time, and 4.932 seconds non-GC time. ]
-  99.53% CPU
-  12,123,826,176 processor cycles
-  560,970,416 bytes consed
+  4.991 seconds of real time
+  4.964000 seconds of total run time (4.936000 user, 0.028000 system)
+  [ Run times consist of 0.112 seconds GC time, and 4.852 seconds non-GC time. ]
+  99.46% CPU
+  11,950,776,700 processor cycles
+  560,970,096 bytes consed
   
-compiled stream backend with repeat.tmpl
+WARNING: New template printer for #P"100var.tmpl.html-template" created
+html-template
+render 100var.tmpl.html-template
 Evaluation took:
-  2.065 seconds of real time
-  2.052000 seconds of total run time (2.024000 user, 0.028000 system)
-  [ Run times consist of 0.124 seconds GC time, and 1.928 seconds non-GC time. ]
-  99.37% CPU
-  4,944,545,880 processor cycles
-  527,999,184 bytes consed
+  2.600 seconds of real time
+  2.588000 seconds of total run time (2.576000 user, 0.012000 system)
+  99.54% CPU
+  6,224,760,576 processor cycles
+  0 bytes consed
   
-compiled string backend with repeat.tmpl
+zenekindarl
+compiled stream backend with repeat.tmpl.zenekindarl
 Evaluation took:
-  2.022 seconds of real time
-  2.008000 seconds of total run time (1.968000 user, 0.040000 system)
-  [ Run times consist of 0.164 seconds GC time, and 1.844 seconds non-GC time. ]
-  99.31% CPU
-  4,842,272,470 processor cycles
-  626,983,456 bytes consed
+  2.168 seconds of real time
+  2.152000 seconds of total run time (2.132000 user, 0.020000 system)
+  [ Run times consist of 0.132 seconds GC time, and 2.020 seconds non-GC time. ]
+  99.26% CPU
+  5,192,219,250 processor cycles
+  527,999,232 bytes consed
   
-compiled octet stream backend with repeat.tmpl
+compiled string backend with repeat.tmpl.zenekindarl
 Evaluation took:
-  5.241 seconds of real time
-  5.224000 seconds of total run time (5.192000 user, 0.032000 system)
-  [ Run times consist of 0.156 seconds GC time, and 5.068 seconds non-GC time. ]
+  2.026 seconds of real time
+  2.020000 seconds of total run time (1.988000 user, 0.032000 system)
+  [ Run times consist of 0.140 seconds GC time, and 1.880 seconds non-GC time. ]
+  99.70% CPU
+  4,849,781,020 processor cycles
+  627,002,352 bytes consed
+  
+compiled octet stream backend with repeat.tmpl.zenekindarl
+Evaluation took:
+  5.269 seconds of real time
+  5.252000 seconds of total run time (5.216000 user, 0.036000 system)
+  [ Run times consist of 0.152 seconds GC time, and 5.100 seconds non-GC time. ]
   99.68% CPU
-  12,549,660,112 processor cycles
-  559,998,016 bytes consed
+  12,616,641,016 processor cycles
+  559,997,760 bytes consed
   
-compiled octet backend with repeat.tmpl
+compiled octet backend with repeat.tmpl.zenekindarl
 Evaluation took:
-  3.112 seconds of real time
-  3.108000 seconds of total run time (3.088000 user, 0.020000 system)
-  [ Run times consist of 0.140 seconds GC time, and 2.968 seconds non-GC time. ]
-  99.87% CPU
-  7,451,505,260 processor cycles
-  583,193,328 bytes consed
+  2.934 seconds of real time
+  2.916000 seconds of total run time (2.880000 user, 0.036000 system)
+  [ Run times consist of 0.156 seconds GC time, and 2.760 seconds non-GC time. ]
+  99.39% CPU
+  7,025,850,892 processor cycles
+  583,192,976 bytes consed
   
-compiled fast-io backend with repeat.tmpl
+compiled fast-io backend with repeat.tmpl.zenekindarl
 Evaluation took:
-  5.484 seconds of real time
-  5.460000 seconds of total run time (5.456000 user, 0.004000 system)
-  [ Run times consist of 0.152 seconds GC time, and 5.308 seconds non-GC time. ]
-  99.56% CPU
-  13,132,090,664 processor cycles
-  560,970,896 bytes consed
+  5.707 seconds of real time
+  5.684000 seconds of total run time (5.672000 user, 0.012000 system)
+  [ Run times consist of 0.144 seconds GC time, and 5.540 seconds non-GC time. ]
+  99.60% CPU
+  13,666,675,424 processor cycles
+  560,970,000 bytes consed
+  
+WARNING: New template printer for #P"repeat.tmpl.html-template" created
+html-template
+render repeat.tmpl.html-template
+Evaluation took:
+  2.273 seconds of real time
+  2.268000 seconds of total run time (2.264000 user, 0.004000 system)
+  [ Run times consist of 0.016 seconds GC time, and 2.252 seconds non-GC time. ]
+  99.78% CPU
+  5,443,603,096 processor cycles
+  48,168,960 bytes consed
   
