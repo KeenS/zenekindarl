@@ -108,10 +108,15 @@ Copyright (c) 2014 κeen
 (defmethod print-object ((obj att-variable) stream)
   (format stream "#<ATT-VARIABLE ~S>" (varsym obj)))
 
-(defun att-variable (sym &optional (type :anything))
-  (make-instance 'att-variable
-                 :varsym sym
-                 :vartype type))
+(defun att-variable (sym &optional (type :anything) (auto-escape nil auto-escape-p))
+  (if auto-escape-p
+      (make-instance 'att-variable
+		     :varsym sym
+		     :vartype type
+		     :auto-escape auto-escape)
+      (make-instance 'att-variable
+		     :varsym sym
+		     :vartype type)))
 
 (defmethod att-equal ((x att-variable) (y att-variable))
   (and (eql (varsym x)  (varsym y))

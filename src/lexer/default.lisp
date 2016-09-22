@@ -27,7 +27,9 @@
             end))))
 
 (defun tokenize-variable (start end rest)
-  (make-token-variable :start start :end end :value (car rest)))
+  (let ((plist (cdr rest)))
+    (make-token-variable :start start :end end :value (car rest)
+			 :auto-escape (getf plist 'auto-escape t))))
 
 (defun tokenize-if (start end rest)
   (make-token-if :start start :end end :cond-clause (car rest)))
