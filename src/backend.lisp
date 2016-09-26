@@ -74,7 +74,7 @@ Copyright (c) 2014 κeen
   (declare (ignore output-p))
   (let ((sym (varsym obj)))
     (unless (find-from-scope sym backend)
-      (push sym (symbols backend)))
+      (pushnew sym (symbols backend)))
     sym))
 
 (defmethod http-escape ((obj att-variable) sexp)
