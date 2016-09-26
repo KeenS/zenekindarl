@@ -36,7 +36,8 @@
 (defstruct (token-variable
              (:conc-name token-)
              (:include token))
-  (value nil :type (or null symbol)))
+  (value nil :type (or null symbol))
+  (auto-escape t :type boolean))
 
 @export
 @export-accessors

@@ -13,21 +13,23 @@
 (annot:enable-annot-syntax)
 
 
-(defun read-out (str start)
+(defun read-out (str start eof-value)
   (multiple-value-bind (atom end)
-      (read-from-string str nil nil :start start)
+      (read-from-string str nil eof-value :start start)
     (if-let ((i (and (symbolp atom)
                      (search "}}" str :start2 start :end2 end)))
              (*package* (find-package :zenekindarl.lexer.default)))
       (multiple-value-bind (atom end)
-          (read-from-string str nil nil :start start :end i)
+          (read-from-string str nil eof-value :start start :end i)
         (list t atom (+ end (length "}}"))))
       (list nil (if (symbolp atom) (intern (symbol-name atom) *package*)
                     atom)
             end))))
 
 (defun tokenize-variable (start end rest)
-  (make-token-variable :start start :end end :value (car rest)))
+  (let ((plist (cdr rest)))
+    (make-token-variable :start start :end end :value (car rest)
+			 :auto-escape (getf plist 'auto-escape t))))
 
 (defun tokenize-if (start end rest)
   (make-token-if :start start :end end :cond-clause (car rest)))
@@ -78,9 +80,10 @@
 
 (defun tokens (str start)
   (loop
+     :with eof-value := '#:eof
      :for i := start :then end
-     :for (endp atom end) := (read-out str i)
-     :if atom :collect atom :into result
+     :for (endp atom end) := (read-out str i eof-value)
+     :if (not (eq eof-value atom)) :collect atom :into result
      :until endp
      :finally (return (cons result end))))
 
