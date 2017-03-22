@@ -3,17 +3,15 @@
   Copyright (c) 2014 κeen
 |#
 
-(in-package :cl-user)
-(defpackage zenekindarl-test-asd
-  (:use :cl :asdf))
-(in-package :zenekindarl-test-asd)
 
+#-asdf3.1 (error "zenekindarl-test requires ASDF 3.1")
 (defsystem zenekindarl-test
   :author "κeen"
   :license ""
   :depends-on (:zenekindarl
                :prove
                :flexi-streams)
+  :defsystem-depends-on (:prove)
   :components ((:module "t"
                 :components
                 ((:test-file "zenekindarl")
@@ -22,8 +20,4 @@
                  (:test-file "backend")
                  (:test-file "parse"))))
 
-  :defsystem-depends-on (:prove)
-  :perform (test-op :after (op c)
-                    (funcall (intern #. (string :run-test-system) :prove)
-                             c)
-                    (asdf:clear-system c)))
+  :perform (test-op (op c) (uiop:symbol-call :prove :run-test-system c)))

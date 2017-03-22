@@ -7,11 +7,6 @@
   Author: κeen
 |#
 
-(in-package :cl-user)
-(defpackage zenekindarl-asd
-  (:use :cl :asdf))
-(in-package :zenekindarl-asd)
-
 (defsystem zenekindarl
   :version "0.1"
   :author "κeen"
