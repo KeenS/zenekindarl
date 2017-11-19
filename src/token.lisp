@@ -1,20 +1,20 @@
 (in-package :cl-user)
 (defpackage zenekindarl.token
   (:use :cl
-        :mpc
-        :annot.class))
+        :annot.class)
+  (:export
+   :token-string-p
+   :token-variable-p
+   :token-if-p
+   :token-else-p
+   :token-end-p
+   :token-loop-p
+   :token-repeat-p
+   :token-include-p
+   :token-insert-p))
 (in-package zenekindarl.token)
 
 (annot:enable-annot-syntax)
-(export '(token-string-p
-          token-variable-p
-          token-if-p
-          token-else-p
-          token-end-p
-          token-loop-p
-          token-repeat-p
-          token-include-p
-          token-insert-p))
 
 @export-accessors
 (defstruct token

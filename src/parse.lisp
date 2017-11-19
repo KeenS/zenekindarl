@@ -11,7 +11,8 @@
 (in-package zenekindarl.parse)
 
 (defun parse-template-string (str &optional (syntax :default))
-  (mpc:run (zenekindarl.parser:=template) (zenekindarl.lexer:lex str syntax)))
+  (maxpc:parse (zenekindarl.lexer:lex str syntax) (zenekindarl.parser:=template)))
 
 (defun parse-template-file (file &optional (syntax :default))
-  (parse-template-string (read-file-into-string file)  syntax))
+  (with-open-file (f file)
+   (parse-template-string f  syntax)))
