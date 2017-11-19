@@ -29,7 +29,10 @@
 
 (defun =control-if ()
   (=destructure (token-if then else _)
-      (=list (?token-if) 's/=template (%maybe (%and (?token-else) 's/=template)) (?token-end))
+      (=list (?token-if)
+             's/=template
+             (%maybe (=transform (=list (?token-else) 's/=template) #'second))
+             (?token-end))
     (att-if (if (symbolp (token-cond-clause token-if))
                 (att-variable (token-cond-clause token-if))
                 (att-eval (token-cond-clause token-if)))
